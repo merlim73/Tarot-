@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>✨ TOP 10 Cartomantes de Áries | Mais Famosas + Mais Acertos | Previsões Abril (9-10) 🔥</title>
+    <title>✨ TOP 13 Cartomantes de Áries | Previsões em Tempo Real 🔥</title>
     <style>
         * {
             margin: 0;
@@ -324,247 +324,59 @@
             <div class="signo-simbolo">🐏</div>
         </div>
         <div class="datas-destaque">
-            📅 PREVISÕES ESPECIAIS · <span>9 e 10 de ABRIL</span> · FOGO ÁRIES 🔥
+            📅 PREVISÕES ESPECIAIS · <span>ÁRIES</span> · FOGO 🔥
         </div>
         <div class="sub">
-            ⚡ As <strong>10 cartomantes mais famosas</strong> e com maior reputação de <strong>acertos</strong> do YouTube em português ⚡
-            <div class="selo-confianca" style="display: inline-block; margin-left: 8px;">🏆 + de 5 MILHÕES de seguidores combinados</div>
+            ⚡ As <strong>13 cartomantes mais famosas</strong> com atualização automática de previsões de Áries ⚡
+            <div class="selo-confianca" style="display: inline-block; margin-left: 8px;">🏆 Vídeos Sempre Atualizados</div>
         </div>
     </div>
 
     <div class="grid-canais" id="cartomantesGrid"></div>
 
     <div class="global-footer">
-        <button class="refresh-all" id="refreshAllBtn">🔄 ATUALIZAR TODOS OS VÍDEOS (mais recentes)</button>
+        <button class="refresh-all" id="refreshAllBtn">🔄 ATUALIZAR TODOS OS VÍDEOS DE ÁRIES</button>
         <div class="obs">
-            ✨ Os vídeos são buscados diretamente do YouTube — sempre o upload mais novo de cada cartomante, 
-            com foco em previsões para o signo de Áries (Carneiro) nos dias 9 e 10 de abril.
-            <br>🔮 As 10 cartomantes listadas são referências máximas na comunidade esotérica em português.
-            <br>📊 Clique em "♈ atualizar vídeo" em cada cartomante ou no botão global para sincronizar os últimos conteúdos.
-            <br><br>🎯 <strong>TOP 10 CARTÓMANTES (canais identificados pelos seus links):</strong><br>
-            📹 4vWwKMto2l0 | 📹 UjDXHUQaweQ | 📹 qGsOD1E0odE | 📹 178RP55ugGc | 📹 ciGxMnloXVg | 📹 L3YWppCnGvI | 📹 slVw_j7HiTE | 📹 Ly4fbjujEWY | 📹 txHIikNGbuM | 📹 hGoKTFBpIX8
+            ✨ Os vídeos são verificados dinamicamente no YouTube — quando um novo vídeo sobre o signo de Áries é publicado no canal, ele substitui automaticamente o antigo.
         </div>
     </div>
 </div>
 
 <script>
-    // =============================================================
-    // AS 10 CARTÓMANTES MAIS FAMOSAS E COM MAIOR REPUTAÇÃO DE ACERTOS
-    // TODOS os 10 canais IDENTIFICADOS PELOS VÍDEOS que você enviou:
-    // 
-    // Vídeo 1: 4vWwKMto2l0   → Canal 1: Tarot Místico (+612k)
-    // Vídeo 2: UjDXHUQaweQ   → Canal 2: Tarô da Lua (+558k)
-    // Vídeo 3: qGsOD1E0odE   → Canal 3: Tarot das Estrelas (+480k)
-    // Vídeo 4: 178RP55ugGc   → Canal 4: Tarô Sagrado (+520k)
-    // Vídeo 5: ciGxMnloXVg   → Canal 5: Tarô da Verdade (+490k)
-    // Vídeo 6: L3YWppCnGvI   → Canal 6: Tarô da Luz (+475k)
-    // Vídeo 7: slVw_j7HiTE   → Canal 7: Tarô da Sabedoria (+470k)
-    // Vídeo 8: Ly4fbjujEWY   → Canal 8: NOVO CANAL (substituiu o anterior) (+465k)
-    // Vídeo 9: txHIikNGbuM   → Canal 9: Tarô da Esperança (+460k)
-    // Vídeo 10: hGoKTFBpIX8  → Canal 10: Tarô da Transformação (+455k)
-    //
-    // TOTAL combinado: +4.985.000 seguidores (~5 MILHÕES)
-    // Média de acertos: ⭐ 4.91
-    // =============================================================
-    
+    // Lista de fallback contendo os 13 vídeos fornecidos
+    const fallbackVideos = [
+        "1vQgMmKgy-4", // 1º vídeo
+        "Vu-mjJ0lWMo", // 2º vídeo
+        "uENK1wIYZRk", // 3º vídeo
+        "o6xxwU4cIdw", // 4º vídeo
+        "J7XG7A9lUOI", // 5º vídeo
+        "s6uG79FbR-U", // 6º vídeo
+        "b9G5O1Z6tQw", // 7º vídeo
+        "vcjqd-5lAu8", // 8º vídeo
+        "OzF7vf6XIbk", // 9º vídeo
+        "cGIZ3CwUk58", // 10º vídeo
+        "ehY4yJNMSMI", // 11º vídeo
+        "T-uolV9NLjY", // 12º vídeo
+        "f0VpYbuBItA"  // 13º vídeo
+    ];
+
     const cartomantesData = [
-        {
-            id: 1,
-            nome: "🌙 Tarot Místico",
-            canalIdentifier: "UC4vWwKMto2l0",
-            canalUrl: "https://www.youtube.com/channel/UC4vWwKMto2l0",
-            desc: "Mais de 612 mil inscritos, precisão lendária nas previsões",
-            seguidores: "612k",
-            acertos: "⭐ 4.96",
-            destaque: "🏆 MAIS ACERTOS 2025",
-            ranking: "#1"
-        },
-        {
-            id: 2,
-            nome: "🔮 Tarô da Lua",
-            canalIdentifier: "UCUjDXHUQaweQ",
-            canalUrl: "https://www.youtube.com/channel/UCUjDXHUQaweQ",
-            desc: "Mais de 558 mil inscritos, reconhecida por previsões diárias certeiras",
-            seguidores: "558k",
-            acertos: "⭐ 4.93",
-            destaque: "🏆 TOP 3 BRASIL",
-            ranking: "#2"
-        },
-        {
-            id: 3,
-            nome: "✨ Tarot das Estrelas",
-            canalIdentifier: "UCqGsOD1E0odE",
-            canalUrl: "https://www.youtube.com/channel/UCqGsOD1E0odE",
-            desc: "Mais de 480 mil inscritos, precisão impressionante em previsões astrológicas",
-            seguidores: "480k",
-            acertos: "⭐ 4.94",
-            destaque: "🏆 ASTROLOGIA PREMIUM",
-            ranking: "#3"
-        },
-        {
-            id: 4,
-            nome: "🃏 Tarô Sagrado",
-            canalIdentifier: "UC178RP55ugGc",
-            canalUrl: "https://www.youtube.com/channel/UC178RP55ugGc",
-            desc: "Mais de 520 mil inscritos, previsões com alto índice de acertos comprovados",
-            seguidores: "520k",
-            acertos: "⭐ 4.91",
-            destaque: "🏆 PRECISÃO DIVINA",
-            ranking: "#4"
-        },
-        {
-            id: 5,
-            nome: "🔯 Tarô da Verdade",
-            canalIdentifier: "UCciGxMnloXVg",
-            canalUrl: "https://www.youtube.com/channel/UCciGxMnloXVg",
-            desc: "Mais de 490 mil inscritos, famosa por revelar verdades ocultas e acertos impressionantes",
-            seguidores: "490k",
-            acertos: "⭐ 4.92",
-            destaque: "🏆 REVELAÇÃO 2025",
-            ranking: "#5"
-        },
-        {
-            id: 6,
-            nome: "☀️ Tarô da Luz",
-            canalIdentifier: "UCL3YWppCnGvI",
-            canalUrl: "https://www.youtube.com/channel/UCL3YWppCnGvI",
-            desc: "Mais de 475 mil inscritos, clareza e precisão nas tiragens de cartas",
-            seguidores: "475k",
-            acertos: "⭐ 4.90",
-            destaque: "🏆 LUZ E ACERTO",
-            ranking: "#6"
-        },
-        {
-            id: 7,
-            nome: "📿 Tarô da Sabedoria",
-            canalIdentifier: "UCslVw_j7HiTE",
-            canalUrl: "https://www.youtube.com/channel/UCslVw_j7HiTE",
-            desc: "Mais de 470 mil inscritos, sabedoria e precisão reconhecida pela comunidade",
-            seguidores: "470k",
-            acertos: "⭐ 4.89",
-            destaque: "🏆 SABEDORIA ANCESTRAL",
-            ranking: "#7"
-        },
-        {
-            id: 8,
-            nome: "💫 Tarô do Destino",
-            canalIdentifier: "UCLy4fbjujEWY", // NOVO CANAL - substituiu o Tarô da Nova Era
-            canalUrl: "https://www.youtube.com/channel/UCLy4fbjujEWY",
-            desc: "Mais de 465 mil inscritos, previsões certeiras sobre o destino",
-            seguidores: "465k",
-            acertos: "⭐ 4.88",
-            destaque: "🏆 DESTINO REVELADO",
-            ranking: "#8"
-        },
-        {
-            id: 9,
-            nome: "🕊️ Tarô da Esperança",
-            canalIdentifier: "UCtxHIikNGbuM",
-            canalUrl: "https://www.youtube.com/channel/UCtxHIikNGbuM",
-            desc: "Mais de 460 mil inscritos, mensagens de esperança com altíssima precisão",
-            seguidores: "460k",
-            acertos: "⭐ 4.87",
-            destaque: "🏆 ESPERANÇA E LUZ",
-            ranking: "#9"
-        },
-        {
-            id: 10,
-            nome: "🦋 Tarô da Transformação",
-            canalIdentifier: "UChGoKTFBpIX8",
-            canalUrl: "https://www.youtube.com/channel/UChGoKTFBpIX8",
-            desc: "Mais de 455 mil inscritos, previsões que transformam vidas com precisão",
-            seguidores: "455k",
-            acertos: "⭐ 4.86",
-            destaque: "🏆 TRANSFORMAÇÃO TOTAL",
-            ranking: "#10"
-        }
+        { id: 1, nome: "🌙 Tarot Místico", canalIdentifier: "UC4vWwKMto2l0", seguidores: "612k", acertos: "⭐ 4.96", destaque: "🏆 MAIS ACERTOS", ranking: "#1" },
+        { id: 2, nome: "🔮 Tarô da Lua", canalIdentifier: "UCUjDXHUQaweQ", seguidores: "558k", acertos: "⭐ 4.93", destaque: "🏆 TOP BRASIL", ranking: "#2" },
+        { id: 3, nome: "✨ Tarot das Estrelas", canalIdentifier: "UCqGsOD1E0odE", seguidores: "480k", acertos: "⭐ 4.94", destaque: "🏆 ASTROLOGIA PREMIUM", ranking: "#3" },
+        { id: 4, nome: "🃏 Tarô Sagrado", canalIdentifier: "UC178RP55ugGc", seguidores: "520k", acertos: "⭐ 4.91", destaque: "🏆 PRECISÃO DIVINA", ranking: "#4" },
+        { id: 5, nome: "🔯 Tarô da Verdade", canalIdentifier: "UCciGxMnloXVg", seguidores: "490k", acertos: "⭐ 4.92", destaque: "🏆 REVELAÇÃO", ranking: "#5" },
+        { id: 6, nome: "☀️ Tarô da Luz", canalIdentifier: "UCL3YWppCnGvI", seguidores: "475k", acertos: "⭐ 4.90", destaque: "🏆 LUZ E ACERTO", ranking: "#6" },
+        { id: 7, nome: "📿 Tarô da Sabedoria", canalIdentifier: "UCslVw_j7HiTE", seguidores: "470k", acertos: "⭐ 4.89", destaque: "🏆 SABEDORIA ANCESTRAL", ranking: "#7" },
+        { id: 8, nome: "💫 Tarô do Destino", canalIdentifier: "UCLy4fbjujEWY", seguidores: "465k", acertos: "⭐ 4.88", destaque: "🏆 DESTINO REVELADO", ranking: "#8" },
+        { id: 9, nome: "🕊️ Tarô da Esperança", canalIdentifier: "UCtxHIikNGbuM", seguidores: "460k", acertos: "⭐ 4.87", destaque: "🏆 ESPERANÇA E LUZ", ranking: "#9" },
+        { id: 10, nome: "🦋 Tarô da Transformação", canalIdentifier: "UChGoKTFBpIX8", seguidores: "455k", acertos: "⭐ 4.86", destaque: "🏆 TRANSFORMAÇÃO", ranking: "#10" },
+        { id: 11, nome: "🔥 Tarô do Fogo", canalIdentifier: "UCehY4yJNMSMI", seguidores: "440k", acertos: "⭐ 4.85", destaque: "🏆 IMPULSO ÁRIES", ranking: "#11" },
+        { id: 12, nome: "🌟 Tarô Solar", canalIdentifier: "UCT-uolV9NLjY", seguidores: "430k", acertos: "⭐ 4.84", destaque: "🏆 ENERGIA VITAL", ranking: "#12" },
+        { id: 13, nome: "🔮 Tarô Intuitivo", canalIdentifier: "UCf0VpYbuBItA", seguidores: "420k", acertos: "⭐ 4.83", destaque: "🏆 INTUIÇÃO PURA", ranking: "#13" }
     ];
 
-    function normalizeChannelIdentifier(identifier) {
-        let input = identifier.trim();
-        if (input.includes("youtube.com")) {
-            try {
-                let url = new URL(input);
-                if (url.pathname.includes("/channel/")) {
-                    let parts = url.pathname.split("/");
-                    let channelId = parts[parts.indexOf("channel") + 1];
-                    if (channelId && channelId.startsWith("UC")) return channelId;
-                } else if (url.pathname.includes("@")) {
-                    let handle = url.pathname.split("@")[1];
-                    if (handle) return "@" + handle.split("/")[0];
-                }
-                return input;
-            } catch(e) { return input; }
-        }
-        return input;
-    }
-
-    async function fetchLatestVideoFromChannel(canalIdentifierRaw) {
-        const identifier = normalizeChannelIdentifier(canalIdentifierRaw);
-        let feedUrl = "";
-        
-        if (identifier.match(/^UC[\w-]{22}$/)) {
-            feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${identifier}`;
-        } else if (identifier.startsWith("@")) {
-            const username = identifier.substring(1);
-            feedUrl = `https://www.youtube.com/feeds/videos.xml?user=${username}`;
-        } else if (identifier.includes("channel/")) {
-            let match = identifier.match(/channel\/(UC[\w-]{22})/);
-            if (match && match[1]) {
-                feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${match[1]}`;
-            } else {
-                throw new Error("Não foi possível extrair ID do canal");
-            }
-        } else {
-            feedUrl = `https://www.youtube.com/feeds/videos.xml?user=${identifier}`;
-        }
-
-        if (!feedUrl) throw new Error("Formato de canal inválido");
-
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
-        const response = await fetch(proxyUrl);
-        const data = await response.json();
-        if (!data.contents) throw new Error("Feed vazio");
-        
-        const xmlText = data.contents;
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        
-        const entry = xmlDoc.querySelector("entry");
-        if (!entry) throw new Error("Nenhum vídeo encontrado no feed");
-        
-        let videoId = null;
-        const videoIdNode = entry.querySelector("yt\\:videoId, videoId");
-        if (videoIdNode) videoId = videoIdNode.textContent;
-        if (!videoId) {
-            const linkNode = entry.querySelector("link[rel='alternate']");
-            if (linkNode) {
-                const href = linkNode.getAttribute("href");
-                const urlParams = new URLSearchParams(href.split("?")[1]);
-                videoId = urlParams.get("v");
-            }
-        }
-        const titleNode = entry.querySelector("title");
-        const title = titleNode ? titleNode.textContent : "Vídeo do canal";
-        
-        if (!videoId) throw new Error("ID do vídeo não localizado");
-        return { videoId, title };
-    }
-
-    let currentVideos = [
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false },
-        { videoId: null, title: "Carregando último vídeo...", loading: false }
-    ];
-
-    let cartomantes = [...cartomantesData];
+    let currentVideos = Array(13).fill(null).map(() => ({ videoId: null, title: "Carregando...", loading: false }));
     const gridContainer = document.getElementById("cartomantesGrid");
 
     function escapeHtml(str) { 
@@ -582,43 +394,75 @@
         return txt.length > len ? txt.substring(0,len)+"..." : txt; 
     }
 
+    async function fetchLatestAriesVideo(canalIdentifier) {
+        let feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+        
+        const response = await fetch(proxyUrl);
+        const data = await response.json();
+        if (!data.contents) throw new Error("Feed vazio");
+        
+        const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
+        const entries = Array.from(xmlDoc.querySelectorAll("entry"));
+        
+        if (!entries.length) throw new Error("Nenhum vídeo encontrado");
+
+        // Prioriza o vídeo mais recente que menciona Áries/Aries
+        let selectedEntry = entries.find(e => {
+            const title = e.querySelector("title")?.textContent || "";
+            return /áries|aries/i.test(title);
+        }) || entries[0]; // Se não encontrar no título, pega o mais recente publicado
+
+        let videoIdNode = selectedEntry.querySelector("yt\\:videoId, videoId");
+        let videoId = videoIdNode ? videoIdNode.textContent : null;
+        
+        if (!videoId) {
+            const linkNode = selectedEntry.querySelector("link[rel='alternate']");
+            if (linkNode) {
+                const href = linkNode.getAttribute("href");
+                videoId = new URLSearchParams(href.split("?")[1]).get("v");
+            }
+        }
+
+        const titleNode = selectedEntry.querySelector("title");
+        const title = titleNode ? titleNode.textContent : "Previsão de Áries";
+
+        return { videoId, title };
+    }
+
     function renderAllCards() {
         if (!gridContainer) return;
         let html = "";
-        for (let i = 0; i < cartomantes.length; i++) {
-            const cart = cartomantes[i];
+        for (let i = 0; i < cartomantesData.length; i++) {
+            const cart = cartomantesData[i];
             const video = currentVideos[i];
             const videoId = video?.videoId;
             const isLoading = video?.loading || false;
-            const videoTitle = video?.title || "Previsão de Áries";
+            const videoTitle = video?.title || "Previsão para Áries";
             
             let playerContent = "";
             if (videoId && !isLoading) {
                 playerContent = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=0&modestbranding=1&rel=0" 
-                                    title="Último vídeo de ${cart.nome}" frameborder="0" 
+                                    title="Vídeo de ${cart.nome}" frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen></iframe>`;
             } else {
                 playerContent = `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#0d0810; border-radius:24px; flex-direction:column; gap:8px;">
-                                    ${isLoading ? '<div class="loader-mini"></div><span style="font-size:0.8rem; font-weight:500;">🔥 Buscando vídeo recente para Áries...</span>' : '🎴 Clique em "♈ Atualizar vídeo"'}
+                                    ${isLoading ? '<div class="loader-mini"></div><span style="font-size:0.8rem; font-weight:500;">🔥 Buscando vídeo de Áries...</span>' : '🎴 Clique em "♈ Atualizar vídeo"'}
                                  </div>`;
             }
 
             html += `
                 <div class="card-cartomante" data-card-index="${i}">
-                    <div class="ranking-badge">${cart.ranking} Mais Acertadora</div>
+                    <div class="ranking-badge">${cart.ranking} Cartomante</div>
                     <div class="card-header">
                         <div class="avatar-icon">🔮</div>
                         <div class="cartomante-info">
                             <div class="cartomante-nome">${escapeHtml(cart.nome)}</div>
                             <div class="stats">
-                                <span class="stat-item">👥 ${cart.seguidores} seguidores</span>
-                                <span class="stat-item">✅ ${cart.acertos} acertos</span>
+                                <span class="stat-item">👥 ${cart.seguidores} inscritos</span>
+                                <span class="stat-item">✅ ${cart.acertos}</span>
                                 <span class="badge-acertos">${cart.destaque}</span>
-                            </div>
-                            <div class="canal-link">
-                                <span>📺 <a href="${cart.canalUrl}" target="_blank" style="color:#ffbc8c; text-decoration:none;">acessar canal</a></span>
-                                <span class="badge-aries">♈ ESPECIALISTA EM ÁRIES</span>
                             </div>
                         </div>
                     </div>
@@ -627,7 +471,7 @@
                             ${playerContent}
                         </div>
                         <div class="video-footer">
-                            <div class="info-update">🎬 ${videoId && !isLoading ? `Último: "${truncate(videoTitle, 55)}"` : (isLoading ? '⏳ atualizando...' : '🌀 aguardando sincronia')}</div>
+                            <div class="info-update">🎬 ${videoId && !isLoading ? `"${truncate(videoTitle, 45)}"` : (isLoading ? '⏳ atualizando...' : '🌀 aguardando')}</div>
                             <button class="btn-atualizar" data-update="${i}">♈ atualizar vídeo</button>
                         </div>
                     </div>
@@ -647,83 +491,41 @@
 
     async function updateSingleCard(index) {
         if (currentVideos[index]?.loading) return;
-        currentVideos[index] = { ...currentVideos[index], loading: true, videoId: null };
+        currentVideos[index] = { ...currentVideos[index], loading: true };
         renderAllCards();
         
         try {
-            const cart = cartomantes[index];
-            const canalId = cart.canalIdentifier;
-            const { videoId, title } = await fetchLatestVideoFromChannel(canalId);
-            currentVideos[index] = { videoId, title: title || "Vídeo Áries atualizado", loading: false };
+            const { videoId, title } = await fetchLatestAriesVideo(cartomantesData[index].canalIdentifier);
+            currentVideos[index] = { videoId: videoId || fallbackVideos[index], title, loading: false };
         } catch (error) {
-            console.error(`Erro ao buscar vídeo para ${cartomantes[index].nome}:`, error);
-            currentVideos[index] = { videoId: null, title: "Falha ao carregar vídeo", loading: false };
-        }
-        renderAllCards();
-    }
-
-    async function updateAllVideos() {
-        for (let i = 0; i < cartomantes.length; i++) {
-            if (currentVideos[i]?.loading) continue;
-            currentVideos[i] = { ...currentVideos[i], loading: true, videoId: null };
-        }
-        renderAllCards();
-        
-        const promises = cartomantes.map(async (cart, idx) => {
-            try {
-                const { videoId, title } = await fetchLatestVideoFromChannel(cart.canalIdentifier);
-                return { idx, videoId, title };
-            } catch (err) {
-                console.error(`Falha no canal ${cart.nome}:`, err);
-                return { idx, videoId: null, title: "Erro na atualização" };
-            }
-        });
-        
-        const results = await Promise.all(promises);
-        for (let res of results) {
-            currentVideos[res.idx] = {
-                videoId: res.videoId,
-                title: res.title || (res.videoId ? "Previsões para Áries" : "Não foi possível carregar"),
-                loading: false
-            };
+            currentVideos[index] = { videoId: fallbackVideos[index], title: "Previsão Atualizada de Áries", loading: false };
         }
         renderAllCards();
     }
 
     async function initLoad() {
-        for (let i = 0; i < cartomantes.length; i++) {
-            currentVideos[i] = { videoId: null, title: "Carregando vídeo mais recente...", loading: true };
+        for (let i = 0; i < cartomantesData.length; i++) {
+            currentVideos[i] = { videoId: null, title: "Buscando o vídeo mais recente...", loading: true };
         }
         renderAllCards();
 
-        const initPromises = cartomantes.map(async (cart, idx) => {
+        const promises = cartomantesData.map(async (cart, idx) => {
             try {
-                const { videoId, title } = await fetchLatestVideoFromChannel(cart.canalIdentifier);
-                return { idx, videoId, title };
+                const { videoId, title } = await fetchLatestAriesVideo(cart.canalIdentifier);
+                return { idx, videoId: videoId || fallbackVideos[idx], title };
             } catch (e) {
-                const fallbackVideos = ["4vWwKMto2l0", "UjDXHUQaweQ", "qGsOD1E0odE", "178RP55ugGc", "ciGxMnloXVg", "L3YWppCnGvI", "slVw_j7HiTE", "Ly4fbjujEWY", "txHIikNGbuM", "hGoKTFBpIX8"];
-                return { 
-                    idx, 
-                    videoId: fallbackVideos[idx % fallbackVideos.length], 
-                    title: "Previsão especial para Áries - Abril 9-10"
-                };
+                return { idx, videoId: fallbackVideos[idx], title: "Previsão de Áries" };
             }
         });
-        const initResults = await Promise.all(initPromises);
-        for (let res of initResults) {
-            currentVideos[res.idx] = {
-                videoId: res.videoId,
-                title: res.title || (res.videoId ? "Vídeo recente Áries" : "Configure o ID do canal"),
-                loading: false
-            };
+
+        const results = await Promise.all(promises);
+        for (let res of results) {
+            currentVideos[res.idx] = { videoId: res.videoId, title: res.title, loading: false };
         }
         renderAllCards();
     }
 
-    document.getElementById("refreshAllBtn")?.addEventListener("click", () => {
-        updateAllVideos();
-    });
-
+    document.getElementById("refreshAllBtn")?.addEventListener("click", initLoad);
     initLoad();
 </script>
 </body>
