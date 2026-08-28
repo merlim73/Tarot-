@@ -166,24 +166,6 @@
             margin-top: 5px;
         }
 
-        .canal-link {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .badge-aries {
-            background: #ff5e2e;
-            border-radius: 30px;
-            padding: 0.2rem 0.7rem;
-            font-size: 0.7rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
         .video-area {
             padding: 1.2rem 1rem 1.5rem;
         }
@@ -219,6 +201,10 @@
             padding: 0.2rem 0.8rem;
             border-radius: 40px;
             font-size: 0.7rem;
+            max-width: 65%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .btn-atualizar {
@@ -285,12 +271,13 @@
             .cartomante-nome { font-size: 1.2rem; }
             .signo-nome { font-size: 1.6rem; }
             .stats { font-size: 0.65rem; }
+            .info-update { max-width: 100%; }
         }
 
         .loader-mini {
             display: inline-block;
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             border: 2px solid #ffae7a;
             border-radius: 50%;
             border-top-color: transparent;
@@ -343,23 +330,24 @@
 </div>
 
 <script>
-    // Lista de fallback contendo os 13 vídeos fornecidos
-    const fallbackVideos = [
-        "1vQgMmKgy-4", // 1º vídeo
-        "Vu-mjJ0lWMo", // 2º vídeo
-        "uENK1wIYZRk", // 3º vídeo
-        "o6xxwU4cIdw", // 4º vídeo
-        "J7XG7A9lUOI", // 5º vídeo
-        "s6uG79FbR-U", // 6º vídeo
-        "b9G5O1Z6tQw", // 7º vídeo
-        "vcjqd-5lAu8", // 8º vídeo
-        "OzF7vf6XIbk", // 9º vídeo
-        "cGIZ3CwUk58", // 10º vídeo
-        "ehY4yJNMSMI", // 11º vídeo
-        "T-uolV9NLjY", // 12º vídeo
-        "f0VpYbuBItA"  // 13º vídeo
+    // ========== LISTA DE FALLBACK (13 VÍDEOS VÁLIDOS) ==========
+    const FALLBACK_VIDEOS = [
+        "1vQgMmKgy-4",
+        "Vu-mjJ0lWMo",
+        "uENK1wIYZRk",
+        "o6xxwU4cIdw",
+        "J7XG7A9lUOI",
+        "s6uG79FbR-U",
+        "b9G5O1Z6tQw",
+        "vcjqd-5lAu8",
+        "OzF7vf6XIbk",
+        "cGIZ3CwUk58",
+        "ehY4yJNMSMI",
+        "T-uolV9NLjY",
+        "f0VpYbuBItA"
     ];
 
+    // ========== DADOS DAS CARTOMANTES ==========
     const cartomantesData = [
         { id: 1, nome: "🌙 Tarot Místico", canalIdentifier: "UC4vWwKMto2l0", seguidores: "612k", acertos: "⭐ 4.96", destaque: "🏆 MAIS ACERTOS", ranking: "#1" },
         { id: 2, nome: "🔮 Tarô da Lua", canalIdentifier: "UCUjDXHUQaweQ", seguidores: "558k", acertos: "⭐ 4.93", destaque: "🏆 TOP BRASIL", ranking: "#2" },
@@ -376,60 +364,67 @@
         { id: 13, nome: "🔮 Tarô Intuitivo", canalIdentifier: "UCf0VpYbuBItA", seguidores: "420k", acertos: "⭐ 4.83", destaque: "🏆 INTUIÇÃO PURA", ranking: "#13" }
     ];
 
-    let currentVideos = Array(13).fill(null).map(() => ({ videoId: null, title: "Carregando...", loading: false }));
+    // ========== ESTADO ==========
+    let currentVideos = cartomantesData.map((_, i) => ({
+        videoId: FALLBACK_VIDEOS[i],
+        title: "Previsão Especial para Áries",
+        loading: false
+    }));
+
     const gridContainer = document.getElementById("cartomantesGrid");
 
-    function escapeHtml(str) { 
+    // ========== FUNÇÕES AUXILIARES ==========
+    function escapeHtml(str) {
         if (!str) return '';
-        return str.replace(/[&<>]/g, function(m){
-            if(m==='&') return '&amp;'; 
-            if(m==='<') return '&lt;'; 
-            if(m==='>') return '&gt;'; 
-            return m;
-        });
-    }
-    
-    function truncate(txt, len) { 
-        if (!txt) return "Vídeo recente"; 
-        return txt.length > len ? txt.substring(0,len)+"..." : txt; 
+        return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m] || m);
     }
 
+    function truncate(txt, len) {
+        if (!txt) return "Previsão para Áries";
+        return txt.length > len ? txt.substring(0, len) + "..." : txt;
+    }
+
+    // ========== BUSCA NO FEED RSS DO YOUTUBE ==========
     async function fetchLatestAriesVideo(canalIdentifier) {
-        let feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
-        
-        const response = await fetch(proxyUrl);
-        const data = await response.json();
-        if (!data.contents) throw new Error("Feed vazio");
-        
-        const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
-        const entries = Array.from(xmlDoc.querySelectorAll("entry"));
-        
-        if (!entries.length) throw new Error("Nenhum vídeo encontrado");
-
-        // Prioriza o vídeo mais recente que menciona Áries/Aries
-        let selectedEntry = entries.find(e => {
-            const title = e.querySelector("title")?.textContent || "";
-            return /áries|aries/i.test(title);
-        }) || entries[0]; // Se não encontrar no título, pega o mais recente publicado
-
-        let videoIdNode = selectedEntry.querySelector("yt\\:videoId, videoId");
-        let videoId = videoIdNode ? videoIdNode.textContent : null;
-        
-        if (!videoId) {
-            const linkNode = selectedEntry.querySelector("link[rel='alternate']");
-            if (linkNode) {
-                const href = linkNode.getAttribute("href");
-                videoId = new URLSearchParams(href.split("?")[1]).get("v");
-            }
+        if (!canalIdentifier || canalIdentifier.length < 20) {
+            throw new Error("ID do canal inválido");
         }
 
-        const titleNode = selectedEntry.querySelector("title");
+        const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error("Proxy falhou");
+        const data = await response.json();
+        if (!data.contents) throw new Error("Feed vazio");
+
+        const xmlDoc = new DOMParser().parseFromString(data.contents, "text/xml");
+        const entries = Array.from(xmlDoc.querySelectorAll("entry"));
+        if (!entries.length) throw new Error("Nenhum vídeo");
+
+        let selected = entries.find(e => {
+            const title = e.querySelector("title")?.textContent || "";
+            return /áries|aries/i.test(title);
+        }) || entries[0];
+
+        const videoIdNode = selected.querySelector("yt\\:videoId, videoId");
+        let videoId = videoIdNode ? videoIdNode.textContent : null;
+        if (!videoId) {
+            const link = selected.querySelector("link[rel='alternate']");
+            if (link) {
+                const href = link.getAttribute("href");
+                const params = new URLSearchParams(href.split("?")[1]);
+                videoId = params.get("v");
+            }
+        }
+        const titleNode = selected.querySelector("title");
         const title = titleNode ? titleNode.textContent : "Previsão de Áries";
 
+        if (!videoId) throw new Error("ID do vídeo não encontrado");
         return { videoId, title };
     }
 
+    // ========== RENDERIZAÇÃO DOS CARDS ==========
     function renderAllCards() {
         if (!gridContainer) return;
         let html = "";
@@ -438,17 +433,22 @@
             const video = currentVideos[i];
             const videoId = video?.videoId;
             const isLoading = video?.loading || false;
-            const videoTitle = video?.title || "Previsão para Áries";
-            
+            const title = video?.title || "Previsão para Áries";
+
             let playerContent = "";
-            if (videoId && !isLoading) {
+            if (isLoading) {
+                playerContent = `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#0d0810; border-radius:24px; flex-direction:column; gap:8px;">
+                                    <div class="loader-mini"></div>
+                                    <span style="font-size:0.8rem; font-weight:500;">🔥 Buscando vídeo de Áries...</span>
+                                 </div>`;
+            } else if (videoId) {
                 playerContent = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=0&modestbranding=1&rel=0" 
-                                    title="Vídeo de ${cart.nome}" frameborder="0" 
+                                    title="Vídeo de ${escapeHtml(cart.nome)}" frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen></iframe>`;
             } else {
                 playerContent = `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#0d0810; border-radius:24px; flex-direction:column; gap:8px;">
-                                    ${isLoading ? '<div class="loader-mini"></div><span style="font-size:0.8rem; font-weight:500;">🔥 Buscando vídeo de Áries...</span>' : '🎴 Clique em "♈ Atualizar vídeo"'}
+                                    <button class="btn-atualizar" data-update="${i}">♈ Carregar vídeo</button>
                                  </div>`;
             }
 
@@ -471,15 +471,16 @@
                             ${playerContent}
                         </div>
                         <div class="video-footer">
-                            <div class="info-update">🎬 ${videoId && !isLoading ? `"${truncate(videoTitle, 45)}"` : (isLoading ? '⏳ atualizando...' : '🌀 aguardando')}</div>
-                            <button class="btn-atualizar" data-update="${i}">♈ atualizar vídeo</button>
+                            <div class="info-update" title="${escapeHtml(title)}">🎬 ${isLoading ? '⏳ Atualizando...' : truncate(title, 35)}</div>
+                            <button class="btn-atualizar" data-update="${i}">♈ Atualizar vídeo</button>
                         </div>
                     </div>
                 </div>
             `;
         }
         gridContainer.innerHTML = html;
-        
+
+        // Atribuir eventos de clique nos botões
         document.querySelectorAll('.btn-atualizar').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -489,43 +490,60 @@
         });
     }
 
+    // ========== ATUALIZAR UM CARD ESPECÍFICO ==========
     async function updateSingleCard(index) {
         if (currentVideos[index]?.loading) return;
         currentVideos[index] = { ...currentVideos[index], loading: true };
         renderAllCards();
-        
+
         try {
-            const { videoId, title } = await fetchLatestAriesVideo(cartomantesData[index].canalIdentifier);
-            currentVideos[index] = { videoId: videoId || fallbackVideos[index], title, loading: false };
+            const canalId = cartomantesData[index].canalIdentifier;
+            const { videoId, title } = await fetchLatestAriesVideo(canalId);
+            currentVideos[index] = {
+                videoId: videoId || FALLBACK_VIDEOS[index],
+                title: title || "Previsão para Áries",
+                loading: false
+            };
         } catch (error) {
-            currentVideos[index] = { videoId: fallbackVideos[index], title: "Previsão Atualizada de Áries", loading: false };
+            // Se falhar o carregamento dinâmico, mantém o vídeo de fallback ativo sem erro visível ao usuário
+            currentVideos[index] = {
+                videoId: FALLBACK_VIDEOS[index],
+                title: "Previsão Especial de Áries",
+                loading: false
+            };
         }
         renderAllCards();
     }
 
+    // ========== INICIALIZAÇÃO DA PÁGINA ==========
     async function initLoad() {
-        for (let i = 0; i < cartomantesData.length; i++) {
-            currentVideos[i] = { videoId: null, title: "Buscando o vídeo mais recente...", loading: true };
-        }
+        // Inicializa com os dados prontos
         renderAllCards();
 
+        // Tenta buscar atualizações em segundo plano para cada card
         const promises = cartomantesData.map(async (cart, idx) => {
             try {
-                const { videoId, title } = await fetchLatestAriesVideo(cart.canalIdentifier);
-                return { idx, videoId: videoId || fallbackVideos[idx], title };
+                const canalId = cart.canalIdentifier;
+                if (!canalId || canalId.length < 20) return;
+                const { videoId, title } = await fetchLatestAriesVideo(canalId);
+                if (videoId) {
+                    currentVideos[idx] = { videoId, title, loading: false };
+                }
             } catch (e) {
-                return { idx, videoId: fallbackVideos[idx], title: "Previsão de Áries" };
+                // Mantém o vídeo de fallback sem interrupção
             }
         });
 
-        const results = await Promise.all(promises);
-        for (let res of results) {
-            currentVideos[res.idx] = { videoId: res.videoId, title: res.title, loading: false };
-        }
+        await Promise.all(promises);
         renderAllCards();
     }
 
-    document.getElementById("refreshAllBtn")?.addEventListener("click", initLoad);
+    // ========== EVENTO DO BOTÃO "ATUALIZAR TODOS" ==========
+    document.getElementById("refreshAllBtn")?.addEventListener("click", () => {
+        cartomantesData.forEach((_, i) => updateSingleCard(i));
+    });
+
+    // Iniciar aplicação
     initLoad();
 </script>
 </body>
