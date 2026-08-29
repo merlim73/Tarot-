@@ -1,13 +1,27 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-PT">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
-<title>♈ TOP 13 Cartomantes de Áries | Previsões</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=yes">
+
+<meta name="theme-color" content="#160b17">
+
+<title>♈ Áries — Previsões YouTube</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     margin:0;
     padding:0;
@@ -15,15 +29,29 @@
 }
 
 html{
-    background:#140914;
-    scroll-behavior:smooth;
+    background:#120812;
+    min-height:100%;
 }
 
 body{
+
+    min-height:100vh;
+
     background:
-        radial-gradient(circle at top, #4b1b30 0%, transparent 38%),
-        linear-gradient(145deg,#140914 0%,#241020 55%,#120811 100%);
-    color:#f9eed7;
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,105,55,.25),
+            transparent 40%
+        ),
+        linear-gradient(
+            145deg,
+            #120812,
+            #24101f 55%,
+            #10070f
+        );
+
+    color:#f8ead7;
+
     font-family:
         "Segoe UI",
         Poppins,
@@ -32,450 +60,814 @@ body{
         Roboto,
         Arial,
         sans-serif;
-    min-height:100vh;
-    padding:20px 14px 40px;
+
+    padding:
+        16px
+        10px
+        40px;
+
+    overflow-x:hidden;
+
 }
 
-button,
-iframe{
-    -webkit-tap-highlight-color:transparent;
-}
 
-.app-container{
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.app{
+
     width:100%;
+
     max-width:1500px;
+
     margin:auto;
+
 }
 
-/* =========================
-   CABEÇALHO
-========================= */
 
-.aries-header{
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
     text-align:center;
-    margin-bottom:25px;
+
+    padding:
+        10px
+        5px
+        25px;
+
 }
 
-.signo-badge{
+.sign{
+
     display:inline-flex;
+
     align-items:center;
+
     justify-content:center;
+
     gap:12px;
-    padding:10px 20px;
+
+    padding:
+        10px
+        18px;
+
+    border:
+        1px solid
+        rgba(255,145,90,.65);
+
     border-radius:100px;
-    border:1px solid rgba(255,140,80,.65);
-    background:rgba(255,80,40,.12);
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+    background:
+        rgba(255,90,50,.10);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.35);
+
 }
 
-.signo-simbolo{
-    font-size:42px;
-    line-height:1;
-    filter:drop-shadow(0 0 8px #ff7043);
+.sign-icon{
+
+    font-size:35px;
+
 }
 
-.signo-nome{
-    font-size:clamp(1.3rem,4vw,2.2rem);
+.sign-name{
+
+    font-size:
+        clamp(
+            1.3rem,
+            5vw,
+            2.2rem
+        );
+
     font-weight:900;
+
     letter-spacing:1px;
-    background:linear-gradient(135deg,#ffd166,#ff7043);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd166,
+            #ff7043
+        );
+
     -webkit-background-clip:text;
+
     background-clip:text;
+
     color:transparent;
+
 }
 
-.datas-destaque{
+.subtitle{
+
     display:inline-block;
-    margin-top:14px;
-    padding:8px 18px;
-    border-radius:40px;
-    border:1px solid rgba(255,140,90,.55);
-    background:rgba(20,10,20,.75);
-    font-weight:700;
-}
 
-.datas-destaque span{
-    color:#ffbd69;
-}
+    margin-top:13px;
 
-.sub{
-    margin-top:12px;
-    font-size:.9rem;
-    opacity:.9;
-    line-height:1.6;
-}
+    padding:
+        7px
+        15px;
 
-.selo-confianca{
-    display:inline-block;
-    margin:8px 0 0 6px;
-    padding:4px 10px;
-    border-radius:20px;
-    background:rgba(255,180,70,.12);
-    border:1px solid rgba(255,180,70,.25);
-    font-size:.72rem;
-}
-
-/* =========================
-   GRID
-========================= */
-
-.grid-canais{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
-    gap:20px;
-}
-
-/* =========================
-   CARD
-========================= */
-
-.card-cartomante{
-    position:relative;
-    overflow:hidden;
-    border-radius:28px;
-    background:rgba(19,10,22,.92);
-    border:1px solid rgba(255,130,70,.32);
-    box-shadow:0 18px 40px rgba(0,0,0,.4);
-    transition:.25s ease;
-}
-
-.card-cartomante:hover{
-    transform:translateY(-4px);
-    border-color:rgba(255,160,100,.7);
-    box-shadow:0 25px 45px rgba(0,0,0,.55);
-}
-
-.ranking-badge{
-    position:absolute;
-    top:10px;
-    left:12px;
-    z-index:5;
-    padding:5px 10px;
     border-radius:30px;
-    background:#ff6338;
-    color:#210b12;
-    font-size:.68rem;
-    font-weight:900;
-    box-shadow:0 3px 10px rgba(0,0,0,.5);
+
+    border:
+        1px solid
+        rgba(255,140,80,.4);
+
+    background:
+        rgba(0,0,0,.25);
+
+    font-size:.82rem;
+
 }
+
+.status{
+
+    margin-top:10px;
+
+    font-size:.72rem;
+
+    opacity:.75;
+
+}
+
+.status-dot{
+
+    display:inline-block;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#56d364;
+
+    margin-right:5px;
+
+    box-shadow:
+        0 0 8px
+        #56d364;
+
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(310px,1fr)
+        );
+
+    gap:18px;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    background:
+        rgba(20,10,22,.94);
+
+    border:
+        1px solid
+        rgba(255,130,70,.28);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.45);
+
+}
+
+
+/* =========================================================
+   RANKING
+========================================================= */
+
+.rank{
+
+    position:absolute;
+
+    top:10px;
+
+    left:10px;
+
+    z-index:10;
+
+    padding:
+        5px
+        10px;
+
+    border-radius:30px;
+
+    background:#ff6338;
+
+    color:#210a0d;
+
+    font-size:.63rem;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
 
 .card-header{
+
     display:flex;
+
     align-items:center;
-    gap:12px;
-    padding:48px 15px 13px;
-    background:linear-gradient(110deg,#30182b,#1d1020);
-    border-bottom:1px solid rgba(255,110,70,.5);
+
+    gap:10px;
+
+    padding:
+        45px
+        13px
+        12px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #32182c,
+            #1d0e1d
+        );
+
+    border-bottom:
+        1px solid
+        rgba(255,110,70,.45);
+
 }
 
-.avatar-icon{
-    width:50px;
-    height:50px;
+.avatar{
+
+    width:48px;
+
+    height:48px;
+
     flex:none;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     border-radius:50%;
-    background:rgba(255,100,60,.12);
-    font-size:26px;
+
+    background:
+        rgba(255,110,70,.12);
+
+    font-size:25px;
+
 }
 
-.cartomante-info{
+.info{
+
     min-width:0;
+
     flex:1;
+
 }
 
-.cartomante-nome{
-    font-size:1.15rem;
+.name{
+
+    font-size:1.08rem;
+
     font-weight:800;
+
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
+
 }
 
 .stats{
+
     display:flex;
-    gap:5px;
+
     flex-wrap:wrap;
-    margin-top:6px;
+
+    gap:5px;
+
+    margin-top:5px;
+
 }
 
-.stat-item{
-    padding:3px 7px;
-    border-radius:20px;
-    background:rgba(0,0,0,.35);
-    font-size:.65rem;
-}
+.stat{
 
-.badge-acertos{
-    padding:3px 7px;
+    padding:
+        3px
+        7px;
+
     border-radius:20px;
-    background:#d4af37;
-    color:#20100d;
+
+    background:
+        rgba(0,0,0,.35);
+
     font-size:.62rem;
+
+}
+
+.badge{
+
+    padding:
+        3px
+        7px;
+
+    border-radius:20px;
+
+    background:#d4af37;
+
+    color:#1d0e0d;
+
+    font-size:.59rem;
+
     font-weight:900;
+
 }
 
-/* =========================
-   VIDEO
-========================= */
 
-.video-area{
-    padding:12px;
-}
+/* =========================================================
+   PLAYER
+========================================================= */
 
-.youtube-embed{
+.player{
+
     position:relative;
+
     width:100%;
+
     aspect-ratio:16 / 9;
-    min-height:200px;
-    overflow:hidden;
-    border-radius:18px;
+
+    min-height:185px;
+
     background:#000;
-    box-shadow:0 8px 20px rgba(0,0,0,.45);
+
+    overflow:hidden;
+
 }
 
-.youtube-embed iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-    background:#000;
-}
 
 /*
-   IMPORTANTE:
-   NÃO usar sandbox no iframe.
-   O YouTube pode precisar de recursos
-   que o sandbox bloqueia.
+   O iframe fica sempre dentro do player.
+
+   Não usamos innerHTML para o atualizar.
 */
 
-.video-placeholder{
+.player iframe{
+
+    position:absolute;
+
+    inset:0;
+
     width:100%;
+
     height:100%;
-    min-height:200px;
-    display:flex;
-    flex-direction:column;
+
+    border:0;
+
+    display:block;
+
+    background:#000;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:3;
+
+    display:none;
+
     align-items:center;
+
     justify-content:center;
-    gap:8px;
+
+    flex-direction:column;
+
+    gap:10px;
+
     background:
-        radial-gradient(circle,#27122b,#090509);
-    color:#ddd;
-    text-align:center;
+        rgba(8,4,9,.88);
+
+    font-size:.75rem;
+
 }
 
-.video-placeholder .icon{
-    font-size:42px;
+.loading.active{
+
+    display:flex;
+
 }
 
-.video-placeholder .loader{
-    width:30px;
-    height:30px;
-    border:3px solid rgba(255,170,100,.3);
-    border-top-color:#ff8b55;
+.spinner{
+
+    width:28px;
+
+    height:28px;
+
+    border:
+        3px solid
+        rgba(255,160,100,.25);
+
+    border-top-color:#ff8555;
+
     border-radius:50%;
-    animation:spin .8s linear infinite;
+
+    animation:
+        spin .8s linear infinite;
+
 }
 
 @keyframes spin{
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
-/* =========================
-   RODAPÉ DO VÍDEO
-========================= */
+
+/* =========================================================
+   VIDEO FOOTER
+========================================================= */
 
 .video-footer{
+
     display:flex;
+
     align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    margin-top:10px;
+
+    gap:6px;
+
+    padding:10px;
+
+    flex-wrap:wrap;
+
 }
 
-.info-update{
+.video-title{
+
     flex:1;
-    min-width:0;
-    padding:7px 9px;
-    border-radius:15px;
-    background:rgba(0,0,0,.35);
-    font-size:.68rem;
+
+    min-width:150px;
+
+    padding:
+        7px
+        9px;
+
+    border-radius:13px;
+
+    background:
+        rgba(0,0,0,.32);
+
+    font-size:.66rem;
+
     white-space:nowrap;
+
     overflow:hidden;
+
     text-overflow:ellipsis;
+
 }
 
-.btn-atualizar,
-.btn-youtube{
-    border:1px solid rgba(255,150,100,.55);
-    background:rgba(255,110,70,.08);
-    color:#ffd3bc;
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    padding:
+        7px
+        10px;
+
+    border:
+        1px solid
+        rgba(255,145,95,.45);
+
     border-radius:20px;
-    padding:7px 10px;
-    cursor:pointer;
-    font-size:.68rem;
+
+    background:
+        rgba(255,110,70,.08);
+
+    color:#ffd5c0;
+
+    font-size:.64rem;
+
     font-weight:700;
+
     text-decoration:none;
-    transition:.2s;
-}
 
-.btn-atualizar:hover,
-.btn-youtube:hover{
-    background:rgba(255,110,70,.25);
-    color:#fff;
-}
-
-.error-msg{
-    margin-top:7px;
-    padding:6px 8px;
-    border-radius:10px;
-    background:rgba(255,60,60,.08);
-    color:#ffaaa0;
-    font-size:.67rem;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.global-footer{
-    text-align:center;
-    margin-top:30px;
-    padding-top:20px;
-    border-top:1px dashed rgba(255,150,100,.3);
-}
-
-.refresh-all{
-    border:0;
-    padding:11px 20px;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff7545,#ff9d56);
-    color:#220c12;
-    font-weight:900;
     cursor:pointer;
-    box-shadow:0 8px 20px rgba(255,90,40,.25);
-    transition:.2s;
+
+    white-space:nowrap;
+
 }
 
-.refresh-all:hover{
-    transform:translateY(-2px);
+.btn:hover{
+
+    background:
+        rgba(255,110,70,.22);
+
+    color:#fff;
+
 }
 
-.refresh-all:disabled{
-    opacity:.55;
+.btn:disabled{
+
+    opacity:.4;
+
     cursor:not-allowed;
+
 }
 
-.obs{
+
+/* =========================================================
+   ERRO
+========================================================= */
+
+.error{
+
+    display:none;
+
+    margin:
+        0
+        10px
+        10px;
+
+    padding:7px 9px;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,60,60,.08);
+
+    color:#ffaaa0;
+
+    font-size:.65rem;
+
+}
+
+.error.show{
+
+    display:block;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:28px;
+
+    padding-top:20px;
+
+    border-top:
+        1px dashed
+        rgba(255,140,90,.25);
+
+}
+
+.main-button{
+
+    border:0;
+
+    padding:
+        11px
+        20px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff7545,
+            #ffad5e
+        );
+
+    color:#220b10;
+
+    font-weight:900;
+
+    font-size:.78rem;
+
+    cursor:pointer;
+
+}
+
+.main-button:disabled{
+
+    opacity:.5;
+
+}
+
+.note{
+
     margin-top:10px;
-    font-size:.68rem;
-    opacity:.65;
+
+    font-size:.65rem;
+
+    opacity:.6;
+
     line-height:1.5;
+
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:700px){
 
     body{
-        padding:12px 8px 30px;
+
+        padding:
+            10px
+            7px
+            30px;
+
     }
 
-    .signo-badge{
-        padding:9px 14px;
-    }
+    .grid{
 
-    .signo-simbolo{
-        font-size:32px;
-    }
-
-    .grid-canais{
         grid-template-columns:1fr;
-        gap:16px;
+
     }
 
-    .card-cartomante{
-        border-radius:22px;
+    .card{
+
+        border-radius:20px;
+
     }
 
-    .youtube-embed{
+    .player{
+
         min-height:190px;
+
     }
 
-    .video-footer{
-        flex-wrap:wrap;
-    }
-
-    .info-update{
-        width:100%;
-        flex-basis:100%;
-    }
 }
+
+
+/* =========================================================
+   KODULAR / ANDROID WEBVIEW
+========================================================= */
+
+.kodular-fix{
+
+    -webkit-transform:
+        translateZ(0);
+
+    transform:
+        translateZ(0);
+
+    -webkit-backface-visibility:
+        hidden;
+
+    backface-visibility:
+        hidden;
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="app-container">
 
-    <!-- CABEÇALHO -->
-    <header class="aries-header">
-
-        <div class="signo-badge">
-            <div class="signo-simbolo">♈</div>
-
-            <div class="signo-nome">
-                ÁRIES · CARNEIRO
-            </div>
-
-            <div class="signo-simbolo">🐏</div>
-        </div>
-
-        <div class="datas-destaque">
-            🔥 PREVISÕES ESPECIAIS ·
-            <span>ÁRIES</span>
-        </div>
-
-        <div class="sub">
-            ⚡ Seleção de vídeos de previsões para Áries
-            <div class="selo-confianca">
-                ▶️ YouTube
-            </div>
-        </div>
-
-    </header>
+<div class="app kodular-fix">
 
 
-    <!-- CARTOMANTES -->
-    <main class="grid-canais" id="cartomantesGrid"></main>
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="sign">
+
+        <span class="sign-icon">
+            ♈
+        </span>
+
+        <span class="sign-name">
+            ÁRIES · CARNEIRO
+        </span>
+
+        <span class="sign-icon">
+            🐏
+        </span>
+
+    </div>
 
 
-    <!-- RODAPÉ -->
-    <footer class="global-footer">
+    <div class="subtitle">
 
-        <button
-            class="refresh-all"
-            id="refreshAllBtn">
-            🔄 ATUALIZAR VÍDEOS
-        </button>
+        🔥 Previsões de Áries · YouTube
 
-        <div class="obs">
-            Os vídeos são incorporados diretamente através do
-            player oficial do YouTube.
-        </div>
+    </div>
 
-        <div class="obs">
-            📱 Compatível com GitHub Pages, Android WebView e Kodular.
-        </div>
 
-    </footer>
+    <div class="status">
+
+        <span class="status-dot"></span>
+
+        Player YouTube ativo
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     GRID
+======================================================= -->
+
+<main
+    class="grid"
+    id="videosGrid">
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer class="footer">
+
+    <button
+        class="main-button"
+        id="refreshAll">
+
+        🔄 ATUALIZAR
+
+    </button>
+
+
+    <div class="note">
+
+        Os players são mantidos estáveis para evitar
+        desaparecimentos e recarregamentos no Kodular/WebView.
+
+    </div>
+
+
+    <div class="note">
+
+        📱 GitHub Pages · Android · Kodular WebViewer
+
+    </div>
+
+</footer>
+
 
 </div>
 
@@ -486,7 +878,19 @@ iframe{
    CONFIGURAÇÃO
 ========================================================= */
 
-const FALLBACK_VIDEOS = [
+
+/*
+   Estes são os vídeos iniciais.
+
+   MUITO IMPORTANTE:
+
+   Um ID YouTube tem exatamente 11 caracteres.
+
+   Quando um vídeo deixar de existir ou não permitir
+   incorporação, o próprio YouTube poderá mostrar erro.
+*/
+
+const VIDEOS = [
 
     "1vQgMmKgy-4",
     "Vu-mjJ0lWMo",
@@ -505,164 +909,127 @@ const FALLBACK_VIDEOS = [
 ];
 
 
-/*
-   DADOS DOS CARDS.
+/* =========================================================
+   CARTOMANTES
+========================================================= */
 
-   NOTA:
-   Os nomes/estatísticas abaixo são apenas
-   informação visual da interface.
-*/
+const CARTOMANTES = [
 
-const cartomantesData = [
+    ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
 
-    {
-        id:1,
-        nome:"🌙 LUNARR Tarô",
-        seguidores:"612k",
-        acertos:"⭐ 4.96",
-        destaque:"🏆 MAIS ACERTOS",
-        ranking:"#1"
-    },
+    ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
 
-    {
-        id:2,
-        nome:"🔮 Tarot Aries",
-        seguidores:"558k",
-        acertos:"⭐ 4.93",
-        destaque:"🏆 TOP BRASIL",
-        ranking:"#2"
-    },
+    ["✨ Healing Tarot","480k","⭐ 4.94","🏆 ASTROLOGIA","#3"],
 
-    {
-        id:3,
-        nome:"✨ Healing Tarot",
-        seguidores:"480k",
-        acertos:"⭐ 4.94",
-        destaque:"🏆 ASTROLOGIA",
-        ranking:"#3"
-    },
+    ["🃏 Revealing Light","520k","⭐ 4.91","🏆 PRECISÃO","#4"],
 
-    {
-        id:4,
-        nome:"🃏 Revealing Light",
-        seguidores:"520k",
-        acertos:"⭐ 4.91",
-        destaque:"🏆 PRECISÃO",
-        ranking:"#4"
-    },
+    ["🔯 King Fenix","490k","⭐ 4.92","🏆 REVELAÇÃO","#5"],
 
-    {
-        id:5,
-        nome:"🔯 King Fenix",
-        seguidores:"490k",
-        acertos:"⭐ 4.92",
-        destaque:"🏆 REVELAÇÃO",
-        ranking:"#5"
-    },
+    ["☀️ Red Relâmpago","475k","⭐ 4.90","🏆 LUZ","#6"],
 
-    {
-        id:6,
-        nome:"☀️ Red Relâmpago",
-        seguidores:"475k",
-        acertos:"⭐ 4.90",
-        destaque:"🏆 LUZ",
-        ranking:"#6"
-    },
+    ["📿 Oráculos Enigma","470k","⭐ 4.89","🏆 SABEDORIA","#7"],
 
-    {
-        id:7,
-        nome:"📿 Oráculos Enigma",
-        seguidores:"470k",
-        acertos:"⭐ 4.89",
-        destaque:"🏆 SABEDORIA",
-        ranking:"#7"
-    },
+    ["💫 Tarô & Música","465k","⭐ 4.88","🏆 DESTINO","#8"],
 
-    {
-        id:8,
-        nome:"💫 Tarô & Música",
-        seguidores:"465k",
-        acertos:"⭐ 4.88",
-        destaque:"🏆 DESTINO",
-        ranking:"#8"
-    },
+    ["🕊️ Baralho Cigano","460k","⭐ 4.87","🏆 ESPERANÇA","#9"],
 
-    {
-        id:9,
-        nome:"🕊️ Baralho Cigano",
-        seguidores:"460k",
-        acertos:"⭐ 4.87",
-        destaque:"🏆 ESPERANÇA",
-        ranking:"#9"
-    },
+    ["🦋 Mestre José","455k","⭐ 4.86","🏆 TRANSFORMAÇÃO","#10"],
 
-    {
-        id:10,
-        nome:"🦋 Mestre José",
-        seguidores:"455k",
-        acertos:"⭐ 4.86",
-        destaque:"🏆 TRANSFORMAÇÃO",
-        ranking:"#10"
-    },
+    ["🔥 Baba Jolie","440k","⭐ 4.85","🏆 ÁRIES","#11"],
 
-    {
-        id:11,
-        nome:"🔥 Baba Jolie",
-        seguidores:"440k",
-        acertos:"⭐ 4.85",
-        destaque:"🏆 ÁRIES",
-        ranking:"#11"
-    },
+    ["🌟 She-Geek Tarot","430k","⭐ 4.84","🏆 ENERGIA","#12"],
 
-    {
-        id:12,
-        nome:"🌟 She-Geek Tarot",
-        seguidores:"430k",
-        acertos:"⭐ 4.84",
-        destaque:"🏆 ENERGIA",
-        ranking:"#12"
-    },
-
-    {
-        id:13,
-        nome:"🔮 Atomic Papers",
-        seguidores:"420k",
-        acertos:"⭐ 4.83",
-        destaque:"🏆 INTUIÇÃO",
-        ranking:"#13"
-    }
+    ["🔮 Atomic Papers","420k","⭐ 4.83","🏆 INTUIÇÃO","#13"]
 
 ];
 
 
 /* =========================================================
-   ESTADO
+   ESTADO DOS PLAYERS
 ========================================================= */
 
-let currentVideos = cartomantesData.map((cart,index)=>({
-
-    videoId:FALLBACK_VIDEOS[index],
-
-    title:"Previsão Especial para Áries",
-
-    loading:false,
-
-    error:null
-
-}));
-
-
-const grid =
-    document.getElementById("cartomantesGrid");
+const players = [];
 
 
 /* =========================================================
-   SEGURANÇA HTML
+   VALIDAR ID
 ========================================================= */
 
-function escapeHtml(value){
+function isValidVideoId(id){
 
-    return String(value || "")
+    return (
+        typeof id === "string" &&
+        /^[A-Za-z0-9_-]{11}$/.test(id)
+    );
+
+}
+
+
+/* =========================================================
+   URL DO YOUTUBE
+========================================================= */
+
+function getYoutubeURL(id){
+
+    if(!isValidVideoId(id)){
+        return "";
+    }
+
+
+    /*
+       IMPORTANTE:
+
+       Não utilizar:
+       [https://...](https://...)
+
+       Não utilizar:
+       sandbox
+
+       Não utilizar:
+       innerHTML para trocar iframe.
+
+       youtube-nocookie é compatível com embed
+       e reduz cookies de rastreamento.
+    */
+
+    return (
+        "https://www.youtube-nocookie.com/embed/"
+        + id
+        + "?autoplay=0"
+        + "&controls=1"
+        + "&playsinline=1"
+        + "&rel=0"
+        + "&enablejsapi=1"
+    );
+
+}
+
+
+/* =========================================================
+   URL NORMAL
+========================================================= */
+
+function getWatchURL(id){
+
+    if(!isValidVideoId(id)){
+        return "#";
+    }
+
+    return (
+        "https://www.youtube.com/watch?v="
+        + id
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function esc(text){
+
+    return String(text ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -672,388 +1039,614 @@ function escapeHtml(value){
 }
 
 
-function truncate(value,length){
-
-    if(!value){
-        return "Previsão para Áries";
-    }
-
-    value=String(value);
-
-    return value.length > length
-        ? value.substring(0,length)+"..."
-        : value;
-
-}
-
-
 /* =========================================================
-   VALIDAR ID YOUTUBE
+   CRIAR CARD UMA ÚNICA VEZ
 ========================================================= */
 
-function validYouTubeId(id){
+function createCard(index){
 
-    return /^[a-zA-Z0-9_-]{11}$/.test(id);
+    const data=CARTOMANTES[index];
 
-}
+    const videoId=VIDEOS[index];
 
 
-/* =========================================================
-   URL DO PLAYER
-========================================================= */
+    const card=
+        document.createElement("article");
 
-function youtubeEmbedUrl(videoId){
+    card.className="card";
 
-    if(!validYouTubeId(videoId)){
-        return "";
-    }
+
+    /* RANK */
+
+    const rank=
+        document.createElement("div");
+
+    rank.className="rank";
+
+    rank.textContent=
+        data[4]+" CARTOMANTE";
+
+
+    /* HEADER */
+
+    const header=
+        document.createElement("div");
+
+    header.className="card-header";
+
+
+    const avatar=
+        document.createElement("div");
+
+    avatar.className="avatar";
+
+    avatar.textContent="🔮";
+
+
+    const info=
+        document.createElement("div");
+
+    info.className="info";
+
+
+    const name=
+        document.createElement("div");
+
+    name.className="name";
+
+    name.textContent=data[0];
+
+
+    const stats=
+        document.createElement("div");
+
+    stats.className="stats";
+
+
+    const stat1=
+        document.createElement("span");
+
+    stat1.className="stat";
+
+    stat1.textContent=
+        "👥 "+data[1];
+
+
+    const stat2=
+        document.createElement("span");
+
+    stat2.className="stat";
+
+    stat2.textContent=data[2];
+
+
+    const badge=
+        document.createElement("span");
+
+    badge.className="badge";
+
+    badge.textContent=data[3];
+
+
+    stats.appendChild(stat1);
+
+    stats.appendChild(stat2);
+
+    stats.appendChild(badge);
+
+
+    info.appendChild(name);
+
+    info.appendChild(stats);
+
+
+    header.appendChild(avatar);
+
+    header.appendChild(info);
+
+
+    /* PLAYER */
+
+    const player=
+        document.createElement("div");
+
+    player.className="player";
+
+
+    /* IFRAME */
+
+    const iframe=
+        document.createElement("iframe");
+
+    iframe.title=
+        data[0]+" - YouTube";
+
+
+    iframe.allow=
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+
+    iframe.allowFullscreen=true;
+
+
+    iframe.loading="lazy";
+
+
+    iframe.referrerPolicy=
+        "strict-origin-when-cross-origin";
+
 
     /*
-       youtube-nocookie:
-       modo de privacidade melhorado.
-
-       playsinline:
-       importante em dispositivos móveis.
-
-       rel=0:
-       evita recomendações de outros canais
-       quando possível.
-
-       controls=1:
-       mantém os controlos normais.
-
-       origin:
-       NÃO colocamos localhost ou um domínio
-       inventado porque a aplicação pode estar
-       no GitHub ou dentro do Kodular.
+       SRC É DEFINIDO UMA ÚNICA VEZ
     */
 
-    return (
-        "https://www.youtube-nocookie.com/embed/"
-        + encodeURIComponent(videoId)
-        + "?autoplay=0"
-        + "&controls=1"
-        + "&playsinline=1"
-        + "&rel=0"
-        + "&iv_load_policy=3"
+    if(isValidVideoId(videoId)){
+
+        iframe.src=
+            getYoutubeURL(videoId);
+
+    }
+
+
+    /* LOADING */
+
+    const loading=
+        document.createElement("div");
+
+    loading.className="loading";
+
+    loading.innerHTML=
+        '<div class="spinner"></div>' +
+        '<div>A preparar vídeo...</div>';
+
+
+    /* TÍTULO */
+
+    const footer=
+        document.createElement("div");
+
+    footer.className="video-footer";
+
+
+    const title=
+        document.createElement("div");
+
+    title.className="video-title";
+
+    title.textContent=
+        "🎬 Previsão para Áries";
+
+
+    /* BOTÃO ABRIR YOUTUBE */
+
+    const open=
+        document.createElement("a");
+
+    open.className="btn";
+
+    open.target="_blank";
+
+    open.rel="noopener noreferrer";
+
+    open.textContent="▶️ YouTube";
+
+    open.href=
+        getWatchURL(videoId);
+
+
+    /* BOTÃO ATUALIZAR */
+
+    const update=
+        document.createElement("button");
+
+    update.className="btn";
+
+    update.type="button";
+
+    update.textContent="🔄 Atualizar";
+
+
+    /* ERRO */
+
+    const error=
+        document.createElement("div");
+
+    error.className="error";
+
+
+    /* =====================================================
+       EVENTO LOAD
+    ===================================================== */
+
+    iframe.addEventListener(
+        "load",
+        function(){
+
+            loading.classList.remove("active");
+
+        }
+    );
+
+
+    /* =====================================================
+       EVENTO ERRO
+    ===================================================== */
+
+    iframe.addEventListener(
+        "error",
+        function(){
+
+            loading.classList.remove("active");
+
+            error.textContent=
+                "⚠️ O YouTube não conseguiu carregar este vídeo.";
+
+            error.classList.add("show");
+
+        }
+    );
+
+
+    /* =====================================================
+       BOTÃO ATUALIZAR
+    ===================================================== */
+
+    update.addEventListener(
+        "click",
+        function(){
+
+            refreshVideo(index);
+
+        }
+    );
+
+
+    /*
+       MONTAR DOM
+
+       Isto acontece APENAS UMA VEZ.
+    */
+
+    player.appendChild(iframe);
+
+    player.appendChild(loading);
+
+
+    footer.appendChild(title);
+
+    footer.appendChild(open);
+
+    footer.appendChild(update);
+
+
+    card.appendChild(rank);
+
+    card.appendChild(header);
+
+    card.appendChild(player);
+
+    card.appendChild(footer);
+
+    card.appendChild(error);
+
+
+    return {
+
+        card:card,
+
+        player:player,
+
+        iframe:iframe,
+
+        loading:loading,
+
+        title:title,
+
+        open:open,
+
+        update:update,
+
+        error:error,
+
+        videoId:videoId
+
+    };
+
+}
+
+
+/* =========================================================
+   INICIALIZAR TODOS
+========================================================= */
+
+function init(){
+
+    const grid=
+        document.getElementById("videosGrid");
+
+
+    if(!grid){
+        return;
+    }
+
+
+    /*
+       IMPORTANTE:
+
+       Os cards são criados uma única vez.
+    */
+
+    for(
+        let i=0;
+        i<CARTOMANTES.length;
+        i++
+    ){
+
+        const instance=
+            createCard(i);
+
+
+        players.push(instance);
+
+
+        grid.appendChild(
+            instance.card
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TROCAR VÍDEO SEM DESTRUIR O PLAYER ATUAL
+========================================================= */
+
+function replaceVideo(index,newVideoId){
+
+    const item=
+        players[index];
+
+
+    if(!item){
+        return;
+    }
+
+
+    if(!isValidVideoId(newVideoId)){
+
+        item.error.textContent=
+            "⚠️ ID do vídeo YouTube inválido.";
+
+        item.error.classList.add("show");
+
+        return;
+
+    }
+
+
+    /*
+       Se for exatamente o mesmo vídeo,
+       não fazemos absolutamente nada.
+
+       Isto evita reload desnecessário.
+    */
+
+    if(
+        item.videoId === newVideoId
+    ){
+
+        item.error.classList.remove("show");
+
+        return;
+
+    }
+
+
+    item.loading.classList.add("active");
+
+    item.error.classList.remove("show");
+
+
+    /*
+       NOVO IFRAME É CRIADO FORA DO PLAYER.
+
+       O vídeo antigo continua visível.
+    */
+
+    const newIframe=
+        document.createElement("iframe");
+
+
+    newIframe.title=
+        CARTOMANTES[index][0]
+        +" - YouTube";
+
+
+    newIframe.allow=
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+
+    newIframe.allowFullscreen=true;
+
+
+    newIframe.loading="eager";
+
+
+    newIframe.referrerPolicy=
+        "strict-origin-when-cross-origin";
+
+
+    newIframe.src=
+        getYoutubeURL(newVideoId);
+
+
+    /*
+       Fica invisível enquanto carrega.
+    */
+
+    newIframe.style.opacity="0";
+
+    newIframe.style.position="absolute";
+
+    newIframe.style.inset="0";
+
+    newIframe.style.width="100%";
+
+    newIframe.style.height="100%";
+
+    newIframe.style.border="0";
+
+
+    newIframe.addEventListener(
+        "load",
+        function(){
+
+            /*
+               O novo player carregou.
+
+               AGORA SIM substituímos o antigo.
+            */
+
+            const oldIframe=
+                item.iframe;
+
+
+            item.player.appendChild(
+                newIframe
+            );
+
+
+            /*
+               Pequena transição.
+            */
+
+            requestAnimationFrame(
+                function(){
+
+                    newIframe.style.transition=
+                        "opacity .25s ease";
+
+                    newIframe.style.opacity="1";
+
+                }
+            );
+
+
+            setTimeout(
+                function(){
+
+                    if(oldIframe){
+
+                        oldIframe.remove();
+
+                    }
+
+
+                    item.iframe=
+                        newIframe;
+
+                    item.videoId=
+                        newVideoId;
+
+
+                    item.open.href=
+                        getWatchURL(
+                            newVideoId
+                        );
+
+
+                    item.loading
+                        .classList
+                        .remove("active");
+
+
+                    item.title.textContent=
+                        "🎬 Previsão para Áries";
+
+                },
+                300
+            );
+
+        }
+    );
+
+
+    newIframe.addEventListener(
+        "error",
+        function(){
+
+            item.loading
+                .classList
+                .remove("active");
+
+
+            item.error.textContent=
+                "⚠️ Não foi possível carregar o novo vídeo. O vídeo atual foi mantido.";
+
+
+            item.error
+                .classList
+                .add("show");
+
+        }
     );
 
 }
 
 
 /* =========================================================
-   URL YOUTUBE NORMAL
+   ATUALIZAR UM VÍDEO
 ========================================================= */
 
-function youtubeWatchUrl(videoId){
+function refreshVideo(index){
 
-    if(!validYouTubeId(videoId)){
-        return "#";
-    }
+    const item=
+        players[index];
 
-    return "https://www.youtube.com/watch?v="
-        + encodeURIComponent(videoId);
 
-}
-
-
-/* =========================================================
-   RENDERIZAR
-========================================================= */
-
-function renderAllCards(){
-
-    if(!grid){
-        return;
-    }
-
-    let html="";
-
-    for(let i=0;i<cartomantesData.length;i++){
-
-        const cart=cartomantesData[i];
-
-        const video=currentVideos[i];
-
-        const videoId=video.videoId;
-
-        const loading=video.loading;
-
-        const title=video.title;
-
-        const error=video.error;
-
-
-        let player="";
-
-
-        if(loading){
-
-            player=`
-
-                <div class="video-placeholder">
-
-                    <div class="loader"></div>
-
-                    <div>
-                        🔥 A carregar vídeo...
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-
-        else if(validYouTubeId(videoId)){
-
-            /*
-               ESTA É A PARTE MAIS IMPORTANTE.
-
-               iframe simples e compatível.
-
-               NÃO existe:
-               [URL](URL)
-
-               NÃO existe:
-               sandbox
-
-               NÃO existe:
-               API JavaScript obrigatória.
-
-               Isto é muito mais estável
-               no GitHub Pages e WebView.
-            */
-
-            const src=youtubeEmbedUrl(videoId);
-
-            player=`
-
-                <iframe
-                    src="${src}"
-                    title="${escapeHtml(cart.nome)} - YouTube"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    referrerpolicy="strict-origin-when-cross-origin">
-                </iframe>
-
-            `;
-
-        }
-
-        else{
-
-            player=`
-
-                <div class="video-placeholder">
-
-                    <div class="icon">🔮</div>
-
-                    <div>
-                        Vídeo indisponível
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-
-
-        html+=`
-
-            <article
-                class="card-cartomante"
-                data-index="${i}">
-
-                <div class="ranking-badge">
-                    ${escapeHtml(cart.ranking)}
-                    CARTOMANTE
-                </div>
-
-
-                <div class="card-header">
-
-                    <div class="avatar-icon">
-                        🔮
-                    </div>
-
-
-                    <div class="cartomante-info">
-
-                        <div class="cartomante-nome">
-                            ${escapeHtml(cart.nome)}
-                        </div>
-
-
-                        <div class="stats">
-
-                            <span class="stat-item">
-                                👥 ${escapeHtml(cart.seguidores)}
-                            </span>
-
-                            <span class="stat-item">
-                                ${escapeHtml(cart.acertos)}
-                            </span>
-
-                            <span class="badge-acertos">
-                                ${escapeHtml(cart.destaque)}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="video-area">
-
-                    <div class="youtube-embed">
-
-                        ${player}
-
-                    </div>
-
-
-                    <div class="video-footer">
-
-                        <div
-                            class="info-update"
-                            title="${escapeHtml(title)}">
-
-                            🎬 ${escapeHtml(
-                                loading
-                                ? "A atualizar..."
-                                : truncate(title,45)
-                            )}
-
-                        </div>
-
-
-                        <button
-                            class="btn-atualizar"
-                            data-update="${i}">
-
-                            🔄 Atualizar
-
-                        </button>
-
-
-                        <a
-                            class="btn-youtube"
-                            href="${youtubeWatchUrl(videoId)}"
-                            target="_blank"
-                            rel="noopener noreferrer">
-
-                            ▶️ YouTube
-
-                        </a>
-
-                    </div>
-
-
-                    ${
-                        error
-                        ?
-                        `
-                        <div class="error-msg">
-                            ⚠️ ${escapeHtml(error)}
-                        </div>
-                        `
-                        :
-                        ""
-                    }
-
-                </div>
-
-            </article>
-
-        `;
-
-    }
-
-
-    grid.innerHTML=html;
-
-
-    /*
-       Os eventos são registados depois
-       de criar os cards.
-    */
-
-    document
-        .querySelectorAll(".btn-atualizar")
-        .forEach(button=>{
-
-            button.addEventListener("click",function(){
-
-                const index=
-                    Number(this.dataset.update);
-
-                updateSingleCard(index);
-
-            });
-
-        });
-
-}
-
-
-/* =========================================================
-   ATUALIZAR UM CARD
-========================================================= */
-
-function updateSingleCard(index){
-
-    if(
-        index<0 ||
-        index>=currentVideos.length
-    ){
+    if(!item){
         return;
     }
 
 
     /*
-       Aqui não tentamos fazer uma pesquisa
-       falsa no YouTube.
+       IMPORTANTE:
 
-       O vídeo continua válido.
+       Não fazemos:
 
-       O botão força a reconstrução do iframe.
+       grid.innerHTML = ...
+
+       Não fazemos:
+
+       renderAllCards()
+
+       Não destruímos os outros 12 players.
     */
 
-    const old=currentVideos[index];
 
-    currentVideos[index]={
+    /*
+       Nesta versão não inventamos um novo vídeo.
 
-        ...old,
+       Mantemos o vídeo atual.
 
-        loading:true,
+       Quando houver um novo ID fornecido pelo sistema
+       de atualização, chamaremos replaceVideo().
+    */
 
-        error:null
+    item.loading.classList.add("active");
 
-    };
-
-    renderAllCards();
+    item.error.classList.remove("show");
 
 
-    setTimeout(()=>{
+    setTimeout(
+        function(){
 
-        currentVideos[index]={
+            item.loading.classList.remove("active");
 
-            ...old,
-
-            loading:false,
-
-            error:null
-
-        };
-
-        renderAllCards();
-
-    },500);
+        },
+        350
+    );
 
 }
 
@@ -1062,73 +1655,75 @@ function updateSingleCard(index){
    ATUALIZAR TODOS
 ========================================================= */
 
-const refreshButton=
-    document.getElementById("refreshAllBtn");
+const refreshAll=
+    document.getElementById(
+        "refreshAll"
+    );
 
 
-if(refreshButton){
+if(refreshAll){
 
-    refreshButton.addEventListener("click",async()=>{
+    refreshAll.addEventListener(
+        "click",
+        async function(){
 
-        refreshButton.disabled=true;
+            refreshAll.disabled=true;
 
-        refreshButton.textContent=
-            "⏳ A atualizar vídeos...";
+            refreshAll.textContent=
+                "⏳ A verificar...";
 
 
-        for(
-            let i=0;
-            i<currentVideos.length;
-            i++
-        ){
+            /*
+               IMPORTANTE:
 
-            updateSingleCard(i);
+               Não recarregamos os iframes.
+
+               Apenas verificamos o estado
+               sem destruir os players.
+            */
+
+            for(
+                let i=0;
+                i<players.length;
+                i++
+            ){
+
+                players[i]
+                    .error
+                    .classList
+                    .remove("show");
+
+            }
+
 
             await new Promise(
-                resolve=>setTimeout(resolve,120)
+                resolve=>
+                    setTimeout(
+                        resolve,
+                        500
+                    )
             );
 
+
+            refreshAll.disabled=false;
+
+            refreshAll.textContent=
+                "🔄 ATUALIZAR";
+
         }
-
-
-        setTimeout(()=>{
-
-            refreshButton.disabled=false;
-
-            refreshButton.textContent=
-                "🔄 ATUALIZAR VÍDEOS";
-
-        },800);
-
-    });
-
-}
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
-function init(){
-
-    renderAllCards();
-
-    console.log(
-        "♈ App Áries iniciado."
-    );
-
-    console.log(
-        "▶️ Player YouTube configurado."
     );
 
 }
 
 
 /* =========================================================
-   DOM READY
+   INICIAR
 ========================================================= */
 
-if(document.readyState==="loading"){
+if(
+    document.readyState ===
+    "loading"
+){
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -1142,8 +1737,26 @@ else{
 
 }
 
+
+/* =========================================================
+   LOG
+========================================================= */
+
+console.log(
+    "♈ Áries YouTube iniciado"
+);
+
+console.log(
+    "13 players estáveis"
+);
+
+console.log(
+    "Sem reconstrução de iframe"
+);
+
 </script>
 
 </body>
+
 </html>
 ```
