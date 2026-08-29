@@ -11,6 +11,7 @@
             font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Roboto', sans-serif;
             padding: 2rem 1.5rem;
             color: #f9eed7;
+            min-height: 100vh;
         }
         .app-container { max-width: 1600px; margin: 0 auto; }
         .aries-header { text-align: center; margin-bottom: 2rem; position: relative; }
@@ -64,8 +65,15 @@
         .youtube-embed {
             position: relative; width: 100%; border-radius: 28px; overflow: hidden;
             aspect-ratio: 16 / 9; background: #0a050c; box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+            min-height: 180px;
         }
-        .youtube-embed iframe { width: 100%; height: 100%; border: none; }
+        .youtube-embed iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            display: block;
+            background: #000;
+        }
         .video-footer { margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; flex-wrap: wrap; gap: 8px; }
         .info-update {
             background: #00000060; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem;
@@ -86,10 +94,6 @@
         .refresh-all:hover { background: #ff925f; transform: scale(1.02); }
         .obs { font-size: 0.7rem; opacity: 0.7; }
         .selo-confianca { background: linear-gradient(90deg, #ff774430, #ffb34730); border-radius: 20px; padding: 0.2rem 1rem; font-size: 0.7rem; }
-        @media (max-width: 700px) {
-            body { padding: 1rem; } .cartomante-nome { font-size: 1.2rem; }
-            .signo-nome { font-size: 1.6rem; } .stats { font-size: 0.65rem; } .info-update { max-width: 100%; }
-        }
         .loader-mini {
             display: inline-block; width: 18px; height: 18px; border: 2px solid #ffae7a;
             border-radius: 50%; border-top-color: transparent; animation: spin 0.7s linear infinite;
@@ -99,24 +103,35 @@
             position: absolute; top: -8px; left: 20px; background: #ff5e2e; border-radius: 40px;
             padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: bold; z-index: 10; box-shadow: 0 2px 8px black;
         }
-        .error-msg { 
-            color: #ff6b6b; font-size: 0.8rem; padding: 10px; 
-            background: rgba(255,0,0,0.1); border-radius: 8px; margin: 5px 0;
+        .video-placeholder {
+            display: flex; align-items: center; justify-content: center; 
+            height: 100%; background: #0d0810; border-radius: 24px; 
+            flex-direction: column; gap: 8px;
+            min-height: 180px;
         }
-        .status-online {
-            display: inline-block; width: 8px; height: 8px;
-            background: #4ade80; border-radius: 50%; margin-right: 5px;
-            animation: pulse 2s infinite;
+        .video-placeholder .icon { font-size: 3rem; opacity: 0.5; }
+        .video-placeholder .text { font-size: 0.8rem; opacity: 0.7; }
+        
+        /* Estilos para Kodular */
+        .kodular-fix {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
+        
+        @media (max-width: 700px) {
+            body { padding: 1rem; } 
+            .cartomante-nome { font-size: 1.2rem; }
+            .signo-nome { font-size: 1.6rem; } 
+            .stats { font-size: 0.65rem; } 
+            .info-update { max-width: 100%; }
+            .grid-canais { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<div class="app-container">
+<div class="app-container kodular-fix">
     <div class="aries-header">
         <div class="signo-badge">
             <div class="signo-simbolo">♈︎</div>
@@ -135,11 +150,17 @@
     <div class="global-footer">
         <button class="refresh-all" id="refreshAllBtn">🔄 ATUALIZAR TODOS OS VÍDEOS DE ÁRIES</button>
         <div class="obs">✨ Os vídeos são verificados dinamicamente no YouTube — quando um novo vídeo sobre o signo de Áries é publicado no canal, ele substitui automaticamente o antigo.</div>
+        <div class="obs" style="margin-top: 5px; color: #ffb347;">📱 Compatível com Kodular e WebView</div>
     </div>
 </div>
 
 <script>
-    // ========== LISTA DE FALLBACK (Vídeos válidos de segurança) ==========
+    // ========== CONFIGURAÇÃO PARA KODULAR ==========
+    const IS_KODULAR = typeof window.Kodular !== 'undefined' || 
+                      navigator.userAgent.includes('Kodular') ||
+                      navigator.userAgent.includes('WebView');
+
+    // ========== LISTA DE FALLBACK (Vídeos válidos) ==========
     const FALLBACK_VIDEOS = [
         "1vQgMmKgy-4", "Vu-mjJ0lWMo", "uENK1wIYZRk", "o6xxwU4cIdw", "J7XG7A9lUOI",
         "s6uG79FbR-U", "b9G5O1Z6tQw", "vcjqd-5lAu8", "OzF7vf6XIbk", "cGIZ3CwUk58",
@@ -168,10 +189,12 @@
         videoId: FALLBACK_VIDEOS[i],
         title: "Previsão Especial para Áries",
         loading: false,
-        error: null
+        error: null,
+        retryCount: 0
     }));
 
     const gridContainer = document.getElementById("cartomantesGrid");
+    let isUpdating = false;
 
     // ========== FUNÇÕES AUXILIARES ==========
     function escapeHtml(str) {
@@ -184,99 +207,88 @@
         return txt.length > len ? txt.substring(0, len) + "..." : txt;
     }
 
-    // ========== BUSCA NO FEED RSS DO YOUTUBE ==========
+    // ========== BUSCA NO YOUTUBE (OTIMIZADO PARA KODULAR) ==========
     async function fetchLatestAriesVideo(canalIdentifier) {
         if (!canalIdentifier || canalIdentifier.length < 20) {
             throw new Error("ID do canal inválido");
         }
 
-        // Tentativa 1: Usando RSS feed nativo
-        const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
-        
-        // Tentativa 2: Usando API do YouTube (mais confiável)
-        const apiKey = 'AIzaSyA6_PZ9odNllgW4p-Pyq7c2MPUa2A5Cc9w'; // Chave pública do YouTube
-        
+        // Para Kodular, usa uma abordagem mais simples e estável
         try {
-            // Primeiro tenta a API oficial
-            const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${canalIdentifier}&part=snippet&order=date&maxResults=10&type=video`;
+            // Tenta a API do YouTube primeiro
+            const apiKey = 'AIzaSyA6_PZ9odNllgW4p-Pyq7c2MPUa2A5Cc9w';
+            const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${canalIdentifier}&part=snippet&order=date&maxResults=15&type=video`;
             
             const response = await fetch(apiUrl);
             if (response.ok) {
                 const data = await response.json();
                 if (data.items && data.items.length > 0) {
-                    // Procura por vídeos relacionados a Áries
-                    for (const item of data.items) {
+                    // Procura por vídeos específicos de Áries
+                    const ariesVideos = data.items.filter(item => {
                         const title = item.snippet.title;
-                        const videoId = item.id.videoId;
-                        if (/áries|aries|carneiro|previsão|horóscopo/i.test(title)) {
-                            return { videoId, title };
-                        }
-                    }
-                    // Se não encontrar, pega o mais recente
-                    const latest = data.items[0];
+                        return /áries|aries|carneiro|previsão|horóscopo|aries/i.test(title);
+                    });
+                    
+                    const selected = ariesVideos.length > 0 ? ariesVideos[0] : data.items[0];
                     return { 
-                        videoId: latest.id.videoId, 
-                        title: latest.snippet.title 
+                        videoId: selected.id.videoId, 
+                        title: selected.snippet.title 
                     };
                 }
             }
         } catch (e) {
-            // Se falhar, tenta o RSS feed
+            console.log('API falhou, tentando RSS...');
         }
 
-        // Tentativa 3: RSS Feed com proxy
+        // Fallback para RSS
         try {
-            const proxies = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`,
-                `https://corsproxy.io/?${encodeURIComponent(feedUrl)}`
-            ];
+            const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
+            
+            const response = await fetch(proxyUrl);
+            if (response.ok) {
+                const xmlText = await response.text();
+                const xmlDoc = new DOMParser().parseFromString(xmlText, "text/xml");
+                const entries = Array.from(xmlDoc.querySelectorAll("entry"));
+                
+                if (entries.length > 0) {
+                    // Procura por vídeos de Áries
+                    let selected = entries.find(e => {
+                        const title = e.querySelector("title")?.textContent || "";
+                        return /áries|aries|carneiro|previsão|horóscopo/i.test(title);
+                    }) || entries[0];
 
-            for (const proxyUrl of proxies) {
-                try {
-                    const response = await fetch(proxyUrl);
-                    if (response.ok) {
-                        const xmlText = await response.text();
-                        const xmlDoc = new DOMParser().parseFromString(xmlText, "text/xml");
-                        const entries = Array.from(xmlDoc.querySelectorAll("entry"));
-                        if (entries.length > 0) {
-                            // Procura por vídeos de Áries
-                            let selected = entries.find(e => {
-                                const title = e.querySelector("title")?.textContent || "";
-                                return /áries|aries|carneiro|previsão|horóscopo/i.test(title);
-                            }) || entries[0];
-
-                            const videoIdNode = selected.querySelector("yt\\:videoId, videoId");
-                            let videoId = videoIdNode ? videoIdNode.textContent : null;
-                            if (!videoId) {
-                                const link = selected.querySelector("link[rel='alternate']");
-                                if (link) {
-                                    const href = link.getAttribute("href");
-                                    const params = new URLSearchParams(href.split("?")[1]);
-                                    videoId = params.get("v");
-                                }
-                            }
-                            const titleNode = selected.querySelector("title");
-                            const title = titleNode ? titleNode.textContent : "Previsão de Áries";
-
-                            if (videoId) {
-                                return { videoId, title };
-                            }
+                    const videoIdNode = selected.querySelector("yt\\:videoId, videoId");
+                    let videoId = videoIdNode ? videoIdNode.textContent : null;
+                    
+                    if (!videoId) {
+                        const link = selected.querySelector("link[rel='alternate']");
+                        if (link) {
+                            const href = link.getAttribute("href");
+                            const params = new URLSearchParams(href.split("?")[1]);
+                            videoId = params.get("v");
                         }
                     }
-                } catch (e) {
-                    continue;
+                    
+                    const titleNode = selected.querySelector("title");
+                    const title = titleNode ? titleNode.textContent : "Previsão de Áries";
+
+                    if (videoId) {
+                        return { videoId, title };
+                    }
                 }
             }
         } catch (e) {
-            // Fallback silencioso
+            console.log('RSS falhou');
         }
 
-        throw new Error("Não foi possível encontrar vídeos recentes");
+        throw new Error("Não foi possível encontrar vídeos");
     }
 
-    // ========== RENDERIZAÇÃO DOS CARDS ==========
+    // ========== RENDERIZAÇÃO DOS CARDS (ESTÁVEL PARA KODULAR) ==========
     function renderAllCards() {
         if (!gridContainer) return;
+        
         let html = "";
         for (let i = 0; i < cartomantesData.length; i++) {
             const cart = cartomantesData[i];
@@ -288,19 +300,26 @@
 
             let playerContent = "";
             if (isLoading) {
-                playerContent = `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#0d0810; border-radius:24px; flex-direction:column; gap:8px;">
+                playerContent = `<div class="video-placeholder">
                                     <div class="loader-mini"></div>
-                                    <span style="font-size:0.8rem; font-weight:500;">🔥 Sincronizando...</span>
+                                    <span class="text">🔥 Sincronizando...</span>
                                  </div>`;
             } else if (videoId) {
-                playerContent = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=0&modestbranding=1&rel=0" 
-                                    title="Vídeo de ${escapeHtml(cart.nome)}" frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen loading="lazy"></iframe>`;
+                // Para Kodular, usa um iframe com atributos específicos para estabilidade
+                playerContent = `<iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=0&modestbranding=1&rel=0&enablejsapi=1" 
+                    title="Vídeo de ${escapeHtml(cart.nome)}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen 
+                    loading="lazy"
+                    style="width:100%; height:100%; border:none; display:block; background:#000;"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                ></iframe>`;
             } else {
-                playerContent = `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#0d0810; border-radius:24px; flex-direction:column; gap:8px;">
-                                    <span style="font-size:2rem;">🔮</span>
-                                    <span style="font-size:0.8rem;">Vídeo indisponível</span>
+                playerContent = `<div class="video-placeholder">
+                                    <div class="icon">🔮</div>
+                                    <div class="text">Vídeo indisponível</div>
                                  </div>`;
             }
 
@@ -324,14 +343,14 @@
                             <div class="info-update" title="${escapeHtml(title)}">🎬 ${isLoading ? '⏳ Atualizando...' : truncate(title, 35)}</div>
                             <button class="btn-atualizar" data-update="${i}">♈ Atualizar</button>
                         </div>
-                        ${error ? `<div class="error-msg">⚠️ ${escapeHtml(error)}</div>` : ''}
+                        ${error ? `<div class="error-msg" style="color:#ff6b6b; font-size:0.7rem; padding:5px;">⚠️ ${escapeHtml(error)}</div>` : ''}
                     </div>
                 </div>
             `;
         }
         gridContainer.innerHTML = html;
 
-        // Adiciona eventos aos botões
+        // Adiciona eventos
         document.querySelectorAll('.btn-atualizar').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -343,9 +362,8 @@
 
     // ========== ATUALIZAR UM CARD ESPECÍFICO ==========
     async function updateSingleCard(index) {
-        if (currentVideos[index]?.loading) return;
+        if (currentVideos[index]?.loading || isUpdating) return;
         
-        // Marca como carregando
         currentVideos[index] = { 
             ...currentVideos[index], 
             loading: true,
@@ -360,26 +378,30 @@
                 videoId: videoId || FALLBACK_VIDEOS[index], 
                 title: title || "Previsão Especial de Áries", 
                 loading: false,
-                error: null
+                error: null,
+                retryCount: 0
             };
         } catch (error) {
             currentVideos[index] = { 
                 videoId: FALLBACK_VIDEOS[index], 
                 title: "Previsão Especial de Áries", 
                 loading: false,
-                error: "Usando vídeo alternativo"
+                error: "Usando vídeo alternativo",
+                retryCount: (currentVideos[index]?.retryCount || 0) + 1
             };
         }
         renderAllCards();
     }
 
-    // ========== INICIALIZAÇÃO ==========
+    // ========== INICIALIZAÇÃO (OTIMIZADA PARA KODULAR) ==========
     async function initLoad() {
         renderAllCards();
         
-        // Atualiza em lotes
-        for (let i = 0; i < cartomantesData.length; i += 3) {
-            const batch = cartomantesData.slice(i, i + 3);
+        // Para Kodular, carrega mais lentamente para evitar travamentos
+        const delay = IS_KODULAR ? 800 : 500;
+        
+        for (let i = 0; i < cartomantesData.length; i += 2) {
+            const batch = cartomantesData.slice(i, i + 2);
             const promises = batch.map(async (cart, batchIdx) => {
                 const idx = i + batchIdx;
                 try {
@@ -391,7 +413,8 @@
                             videoId, 
                             title, 
                             loading: false,
-                            error: null 
+                            error: null,
+                            retryCount: 0
                         };
                     }
                 } catch (e) {
@@ -401,17 +424,47 @@
             
             await Promise.all(promises);
             renderAllCards();
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, delay));
         }
     }
 
-    // ========== EVENTO DO BOTÃO "ATUALIZAR TODOS" ==========
+    // ========== EVENTOS ==========
     document.getElementById("refreshAllBtn")?.addEventListener("click", () => {
-        cartomantesData.forEach((_, i) => updateSingleCard(i));
+        if (isUpdating) return;
+        isUpdating = true;
+        
+        const promises = cartomantesData.map((_, i) => updateSingleCard(i));
+        Promise.all(promises).finally(() => {
+            isUpdating = false;
+        });
     });
 
-    // Iniciar
-    initLoad();
+    // ========== RECARREGAR QUANDO A PÁGINA VOLTAR AO FOCO (KODULAR) ==========
+    if (IS_KODULAR) {
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                // Recarrega os vídeos quando a página volta a ser visível
+                setTimeout(() => {
+                    cartomantesData.forEach((_, i) => {
+                        if (currentVideos[i]?.error) {
+                            updateSingleCard(i);
+                        }
+                    });
+                }, 1000);
+            }
+        });
+    }
+
+    // ========== INICIAR ==========
+    // Aguarda o DOM estar pronto
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLoad);
+    } else {
+        initLoad();
+    }
+
+    // Previne que iframes sejam recarregados desnecessariamente
+    console.log('🔮 App de Áries iniciado - Compatível com Kodular');
 </script>
 </body>
 </html>
