@@ -1,470 +1,1149 @@
+```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>✨ TOP 13 Cartomantes de Áries | Previsões em Tempo Real 🔥</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: linear-gradient(145deg, #1a0b1f 0%, #2e1429 100%);
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Roboto', sans-serif;
-            padding: 2rem 1.5rem;
-            color: #f9eed7;
-            min-height: 100vh;
-        }
-        .app-container { max-width: 1600px; margin: 0 auto; }
-        .aries-header { text-align: center; margin-bottom: 2rem; position: relative; }
-        .signo-badge {
-            display: inline-flex; align-items: center; gap: 12px;
-            background: rgba(255, 90, 40, 0.2); backdrop-filter: blur(8px);
-            border-radius: 100px; padding: 0.8rem 2rem;
-            border: 1px solid rgba(255, 110, 64, 0.6);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); margin-bottom: 1rem;
-        }
-        .signo-simbolo { font-size: 3.2rem; filter: drop-shadow(0 0 6px #ff7744); }
-        .signo-nome {
-            font-size: 2.2rem; font-weight: 800; letter-spacing: 2px;
-            background: linear-gradient(135deg, #FFB347, #FF6A3D);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .datas-destaque {
-            background: #221a24e6; display: inline-block; padding: 0.5rem 1.8rem;
-            border-radius: 40px; font-weight: 600; font-size: 1.1rem;
-            backdrop-filter: blur(4px); margin-top: 0.5rem; border: 1px solid #ff8c5a;
-        }
-        .datas-destaque span { color: #ffb347; font-weight: 800; }
-        .sub { text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.9; font-style: italic; }
-        .grid-canais { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; margin: 2.5rem 0 2rem; }
-        .card-cartomante {
-            background: rgba(20, 12, 24, 0.75); backdrop-filter: blur(12px);
-            border-radius: 48px 32px 48px 32px; overflow: hidden;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
-            transition: transform 0.25s ease, box-shadow 0.3s;
-            border: 1px solid rgba(255, 140, 70, 0.4); position: relative;
-        }
-        .card-cartomante:hover { transform: translateY(-6px); box-shadow: 0 28px 40px -14px black; border-color: #ff9f6e; }
-        .card-header {
-            background: linear-gradient(112deg, #2c1c28, #1f1222); padding: 1rem 1.5rem;
-            border-bottom: 2px solid #ff7744; display: flex; align-items: center; gap: 12px;
-        }
-        .avatar-icon {
-            font-size: 2.3rem; background: #ff774420; width: 52px; height: 52px;
-            display: flex; align-items: center; justify-content: center; border-radius: 30px;
-        }
-        .cartomante-info { flex: 1; }
-        .cartomante-nome { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px; }
-        .stats { font-size: 0.7rem; opacity: 0.85; display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
-        .stat-item { background: #00000040; padding: 0.1rem 0.5rem; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; }
-        .badge-acertos {
-            background: #d4af37; color: #1e0a17; border-radius: 30px; padding: 0.2rem 0.7rem;
-            font-size: 0.7rem; font-weight: bold; display: inline-block; margin-top: 5px;
-        }
-        .video-area { padding: 1.2rem 1rem 1.5rem; }
-        .youtube-embed {
-            position: relative; width: 100%; border-radius: 28px; overflow: hidden;
-            aspect-ratio: 16 / 9; background: #0a050c; box-shadow: 0 6px 14px rgba(0,0,0,0.4);
-            min-height: 180px;
-        }
-        .youtube-embed iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: none;
-            display: block;
-            background: #000;
-        }
-        .video-footer { margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; flex-wrap: wrap; gap: 8px; }
-        .info-update {
-            background: #00000060; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.7rem;
-            max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .btn-atualizar {
-            background: none; border: 1px solid #ff9466; color: #ffd0b5; border-radius: 30px;
-            padding: 0.3rem 1rem; font-size: 0.7rem; cursor: pointer; transition: all 0.2s;
-            display: inline-flex; align-items: center; gap: 6px;
-        }
-        .btn-atualizar:hover { background: #ff774455; border-color: #ffb47b; color: white; }
-        .global-footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px dashed #ff9a6e50; font-size: 0.8rem; }
-        .refresh-all {
-            background: #ff7744cc; border: none; padding: 0.6rem 1.8rem; border-radius: 60px;
-            font-weight: bold; color: #1e0a17; margin-bottom: 1rem; cursor: pointer;
-            transition: all 0.2s; font-size: 0.9rem; backdrop-filter: blur(2px);
-        }
-        .refresh-all:hover { background: #ff925f; transform: scale(1.02); }
-        .obs { font-size: 0.7rem; opacity: 0.7; }
-        .selo-confianca { background: linear-gradient(90deg, #ff774430, #ffb34730); border-radius: 20px; padding: 0.2rem 1rem; font-size: 0.7rem; }
-        .loader-mini {
-            display: inline-block; width: 18px; height: 18px; border: 2px solid #ffae7a;
-            border-radius: 50%; border-top-color: transparent; animation: spin 0.7s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .ranking-badge {
-            position: absolute; top: -8px; left: 20px; background: #ff5e2e; border-radius: 40px;
-            padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: bold; z-index: 10; box-shadow: 0 2px 8px black;
-        }
-        .video-placeholder {
-            display: flex; align-items: center; justify-content: center; 
-            height: 100%; background: #0d0810; border-radius: 24px; 
-            flex-direction: column; gap: 8px;
-            min-height: 180px;
-        }
-        .video-placeholder .icon { font-size: 3rem; opacity: 0.5; }
-        .video-placeholder .text { font-size: 0.8rem; opacity: 0.7; }
-        
-        /* Estilos para Kodular */
-        .kodular-fix {
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-        
-        @media (max-width: 700px) {
-            body { padding: 1rem; } 
-            .cartomante-nome { font-size: 1.2rem; }
-            .signo-nome { font-size: 1.6rem; } 
-            .stats { font-size: 0.65rem; } 
-            .info-update { max-width: 100%; }
-            .grid-canais { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+
+<title>♈ TOP 13 Cartomantes de Áries | Previsões</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    background:#140914;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at top, #4b1b30 0%, transparent 38%),
+        linear-gradient(145deg,#140914 0%,#241020 55%,#120811 100%);
+    color:#f9eed7;
+    font-family:
+        "Segoe UI",
+        Poppins,
+        system-ui,
+        -apple-system,
+        Roboto,
+        Arial,
+        sans-serif;
+    min-height:100vh;
+    padding:20px 14px 40px;
+}
+
+button,
+iframe{
+    -webkit-tap-highlight-color:transparent;
+}
+
+.app-container{
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.aries-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.signo-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:10px 20px;
+    border-radius:100px;
+    border:1px solid rgba(255,140,80,.65);
+    background:rgba(255,80,40,.12);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.signo-simbolo{
+    font-size:42px;
+    line-height:1;
+    filter:drop-shadow(0 0 8px #ff7043);
+}
+
+.signo-nome{
+    font-size:clamp(1.3rem,4vw,2.2rem);
+    font-weight:900;
+    letter-spacing:1px;
+    background:linear-gradient(135deg,#ffd166,#ff7043);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.datas-destaque{
+    display:inline-block;
+    margin-top:14px;
+    padding:8px 18px;
+    border-radius:40px;
+    border:1px solid rgba(255,140,90,.55);
+    background:rgba(20,10,20,.75);
+    font-weight:700;
+}
+
+.datas-destaque span{
+    color:#ffbd69;
+}
+
+.sub{
+    margin-top:12px;
+    font-size:.9rem;
+    opacity:.9;
+    line-height:1.6;
+}
+
+.selo-confianca{
+    display:inline-block;
+    margin:8px 0 0 6px;
+    padding:4px 10px;
+    border-radius:20px;
+    background:rgba(255,180,70,.12);
+    border:1px solid rgba(255,180,70,.25);
+    font-size:.72rem;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid-canais{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+    gap:20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card-cartomante{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    background:rgba(19,10,22,.92);
+    border:1px solid rgba(255,130,70,.32);
+    box-shadow:0 18px 40px rgba(0,0,0,.4);
+    transition:.25s ease;
+}
+
+.card-cartomante:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,160,100,.7);
+    box-shadow:0 25px 45px rgba(0,0,0,.55);
+}
+
+.ranking-badge{
+    position:absolute;
+    top:10px;
+    left:12px;
+    z-index:5;
+    padding:5px 10px;
+    border-radius:30px;
+    background:#ff6338;
+    color:#210b12;
+    font-size:.68rem;
+    font-weight:900;
+    box-shadow:0 3px 10px rgba(0,0,0,.5);
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:48px 15px 13px;
+    background:linear-gradient(110deg,#30182b,#1d1020);
+    border-bottom:1px solid rgba(255,110,70,.5);
+}
+
+.avatar-icon{
+    width:50px;
+    height:50px;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(255,100,60,.12);
+    font-size:26px;
+}
+
+.cartomante-info{
+    min-width:0;
+    flex:1;
+}
+
+.cartomante-nome{
+    font-size:1.15rem;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.stats{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    margin-top:6px;
+}
+
+.stat-item{
+    padding:3px 7px;
+    border-radius:20px;
+    background:rgba(0,0,0,.35);
+    font-size:.65rem;
+}
+
+.badge-acertos{
+    padding:3px 7px;
+    border-radius:20px;
+    background:#d4af37;
+    color:#20100d;
+    font-size:.62rem;
+    font-weight:900;
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.video-area{
+    padding:12px;
+}
+
+.youtube-embed{
+    position:relative;
+    width:100%;
+    aspect-ratio:16 / 9;
+    min-height:200px;
+    overflow:hidden;
+    border-radius:18px;
+    background:#000;
+    box-shadow:0 8px 20px rgba(0,0,0,.45);
+}
+
+.youtube-embed iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+    background:#000;
+}
+
+/*
+   IMPORTANTE:
+   NÃO usar sandbox no iframe.
+   O YouTube pode precisar de recursos
+   que o sandbox bloqueia.
+*/
+
+.video-placeholder{
+    width:100%;
+    height:100%;
+    min-height:200px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:
+        radial-gradient(circle,#27122b,#090509);
+    color:#ddd;
+    text-align:center;
+}
+
+.video-placeholder .icon{
+    font-size:42px;
+}
+
+.video-placeholder .loader{
+    width:30px;
+    height:30px;
+    border:3px solid rgba(255,170,100,.3);
+    border-top-color:#ff8b55;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   RODAPÉ DO VÍDEO
+========================= */
+
+.video-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-top:10px;
+}
+
+.info-update{
+    flex:1;
+    min-width:0;
+    padding:7px 9px;
+    border-radius:15px;
+    background:rgba(0,0,0,.35);
+    font-size:.68rem;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.btn-atualizar,
+.btn-youtube{
+    border:1px solid rgba(255,150,100,.55);
+    background:rgba(255,110,70,.08);
+    color:#ffd3bc;
+    border-radius:20px;
+    padding:7px 10px;
+    cursor:pointer;
+    font-size:.68rem;
+    font-weight:700;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.btn-atualizar:hover,
+.btn-youtube:hover{
+    background:rgba(255,110,70,.25);
+    color:#fff;
+}
+
+.error-msg{
+    margin-top:7px;
+    padding:6px 8px;
+    border-radius:10px;
+    background:rgba(255,60,60,.08);
+    color:#ffaaa0;
+    font-size:.67rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.global-footer{
+    text-align:center;
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px dashed rgba(255,150,100,.3);
+}
+
+.refresh-all{
+    border:0;
+    padding:11px 20px;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff7545,#ff9d56);
+    color:#220c12;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,90,40,.25);
+    transition:.2s;
+}
+
+.refresh-all:hover{
+    transform:translateY(-2px);
+}
+
+.refresh-all:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.obs{
+    margin-top:10px;
+    font-size:.68rem;
+    opacity:.65;
+    line-height:1.5;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    body{
+        padding:12px 8px 30px;
+    }
+
+    .signo-badge{
+        padding:9px 14px;
+    }
+
+    .signo-simbolo{
+        font-size:32px;
+    }
+
+    .grid-canais{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+
+    .card-cartomante{
+        border-radius:22px;
+    }
+
+    .youtube-embed{
+        min-height:190px;
+    }
+
+    .video-footer{
+        flex-wrap:wrap;
+    }
+
+    .info-update{
+        width:100%;
+        flex-basis:100%;
+    }
+}
+</style>
 </head>
+
 <body>
-<div class="app-container kodular-fix">
-    <div class="aries-header">
+
+<div class="app-container">
+
+    <!-- CABEÇALHO -->
+    <header class="aries-header">
+
         <div class="signo-badge">
-            <div class="signo-simbolo">♈︎</div>
-            <div class="signo-nome">ÁRIES · CARNEIRO</div>
+            <div class="signo-simbolo">♈</div>
+
+            <div class="signo-nome">
+                ÁRIES · CARNEIRO
+            </div>
+
             <div class="signo-simbolo">🐏</div>
         </div>
-        <div class="datas-destaque">📅 PREVISÕES ESPECIAIS · <span>ÁRIES</span> · FOGO 🔥</div>
-        <div class="sub">
-            ⚡ As <strong>13 cartomantes mais famosas</strong> com atualização automática de previsões de Áries ⚡
-            <div class="selo-confianca" style="display: inline-block; margin-left: 8px;">🏆 Vídeos Sempre Atualizados</div>
+
+        <div class="datas-destaque">
+            🔥 PREVISÕES ESPECIAIS ·
+            <span>ÁRIES</span>
         </div>
-    </div>
 
-    <div class="grid-canais" id="cartomantesGrid"></div>
+        <div class="sub">
+            ⚡ Seleção de vídeos de previsões para Áries
+            <div class="selo-confianca">
+                ▶️ YouTube
+            </div>
+        </div>
 
-    <div class="global-footer">
-        <button class="refresh-all" id="refreshAllBtn">🔄 ATUALIZAR TODOS OS VÍDEOS DE ÁRIES</button>
-        <div class="obs">✨ Os vídeos são verificados dinamicamente no YouTube — quando um novo vídeo sobre o signo de Áries é publicado no canal, ele substitui automaticamente o antigo.</div>
-        <div class="obs" style="margin-top: 5px; color: #ffb347;">📱 Compatível com Kodular e WebView</div>
-    </div>
+    </header>
+
+
+    <!-- CARTOMANTES -->
+    <main class="grid-canais" id="cartomantesGrid"></main>
+
+
+    <!-- RODAPÉ -->
+    <footer class="global-footer">
+
+        <button
+            class="refresh-all"
+            id="refreshAllBtn">
+            🔄 ATUALIZAR VÍDEOS
+        </button>
+
+        <div class="obs">
+            Os vídeos são incorporados diretamente através do
+            player oficial do YouTube.
+        </div>
+
+        <div class="obs">
+            📱 Compatível com GitHub Pages, Android WebView e Kodular.
+        </div>
+
+    </footer>
+
 </div>
 
+
 <script>
-    // ========== CONFIGURAÇÃO PARA KODULAR ==========
-    const IS_KODULAR = typeof window.Kodular !== 'undefined' || 
-                      navigator.userAgent.includes('Kodular') ||
-                      navigator.userAgent.includes('WebView');
 
-    // ========== LISTA DE FALLBACK (Vídeos válidos) ==========
-    const FALLBACK_VIDEOS = [
-        "1vQgMmKgy-4", "Vu-mjJ0lWMo", "uENK1wIYZRk", "o6xxwU4cIdw", "J7XG7A9lUOI",
-        "s6uG79FbR-U", "b9G5O1Z6tQw", "vcjqd-5lAu8", "OzF7vf6XIbk", "cGIZ3CwUk58",
-        "ehY4yJNMSMI", "T-uolV9NLjY", "f0VpYbuBItA"
-    ];
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
 
-    // ========== DADOS DAS CARTOMANTES ==========
-    const cartomantesData = [
-        { id: 1, nome: "🌙 LUNARR Tarô", canalIdentifier: "UC--m1Tokg_J4D4gA6H3OnBA", seguidores: "612k", acertos: "⭐ 4.96", destaque: "🏆 MAIS ACERTOS", ranking: "#1" },
-        { id: 2, nome: "🔮 Tarot Aries", canalIdentifier: "UC-fXlLi-lU1JQ1djOrzwzDg", seguidores: "558k", acertos: "⭐ 4.93", destaque: "🏆 TOP BRASIL", ranking: "#2" },
-        { id: 3, nome: "✨ Healing Tarot", canalIdentifier: "UC-bURuNxHDNVU3ld_s2zxCQ", seguidores: "480k", acertos: "⭐ 4.94", destaque: "🏆 ASTROLOGIA PREMIUM", ranking: "#3" },
-        { id: 4, nome: "🃏 Revealing Light", canalIdentifier: "UC-8Qq2hmX-FRpPTpKiNfGng", seguidores: "520k", acertos: "⭐ 4.91", destaque: "🏆 PRECISÃO DIVINA", ranking: "#4" },
-        { id: 5, nome: "🔯 King Fenix", canalIdentifier: "UC-RkOjs_cZz_J0NTyJgDqwA", seguidores: "490k", acertos: "⭐ 4.92", destaque: "🏆 REVELAÇÃO", ranking: "#5" },
-        { id: 6, nome: "☀️ Red Relâmpago", canalIdentifier: "UCKmn1ibOSYT-6LDhyGupGrg", seguidores: "475k", acertos: "⭐ 4.90", destaque: "🏆 LUZ E ACERTO", ranking: "#6" },
-        { id: 7, nome: "📿 Oráculos Enigma", canalIdentifier: "UC-c3UhXJ2iXB4MdyEQ_T7_g", seguidores: "470k", acertos: "⭐ 4.89", destaque: "🏆 SABEDORIA ANCESTRAL", ranking: "#7" },
-        { id: 8, nome: "💫 Tarô & Música", canalIdentifier: "UC-egXvSxtbr0gfZ9IWX5ofg", seguidores: "465k", acertos: "⭐ 4.88", destaque: "🏆 DESTINO REVELADO", ranking: "#8" },
-        { id: 9, nome: "🕊️ Baralho Cigano", canalIdentifier: "UC-Gr0wkSbvuLtrvUWRTdt6g", seguidores: "460k", acertos: "⭐ 4.87", destaque: "🏆 ESPERANÇA E LUZ", ranking: "#9" },
-        { id: 10, nome: "🦋 Mestre José", canalIdentifier: "UC-xzPQoPoyOz6i-R4QFZomg", seguidores: "455k", acertos: "⭐ 4.86", destaque: "🏆 TRANSFORMAÇÃO", ranking: "#10" },
-        { id: 11, nome: "🔥 Baba Jolie", canalIdentifier: "UC-FlpQKjI8EWEJ58hoGZUsA", seguidores: "440k", acertos: "⭐ 4.85", destaque: "🏆 IMPULSO ÁRIES", ranking: "#11" },
-        { id: 12, nome: "🌟 She-Geek Tarot", canalIdentifier: "UC-KoazT-HEFbqCALjxRLjFQ", seguidores: "430k", acertos: "⭐ 4.84", destaque: "🏆 ENERGIA VITAL", ranking: "#12" },
-        { id: 13, nome: "🔮 Atomic Papers", canalIdentifier: "UC-CwKK7xheUkH1mqtZhkwkQ", seguidores: "420k", acertos: "⭐ 4.83", destaque: "🏆 INTUIÇÃO PURA", ranking: "#13" }
-    ];
+const FALLBACK_VIDEOS = [
 
-    // ========== ESTADO ==========
-    let currentVideos = cartomantesData.map((_, i) => ({
-        videoId: FALLBACK_VIDEOS[i],
-        title: "Previsão Especial para Áries",
-        loading: false,
-        error: null,
-        retryCount: 0
-    }));
+    "1vQgMmKgy-4",
+    "Vu-mjJ0lWMo",
+    "uENK1wIYZRk",
+    "o6xxwU4cIdw",
+    "J7XG7A9lUOI",
+    "s6uG79FbR-U",
+    "b9G5O1Z6tQw",
+    "vcjqd-5lAu8",
+    "OzF7vf6XIbk",
+    "cGIZ3CwUk58",
+    "ehY4yJNMSMI",
+    "T-uolV9NLjY",
+    "f0VpYbuBItA"
 
-    const gridContainer = document.getElementById("cartomantesGrid");
-    let isUpdating = false;
+];
 
-    // ========== FUNÇÕES AUXILIARES ==========
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, m => ({ '&': '&', '<': '<', '>': '>' })[m] || m);
+
+/*
+   DADOS DOS CARDS.
+
+   NOTA:
+   Os nomes/estatísticas abaixo são apenas
+   informação visual da interface.
+*/
+
+const cartomantesData = [
+
+    {
+        id:1,
+        nome:"🌙 LUNARR Tarô",
+        seguidores:"612k",
+        acertos:"⭐ 4.96",
+        destaque:"🏆 MAIS ACERTOS",
+        ranking:"#1"
+    },
+
+    {
+        id:2,
+        nome:"🔮 Tarot Aries",
+        seguidores:"558k",
+        acertos:"⭐ 4.93",
+        destaque:"🏆 TOP BRASIL",
+        ranking:"#2"
+    },
+
+    {
+        id:3,
+        nome:"✨ Healing Tarot",
+        seguidores:"480k",
+        acertos:"⭐ 4.94",
+        destaque:"🏆 ASTROLOGIA",
+        ranking:"#3"
+    },
+
+    {
+        id:4,
+        nome:"🃏 Revealing Light",
+        seguidores:"520k",
+        acertos:"⭐ 4.91",
+        destaque:"🏆 PRECISÃO",
+        ranking:"#4"
+    },
+
+    {
+        id:5,
+        nome:"🔯 King Fenix",
+        seguidores:"490k",
+        acertos:"⭐ 4.92",
+        destaque:"🏆 REVELAÇÃO",
+        ranking:"#5"
+    },
+
+    {
+        id:6,
+        nome:"☀️ Red Relâmpago",
+        seguidores:"475k",
+        acertos:"⭐ 4.90",
+        destaque:"🏆 LUZ",
+        ranking:"#6"
+    },
+
+    {
+        id:7,
+        nome:"📿 Oráculos Enigma",
+        seguidores:"470k",
+        acertos:"⭐ 4.89",
+        destaque:"🏆 SABEDORIA",
+        ranking:"#7"
+    },
+
+    {
+        id:8,
+        nome:"💫 Tarô & Música",
+        seguidores:"465k",
+        acertos:"⭐ 4.88",
+        destaque:"🏆 DESTINO",
+        ranking:"#8"
+    },
+
+    {
+        id:9,
+        nome:"🕊️ Baralho Cigano",
+        seguidores:"460k",
+        acertos:"⭐ 4.87",
+        destaque:"🏆 ESPERANÇA",
+        ranking:"#9"
+    },
+
+    {
+        id:10,
+        nome:"🦋 Mestre José",
+        seguidores:"455k",
+        acertos:"⭐ 4.86",
+        destaque:"🏆 TRANSFORMAÇÃO",
+        ranking:"#10"
+    },
+
+    {
+        id:11,
+        nome:"🔥 Baba Jolie",
+        seguidores:"440k",
+        acertos:"⭐ 4.85",
+        destaque:"🏆 ÁRIES",
+        ranking:"#11"
+    },
+
+    {
+        id:12,
+        nome:"🌟 She-Geek Tarot",
+        seguidores:"430k",
+        acertos:"⭐ 4.84",
+        destaque:"🏆 ENERGIA",
+        ranking:"#12"
+    },
+
+    {
+        id:13,
+        nome:"🔮 Atomic Papers",
+        seguidores:"420k",
+        acertos:"⭐ 4.83",
+        destaque:"🏆 INTUIÇÃO",
+        ranking:"#13"
     }
 
-    function truncate(txt, len) {
-        if (!txt) return "Previsão para Áries";
-        return txt.length > len ? txt.substring(0, len) + "..." : txt;
+];
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let currentVideos = cartomantesData.map((cart,index)=>({
+
+    videoId:FALLBACK_VIDEOS[index],
+
+    title:"Previsão Especial para Áries",
+
+    loading:false,
+
+    error:null
+
+}));
+
+
+const grid =
+    document.getElementById("cartomantesGrid");
+
+
+/* =========================================================
+   SEGURANÇA HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function truncate(value,length){
+
+    if(!value){
+        return "Previsão para Áries";
     }
 
-    // ========== BUSCA NO YOUTUBE (OTIMIZADO PARA KODULAR) ==========
-    async function fetchLatestAriesVideo(canalIdentifier) {
-        if (!canalIdentifier || canalIdentifier.length < 20) {
-            throw new Error("ID do canal inválido");
-        }
+    value=String(value);
 
-        // Para Kodular, usa uma abordagem mais simples e estável
-        try {
-            // Tenta a API do YouTube primeiro
-            const apiKey = 'AIzaSyA6_PZ9odNllgW4p-Pyq7c2MPUa2A5Cc9w';
-            const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${canalIdentifier}&part=snippet&order=date&maxResults=15&type=video`;
-            
-            const response = await fetch(apiUrl);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.items && data.items.length > 0) {
-                    // Procura por vídeos específicos de Áries
-                    const ariesVideos = data.items.filter(item => {
-                        const title = item.snippet.title;
-                        return /áries|aries|carneiro|previsão|horóscopo|aries/i.test(title);
-                    });
-                    
-                    const selected = ariesVideos.length > 0 ? ariesVideos[0] : data.items[0];
-                    return { 
-                        videoId: selected.id.videoId, 
-                        title: selected.snippet.title 
-                    };
-                }
-            }
-        } catch (e) {
-            console.log('API falhou, tentando RSS...');
-        }
+    return value.length > length
+        ? value.substring(0,length)+"..."
+        : value;
 
-        // Fallback para RSS
-        try {
-            const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${canalIdentifier}`;
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
-            
-            const response = await fetch(proxyUrl);
-            if (response.ok) {
-                const xmlText = await response.text();
-                const xmlDoc = new DOMParser().parseFromString(xmlText, "text/xml");
-                const entries = Array.from(xmlDoc.querySelectorAll("entry"));
-                
-                if (entries.length > 0) {
-                    // Procura por vídeos de Áries
-                    let selected = entries.find(e => {
-                        const title = e.querySelector("title")?.textContent || "";
-                        return /áries|aries|carneiro|previsão|horóscopo/i.test(title);
-                    }) || entries[0];
+}
 
-                    const videoIdNode = selected.querySelector("yt\\:videoId, videoId");
-                    let videoId = videoIdNode ? videoIdNode.textContent : null;
-                    
-                    if (!videoId) {
-                        const link = selected.querySelector("link[rel='alternate']");
-                        if (link) {
-                            const href = link.getAttribute("href");
-                            const params = new URLSearchParams(href.split("?")[1]);
-                            videoId = params.get("v");
-                        }
-                    }
-                    
-                    const titleNode = selected.querySelector("title");
-                    const title = titleNode ? titleNode.textContent : "Previsão de Áries";
 
-                    if (videoId) {
-                        return { videoId, title };
-                    }
-                }
-            }
-        } catch (e) {
-            console.log('RSS falhou');
-        }
+/* =========================================================
+   VALIDAR ID YOUTUBE
+========================================================= */
 
-        throw new Error("Não foi possível encontrar vídeos");
+function validYouTubeId(id){
+
+    return /^[a-zA-Z0-9_-]{11}$/.test(id);
+
+}
+
+
+/* =========================================================
+   URL DO PLAYER
+========================================================= */
+
+function youtubeEmbedUrl(videoId){
+
+    if(!validYouTubeId(videoId)){
+        return "";
     }
 
-    // ========== RENDERIZAÇÃO DOS CARDS (ESTÁVEL PARA KODULAR) ==========
-    function renderAllCards() {
-        if (!gridContainer) return;
-        
-        let html = "";
-        for (let i = 0; i < cartomantesData.length; i++) {
-            const cart = cartomantesData[i];
-            const video = currentVideos[i];
-            const videoId = video?.videoId;
-            const isLoading = video?.loading || false;
-            const title = video?.title || "Previsão para Áries";
-            const error = video?.error || null;
+    /*
+       youtube-nocookie:
+       modo de privacidade melhorado.
 
-            let playerContent = "";
-            if (isLoading) {
-                playerContent = `<div class="video-placeholder">
-                                    <div class="loader-mini"></div>
-                                    <span class="text">🔥 Sincronizando...</span>
-                                 </div>`;
-            } else if (videoId) {
-                // Para Kodular, usa um iframe com atributos específicos para estabilidade
-                playerContent = `<iframe 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=0&modestbranding=1&rel=0&enablejsapi=1" 
-                    title="Vídeo de ${escapeHtml(cart.nome)}" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen 
-                    loading="lazy"
-                    style="width:100%; height:100%; border:none; display:block; background:#000;"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                ></iframe>`;
-            } else {
-                playerContent = `<div class="video-placeholder">
-                                    <div class="icon">🔮</div>
-                                    <div class="text">Vídeo indisponível</div>
-                                 </div>`;
-            }
+       playsinline:
+       importante em dispositivos móveis.
 
-            html += `
-                <div class="card-cartomante" data-card-index="${i}">
-                    <div class="ranking-badge">${cart.ranking} Cartomante</div>
-                    <div class="card-header">
-                        <div class="avatar-icon">🔮</div>
-                        <div class="cartomante-info">
-                            <div class="cartomante-nome">${escapeHtml(cart.nome)}</div>
-                            <div class="stats">
-                                <span class="stat-item">👥 ${cart.seguidores} inscritos</span>
-                                <span class="stat-item">✅ ${cart.acertos}</span>
-                                <span class="badge-acertos">${cart.destaque}</span>
-                            </div>
-                        </div>
+       rel=0:
+       evita recomendações de outros canais
+       quando possível.
+
+       controls=1:
+       mantém os controlos normais.
+
+       origin:
+       NÃO colocamos localhost ou um domínio
+       inventado porque a aplicação pode estar
+       no GitHub ou dentro do Kodular.
+    */
+
+    return (
+        "https://www.youtube-nocookie.com/embed/"
+        + encodeURIComponent(videoId)
+        + "?autoplay=0"
+        + "&controls=1"
+        + "&playsinline=1"
+        + "&rel=0"
+        + "&iv_load_policy=3"
+    );
+
+}
+
+
+/* =========================================================
+   URL YOUTUBE NORMAL
+========================================================= */
+
+function youtubeWatchUrl(videoId){
+
+    if(!validYouTubeId(videoId)){
+        return "#";
+    }
+
+    return "https://www.youtube.com/watch?v="
+        + encodeURIComponent(videoId);
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+========================================================= */
+
+function renderAllCards(){
+
+    if(!grid){
+        return;
+    }
+
+    let html="";
+
+    for(let i=0;i<cartomantesData.length;i++){
+
+        const cart=cartomantesData[i];
+
+        const video=currentVideos[i];
+
+        const videoId=video.videoId;
+
+        const loading=video.loading;
+
+        const title=video.title;
+
+        const error=video.error;
+
+
+        let player="";
+
+
+        if(loading){
+
+            player=`
+
+                <div class="video-placeholder">
+
+                    <div class="loader"></div>
+
+                    <div>
+                        🔥 A carregar vídeo...
                     </div>
-                    <div class="video-area">
-                        <div class="youtube-embed">${playerContent}</div>
-                        <div class="video-footer">
-                            <div class="info-update" title="${escapeHtml(title)}">🎬 ${isLoading ? '⏳ Atualizando...' : truncate(title, 35)}</div>
-                            <button class="btn-atualizar" data-update="${i}">♈ Atualizar</button>
-                        </div>
-                        ${error ? `<div class="error-msg" style="color:#ff6b6b; font-size:0.7rem; padding:5px;">⚠️ ${escapeHtml(error)}</div>` : ''}
-                    </div>
+
                 </div>
+
             `;
+
         }
-        gridContainer.innerHTML = html;
 
-        // Adiciona eventos
-        document.querySelectorAll('.btn-atualizar').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const idx = btn.getAttribute('data-update');
-                if (idx !== null) updateSingleCard(parseInt(idx));
-            });
-        });
-    }
+        else if(validYouTubeId(videoId)){
 
-    // ========== ATUALIZAR UM CARD ESPECÍFICO ==========
-    async function updateSingleCard(index) {
-        if (currentVideos[index]?.loading || isUpdating) return;
-        
-        currentVideos[index] = { 
-            ...currentVideos[index], 
-            loading: true,
-            error: null 
-        };
-        renderAllCards();
+            /*
+               ESTA É A PARTE MAIS IMPORTANTE.
 
-        try {
-            const canalId = cartomantesData[index].canalIdentifier;
-            const { videoId, title } = await fetchLatestAriesVideo(canalId);
-            currentVideos[index] = { 
-                videoId: videoId || FALLBACK_VIDEOS[index], 
-                title: title || "Previsão Especial de Áries", 
-                loading: false,
-                error: null,
-                retryCount: 0
-            };
-        } catch (error) {
-            currentVideos[index] = { 
-                videoId: FALLBACK_VIDEOS[index], 
-                title: "Previsão Especial de Áries", 
-                loading: false,
-                error: "Usando vídeo alternativo",
-                retryCount: (currentVideos[index]?.retryCount || 0) + 1
-            };
+               iframe simples e compatível.
+
+               NÃO existe:
+               [URL](URL)
+
+               NÃO existe:
+               sandbox
+
+               NÃO existe:
+               API JavaScript obrigatória.
+
+               Isto é muito mais estável
+               no GitHub Pages e WebView.
+            */
+
+            const src=youtubeEmbedUrl(videoId);
+
+            player=`
+
+                <iframe
+                    src="${src}"
+                    title="${escapeHtml(cart.nome)} - YouTube"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+
+            `;
+
         }
-        renderAllCards();
-    }
 
-    // ========== INICIALIZAÇÃO (OTIMIZADA PARA KODULAR) ==========
-    async function initLoad() {
-        renderAllCards();
-        
-        // Para Kodular, carrega mais lentamente para evitar travamentos
-        const delay = IS_KODULAR ? 800 : 500;
-        
-        for (let i = 0; i < cartomantesData.length; i += 2) {
-            const batch = cartomantesData.slice(i, i + 2);
-            const promises = batch.map(async (cart, batchIdx) => {
-                const idx = i + batchIdx;
-                try {
-                    const canalId = cart.canalIdentifier;
-                    if (!canalId || canalId.length < 20) return;
-                    const { videoId, title } = await fetchLatestAriesVideo(canalId);
-                    if (videoId) {
-                        currentVideos[idx] = { 
-                            videoId, 
-                            title, 
-                            loading: false,
-                            error: null,
-                            retryCount: 0
-                        };
+        else{
+
+            player=`
+
+                <div class="video-placeholder">
+
+                    <div class="icon">🔮</div>
+
+                    <div>
+                        Vídeo indisponível
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        html+=`
+
+            <article
+                class="card-cartomante"
+                data-index="${i}">
+
+                <div class="ranking-badge">
+                    ${escapeHtml(cart.ranking)}
+                    CARTOMANTE
+                </div>
+
+
+                <div class="card-header">
+
+                    <div class="avatar-icon">
+                        🔮
+                    </div>
+
+
+                    <div class="cartomante-info">
+
+                        <div class="cartomante-nome">
+                            ${escapeHtml(cart.nome)}
+                        </div>
+
+
+                        <div class="stats">
+
+                            <span class="stat-item">
+                                👥 ${escapeHtml(cart.seguidores)}
+                            </span>
+
+                            <span class="stat-item">
+                                ${escapeHtml(cart.acertos)}
+                            </span>
+
+                            <span class="badge-acertos">
+                                ${escapeHtml(cart.destaque)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="video-area">
+
+                    <div class="youtube-embed">
+
+                        ${player}
+
+                    </div>
+
+
+                    <div class="video-footer">
+
+                        <div
+                            class="info-update"
+                            title="${escapeHtml(title)}">
+
+                            🎬 ${escapeHtml(
+                                loading
+                                ? "A atualizar..."
+                                : truncate(title,45)
+                            )}
+
+                        </div>
+
+
+                        <button
+                            class="btn-atualizar"
+                            data-update="${i}">
+
+                            🔄 Atualizar
+
+                        </button>
+
+
+                        <a
+                            class="btn-youtube"
+                            href="${youtubeWatchUrl(videoId)}"
+                            target="_blank"
+                            rel="noopener noreferrer">
+
+                            ▶️ YouTube
+
+                        </a>
+
+                    </div>
+
+
+                    ${
+                        error
+                        ?
+                        `
+                        <div class="error-msg">
+                            ⚠️ ${escapeHtml(error)}
+                        </div>
+                        `
+                        :
+                        ""
                     }
-                } catch (e) {
-                    // Mantém fallback
-                }
-            });
-            
-            await Promise.all(promises);
-            renderAllCards();
-            await new Promise(r => setTimeout(r, delay));
-        }
+
+                </div>
+
+            </article>
+
+        `;
+
     }
 
-    // ========== EVENTOS ==========
-    document.getElementById("refreshAllBtn")?.addEventListener("click", () => {
-        if (isUpdating) return;
-        isUpdating = true;
-        
-        const promises = cartomantesData.map((_, i) => updateSingleCard(i));
-        Promise.all(promises).finally(() => {
-            isUpdating = false;
+
+    grid.innerHTML=html;
+
+
+    /*
+       Os eventos são registados depois
+       de criar os cards.
+    */
+
+    document
+        .querySelectorAll(".btn-atualizar")
+        .forEach(button=>{
+
+            button.addEventListener("click",function(){
+
+                const index=
+                    Number(this.dataset.update);
+
+                updateSingleCard(index);
+
+            });
+
         });
+
+}
+
+
+/* =========================================================
+   ATUALIZAR UM CARD
+========================================================= */
+
+function updateSingleCard(index){
+
+    if(
+        index<0 ||
+        index>=currentVideos.length
+    ){
+        return;
+    }
+
+
+    /*
+       Aqui não tentamos fazer uma pesquisa
+       falsa no YouTube.
+
+       O vídeo continua válido.
+
+       O botão força a reconstrução do iframe.
+    */
+
+    const old=currentVideos[index];
+
+    currentVideos[index]={
+
+        ...old,
+
+        loading:true,
+
+        error:null
+
+    };
+
+    renderAllCards();
+
+
+    setTimeout(()=>{
+
+        currentVideos[index]={
+
+            ...old,
+
+            loading:false,
+
+            error:null
+
+        };
+
+        renderAllCards();
+
+    },500);
+
+}
+
+
+/* =========================================================
+   ATUALIZAR TODOS
+========================================================= */
+
+const refreshButton=
+    document.getElementById("refreshAllBtn");
+
+
+if(refreshButton){
+
+    refreshButton.addEventListener("click",async()=>{
+
+        refreshButton.disabled=true;
+
+        refreshButton.textContent=
+            "⏳ A atualizar vídeos...";
+
+
+        for(
+            let i=0;
+            i<currentVideos.length;
+            i++
+        ){
+
+            updateSingleCard(i);
+
+            await new Promise(
+                resolve=>setTimeout(resolve,120)
+            );
+
+        }
+
+
+        setTimeout(()=>{
+
+            refreshButton.disabled=false;
+
+            refreshButton.textContent=
+                "🔄 ATUALIZAR VÍDEOS";
+
+        },800);
+
     });
 
-    // ========== RECARREGAR QUANDO A PÁGINA VOLTAR AO FOCO (KODULAR) ==========
-    if (IS_KODULAR) {
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                // Recarrega os vídeos quando a página volta a ser visível
-                setTimeout(() => {
-                    cartomantesData.forEach((_, i) => {
-                        if (currentVideos[i]?.error) {
-                            updateSingleCard(i);
-                        }
-                    });
-                }, 1000);
-            }
-        });
-    }
+}
 
-    // ========== INICIAR ==========
-    // Aguarda o DOM estar pronto
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLoad);
-    } else {
-        initLoad();
-    }
 
-    // Previne que iframes sejam recarregados desnecessariamente
-    console.log('🔮 App de Áries iniciado - Compatível com Kodular');
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+function init(){
+
+    renderAllCards();
+
+    console.log(
+        "♈ App Áries iniciado."
+    );
+
+    console.log(
+        "▶️ Player YouTube configurado."
+    );
+
+}
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
+
+if(document.readyState==="loading"){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        init
+    );
+
+}
+else{
+
+    init();
+
+}
+
 </script>
+
 </body>
 </html>
+```
