@@ -1,1762 +1,406 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-PT">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=yes">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <meta name="theme-color" content="#160b17">
-
 <title>♈ Áries — Previsões YouTube</title>
-
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    background:#120812;
-    min-height:100%;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
+html{background:#120812;min-height:100%;}
 body{
-
-    min-height:100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255,105,55,.25),
-            transparent 40%
-        ),
-        linear-gradient(
-            145deg,
-            #120812,
-            #24101f 55%,
-            #10070f
-        );
-
-    color:#f8ead7;
-
-    font-family:
-        "Segoe UI",
-        Poppins,
-        system-ui,
-        -apple-system,
-        Roboto,
-        Arial,
-        sans-serif;
-
-    padding:
-        16px
-        10px
-        40px;
-
-    overflow-x:hidden;
-
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(255,105,55,.25), transparent 40%),
+    linear-gradient(145deg,#120812,#24101f 55%,#10070f);
+  color:#f8ead7;
+  font-family:"Segoe UI",Poppins,system-ui,-apple-system,Roboto,Arial,sans-serif;
+  padding:16px 10px 40px;
+  overflow-x:hidden;
 }
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.app{
-
-    width:100%;
-
-    max-width:1500px;
-
-    margin:auto;
-
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header{
-
-    text-align:center;
-
-    padding:
-        10px
-        5px
-        25px;
-
-}
-
+.app{width:100%;max-width:1500px;margin:auto;}
+.header{text-align:center;padding:10px 5px 25px;}
 .sign{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:12px;
-
-    padding:
-        10px
-        18px;
-
-    border:
-        1px solid
-        rgba(255,145,90,.65);
-
-    border-radius:100px;
-
-    background:
-        rgba(255,90,50,.10);
-
-    box-shadow:
-        0 12px 35px
-        rgba(0,0,0,.35);
-
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  padding:10px 18px;border:1px solid rgba(255,145,90,.65);border-radius:100px;
+  background:rgba(255,90,50,.10);box-shadow:0 12px 35px rgba(0,0,0,.35);
 }
-
-.sign-icon{
-
-    font-size:35px;
-
-}
-
+.sign-icon{font-size:35px;}
 .sign-name{
-
-    font-size:
-        clamp(
-            1.3rem,
-            5vw,
-            2.2rem
-        );
-
-    font-weight:900;
-
-    letter-spacing:1px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd166,
-            #ff7043
-        );
-
-    -webkit-background-clip:text;
-
-    background-clip:text;
-
-    color:transparent;
-
+  font-size:clamp(1.3rem,5vw,2.2rem);font-weight:900;letter-spacing:1px;
+  background:linear-gradient(135deg,#ffd166,#ff7043);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-
 .subtitle{
-
-    display:inline-block;
-
-    margin-top:13px;
-
-    padding:
-        7px
-        15px;
-
-    border-radius:30px;
-
-    border:
-        1px solid
-        rgba(255,140,80,.4);
-
-    background:
-        rgba(0,0,0,.25);
-
-    font-size:.82rem;
-
+  display:inline-block;margin-top:13px;padding:7px 15px;border-radius:30px;
+  border:1px solid rgba(255,140,80,.4);background:rgba(0,0,0,.25);font-size:.82rem;
 }
-
-.status{
-
-    margin-top:10px;
-
-    font-size:.72rem;
-
-    opacity:.75;
-
-}
-
+.status{margin-top:10px;font-size:.72rem;opacity:.75;}
 .status-dot{
-
-    display:inline-block;
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-    background:#56d364;
-
-    margin-right:5px;
-
-    box-shadow:
-        0 0 8px
-        #56d364;
-
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:#56d364;margin-right:5px;box-shadow:0 0 8px #56d364;
 }
-
-
-/* =========================================================
-   GRID
-========================================================= */
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(310px,1fr)
-        );
-
-    gap:18px;
-
-}
-
-
-/* =========================================================
-   CARD
-========================================================= */
-
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;}
 .card{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:24px;
-
-    background:
-        rgba(20,10,22,.94);
-
-    border:
-        1px solid
-        rgba(255,130,70,.28);
-
-    box-shadow:
-        0 15px 35px
-        rgba(0,0,0,.45);
-
+  position:relative;overflow:hidden;border-radius:24px;
+  background:rgba(20,10,22,.94);border:1px solid rgba(255,130,70,.28);
+  box-shadow:0 15px 35px rgba(0,0,0,.45);
 }
-
-
-/* =========================================================
-   RANKING
-========================================================= */
-
 .rank{
-
-    position:absolute;
-
-    top:10px;
-
-    left:10px;
-
-    z-index:10;
-
-    padding:
-        5px
-        10px;
-
-    border-radius:30px;
-
-    background:#ff6338;
-
-    color:#210a0d;
-
-    font-size:.63rem;
-
-    font-weight:900;
-
+  position:absolute;top:10px;left:10px;z-index:10;padding:5px 10px;
+  border-radius:30px;background:#ff6338;color:#210a0d;font-size:.63rem;font-weight:900;
 }
-
-
-/* =========================================================
-   CARD HEADER
-========================================================= */
-
 .card-header{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:
-        45px
-        13px
-        12px;
-
-    background:
-        linear-gradient(
-            110deg,
-            #32182c,
-            #1d0e1d
-        );
-
-    border-bottom:
-        1px solid
-        rgba(255,110,70,.45);
-
+  display:flex;align-items:center;gap:10px;padding:45px 13px 12px;
+  background:linear-gradient(110deg,#32182c,#1d0e1d);
+  border-bottom:1px solid rgba(255,110,70,.45);
 }
-
 .avatar{
-
-    width:48px;
-
-    height:48px;
-
-    flex:none;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,110,70,.12);
-
-    font-size:25px;
-
+  width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(255,110,70,.12);font-size:25px;
 }
-
-.info{
-
-    min-width:0;
-
-    flex:1;
-
-}
-
-.name{
-
-    font-size:1.08rem;
-
-    font-weight:800;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-.stats{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:5px;
-
-    margin-top:5px;
-
-}
-
-.stat{
-
-    padding:
-        3px
-        7px;
-
-    border-radius:20px;
-
-    background:
-        rgba(0,0,0,.35);
-
-    font-size:.62rem;
-
-}
-
-.badge{
-
-    padding:
-        3px
-        7px;
-
-    border-radius:20px;
-
-    background:#d4af37;
-
-    color:#1d0e0d;
-
-    font-size:.59rem;
-
-    font-weight:900;
-
-}
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player{
-
-    position:relative;
-
-    width:100%;
-
-    aspect-ratio:16 / 9;
-
-    min-height:185px;
-
-    background:#000;
-
-    overflow:hidden;
-
-}
-
-
-/*
-   O iframe fica sempre dentro do player.
-
-   Não usamos innerHTML para o atualizar.
-*/
-
-.player iframe{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    border:0;
-
-    display:block;
-
-    background:#000;
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
+.info{min-width:0;flex:1;}
+.name{font-size:1.08rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.stats{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
+.stat{padding:3px 7px;border-radius:20px;background:rgba(0,0,0,.35);font-size:.62rem;}
+.badge{padding:3px 7px;border-radius:20px;background:#d4af37;color:#1d0e0d;font-size:.59rem;font-weight:900;}
+.player{position:relative;width:100%;aspect-ratio:16/9;min-height:185px;background:#000;overflow:hidden;}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;}
 .loading{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:3;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    flex-direction:column;
-
-    gap:10px;
-
-    background:
-        rgba(8,4,9,.88);
-
-    font-size:.75rem;
-
+  position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;background:rgba(8,4,9,.88);font-size:.75rem;
 }
-
-.loading.active{
-
-    display:flex;
-
-}
-
+.loading.active{display:flex;}
 .spinner{
-
-    width:28px;
-
-    height:28px;
-
-    border:
-        3px solid
-        rgba(255,160,100,.25);
-
-    border-top-color:#ff8555;
-
-    border-radius:50%;
-
-    animation:
-        spin .8s linear infinite;
-
+  width:28px;height:28px;border:3px solid rgba(255,160,100,.25);
+  border-top-color:#ff8555;border-radius:50%;animation:spin .8s linear infinite;
 }
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =========================================================
-   VIDEO FOOTER
-========================================================= */
-
-.video-footer{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:10px;
-
-    flex-wrap:wrap;
-
-}
-
+@keyframes spin{to{transform:rotate(360deg);}}
+.video-footer{display:flex;align-items:center;gap:6px;padding:10px;flex-wrap:wrap;}
 .video-title{
-
-    flex:1;
-
-    min-width:150px;
-
-    padding:
-        7px
-        9px;
-
-    border-radius:13px;
-
-    background:
-        rgba(0,0,0,.32);
-
-    font-size:.66rem;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
+  flex:1;min-width:150px;padding:7px 9px;border-radius:13px;background:rgba(0,0,0,.32);
+  font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-
 .btn{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:4px;
-
-    padding:
-        7px
-        10px;
-
-    border:
-        1px solid
-        rgba(255,145,95,.45);
-
-    border-radius:20px;
-
-    background:
-        rgba(255,110,70,.08);
-
-    color:#ffd5c0;
-
-    font-size:.64rem;
-
-    font-weight:700;
-
-    text-decoration:none;
-
-    cursor:pointer;
-
-    white-space:nowrap;
-
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 10px;
+  border:1px solid rgba(255,145,95,.45);border-radius:20px;background:rgba(255,110,70,.08);
+  color:#ffd5c0;font-size:.64rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;
 }
-
-.btn:hover{
-
-    background:
-        rgba(255,110,70,.22);
-
-    color:#fff;
-
-}
-
-.btn:disabled{
-
-    opacity:.4;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =========================================================
-   ERRO
-========================================================= */
-
+.btn:hover{background:rgba(255,110,70,.22);color:#fff;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
 .error{
-
-    display:none;
-
-    margin:
-        0
-        10px
-        10px;
-
-    padding:7px 9px;
-
-    border-radius:10px;
-
-    background:
-        rgba(255,60,60,.08);
-
-    color:#ffaaa0;
-
-    font-size:.65rem;
-
+  display:none;margin:0 10px 10px;padding:7px 9px;border-radius:10px;
+  background:rgba(255,60,60,.08);color:#ffaaa0;font-size:.65rem;
 }
-
-.error.show{
-
-    display:block;
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-
-    text-align:center;
-
-    margin-top:28px;
-
-    padding-top:20px;
-
-    border-top:
-        1px dashed
-        rgba(255,140,90,.25);
-
-}
-
+.error.show{display:block;}
+.footer{text-align:center;margin-top:28px;padding-top:20px;border-top:1px dashed rgba(255,140,90,.25);}
 .main-button{
-
-    border:0;
-
-    padding:
-        11px
-        20px;
-
-    border-radius:50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff7545,
-            #ffad5e
-        );
-
-    color:#220b10;
-
-    font-weight:900;
-
-    font-size:.78rem;
-
-    cursor:pointer;
-
+  border:0;padding:11px 20px;border-radius:50px;
+  background:linear-gradient(135deg,#ff7545,#ffad5e);color:#220b10;font-weight:900;font-size:.78rem;cursor:pointer;
 }
-
-.main-button:disabled{
-
-    opacity:.5;
-
-}
-
-.note{
-
-    margin-top:10px;
-
-    font-size:.65rem;
-
-    opacity:.6;
-
-    line-height:1.5;
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
+.main-button:disabled{opacity:.5;}
+.note{margin-top:10px;font-size:.65rem;opacity:.6;line-height:1.5;}
 @media(max-width:700px){
-
-    body{
-
-        padding:
-            10px
-            7px
-            30px;
-
-    }
-
-    .grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .card{
-
-        border-radius:20px;
-
-    }
-
-    .player{
-
-        min-height:190px;
-
-    }
-
+  body{padding:10px 7px 30px;}
+  .grid{grid-template-columns:1fr;}
+  .card{border-radius:20px;}
+  .player{min-height:190px;}
 }
-
-
-/* =========================================================
-   KODULAR / ANDROID WEBVIEW
-========================================================= */
-
-.kodular-fix{
-
-    -webkit-transform:
-        translateZ(0);
-
-    transform:
-        translateZ(0);
-
-    -webkit-backface-visibility:
-        hidden;
-
-    backface-visibility:
-        hidden;
-
-}
-
+.kodular-fix{-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden;}
 </style>
-
 </head>
-
-
 <body>
-
-
 <div class="app kodular-fix">
 
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
-
 <header class="header">
-
-    <div class="sign">
-
-        <span class="sign-icon">
-            ♈
-        </span>
-
-        <span class="sign-name">
-            ÁRIES · CARNEIRO
-        </span>
-
-        <span class="sign-icon">
-            🐏
-        </span>
-
-    </div>
-
-
-    <div class="subtitle">
-
-        🔥 Previsões de Áries · YouTube
-
-    </div>
-
-
-    <div class="status">
-
-        <span class="status-dot"></span>
-
-        Player YouTube ativo
-
-    </div>
-
+  <div class="sign">
+    <span class="sign-icon">♈</span>
+    <span class="sign-name">ÁRIES · CARNEIRO</span>
+    <span class="sign-icon">🐏</span>
+  </div>
+  <div class="subtitle">🔥 Previsões de Áries · YouTube</div>
+  <div class="status"><span class="status-dot"></span>Player YouTube ativo</div>
 </header>
 
-
-<!-- =======================================================
-     GRID
-======================================================= -->
-
-<main
-    class="grid"
-    id="videosGrid">
-</main>
-
-
-<!-- =======================================================
-     FOOTER
-======================================================= -->
+<main class="grid" id="videosGrid"></main>
 
 <footer class="footer">
-
-    <button
-        class="main-button"
-        id="refreshAll">
-
-        🔄 ATUALIZAR
-
-    </button>
-
-
-    <div class="note">
-
-        Os players são mantidos estáveis para evitar
-        desaparecimentos e recarregamentos no Kodular/WebView.
-
-    </div>
-
-
-    <div class="note">
-
-        📱 GitHub Pages · Android · Kodular WebViewer
-
-    </div>
-
+  <button class="main-button" id="refreshAll">🔄 ATUALIZAR TODOS</button>
+  <div class="note">Os players são mantidos estáveis para evitar desaparecimentos e recarregamentos no Kodular/WebView.</div>
+  <div class="note">Cada atualização troca o vídeo por outro da reserva, sem repetir o que já está visível noutro card.</div>
+  <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer</div>
 </footer>
-
 
 </div>
 
-
 <script>
-
 /* =========================================================
-   CONFIGURAÇÃO
+   CARTOMANTES (13 cards)
 ========================================================= */
-
-
-/*
-   Estes são os vídeos iniciais.
-
-   MUITO IMPORTANTE:
-
-   Um ID YouTube tem exatamente 11 caracteres.
-
-   Quando um vídeo deixar de existir ou não permitir
-   incorporação, o próprio YouTube poderá mostrar erro.
-*/
-
-const VIDEOS = [
-
-    "1vQgMmKgy-4",
-    "Vu-mjJ0lWMo",
-    "uENK1wIYZRk",
-    "o6xxwU4cIdw",
-    "J7XG7A9lUOI",
-    "s6uG79FbR-U",
-    "b9G5O1Z6tQw",
-    "vcjqd-5lAu8",
-    "OzF7vf6XIbk",
-    "cGIZ3CwUk58",
-    "ehY4yJNMSMI",
-    "T-uolV9NLjY",
-    "f0VpYbuBItA"
-
-];
-
-
-/* =========================================================
-   CARTOMANTES
-========================================================= */
-
 const CARTOMANTES = [
-
-    ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
-
-    ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
-
-    ["✨ Healing Tarot","480k","⭐ 4.94","🏆 ASTROLOGIA","#3"],
-
-    ["🃏 Revealing Light","520k","⭐ 4.91","🏆 PRECISÃO","#4"],
-
-    ["🔯 King Fenix","490k","⭐ 4.92","🏆 REVELAÇÃO","#5"],
-
-    ["☀️ Red Relâmpago","475k","⭐ 4.90","🏆 LUZ","#6"],
-
-    ["📿 Oráculos Enigma","470k","⭐ 4.89","🏆 SABEDORIA","#7"],
-
-    ["💫 Tarô & Música","465k","⭐ 4.88","🏆 DESTINO","#8"],
-
-    ["🕊️ Baralho Cigano","460k","⭐ 4.87","🏆 ESPERANÇA","#9"],
-
-    ["🦋 Mestre José","455k","⭐ 4.86","🏆 TRANSFORMAÇÃO","#10"],
-
-    ["🔥 Baba Jolie","440k","⭐ 4.85","🏆 ÁRIES","#11"],
-
-    ["🌟 She-Geek Tarot","430k","⭐ 4.84","🏆 ENERGIA","#12"],
-
-    ["🔮 Atomic Papers","420k","⭐ 4.83","🏆 INTUIÇÃO","#13"]
-
+  ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
+  ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
+  ["✨ Healing Tarot","480k","⭐ 4.94","🏆 ASTROLOGIA","#3"],
+  ["🃏 Revealing Light","520k","⭐ 4.91","🏆 PRECISÃO","#4"],
+  ["🔯 King Fenix","490k","⭐ 4.92","🏆 REVELAÇÃO","#5"],
+  ["☀️ Red Relâmpago","475k","⭐ 4.90","🏆 LUZ","#6"],
+  ["📿 Oráculos Enigma","470k","⭐ 4.89","🏆 SABEDORIA","#7"],
+  ["💫 Tarô & Música","465k","⭐ 4.88","🏆 DESTINO","#8"],
+  ["🕊️ Baralho Cigano","460k","⭐ 4.87","🏆 ESPERANÇA","#9"],
+  ["🦋 Mestre José","455k","⭐ 4.86","🏆 TRANSFORMAÇÃO","#10"],
+  ["🔥 Baba Jolie","440k","⭐ 4.85","🏆 ÁRIES","#11"],
+  ["🌟 She-Geek Tarot","430k","⭐ 4.84","🏆 ENERGIA","#12"],
+  ["🔮 Atomic Papers","420k","⭐ 4.83","🏆 INTUIÇÃO","#13"]
 ];
 
-
 /* =========================================================
-   ESTADO DOS PLAYERS
+   POOL DE VÍDEOS (originais + novos, duplicados removidos)
 ========================================================= */
+const RAW_VIDEOS = [
+  "1vQgMmKgy-4","Vu-mjJ0lWMo","uENK1wIYZRk","o6xxwU4cIdw","J7XG7A9lUOI",
+  "s6uG79FbR-U","b9G5O1Z6tQw","vcjqd-5lAu8","OzF7vf6XIbk","cGIZ3CwUk58",
+  "ehY4yJNMSMI","T-uolV9NLjY","f0VpYbuBItA",
+  "oBhI4XfRs5Y","omwrK8KbO6M","L4sk9hjx_QE","_DSbV6nUggw","6wY5i1MT-6Q","gFkUIcf7rBU"
+];
+
+// remove duplicados mantendo a ordem
+const VIDEO_POOL = [...new Set(RAW_VIDEOS)];
+
+// os primeiros N (=nº de cartomantes) ficam já atribuídos a um card
+const INITIAL_VIDEOS = VIDEO_POOL.slice(0, CARTOMANTES.length);
+
+// o resto fica em reserva, para entrar quando se carrega em "Atualizar"
+let queue = VIDEO_POOL.slice(CARTOMANTES.length);
 
 const players = [];
 
-
-/* =========================================================
-   VALIDAR ID
-========================================================= */
-
 function isValidVideoId(id){
-
-    return (
-        typeof id === "string" &&
-        /^[A-Za-z0-9_-]{11}$/.test(id)
-    );
-
+  return typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id);
 }
-
-
-/* =========================================================
-   URL DO YOUTUBE
-========================================================= */
-
 function getYoutubeURL(id){
-
-    if(!isValidVideoId(id)){
-        return "";
-    }
-
-
-    /*
-       IMPORTANTE:
-
-       Não utilizar:
-       [https://...](https://...)
-
-       Não utilizar:
-       sandbox
-
-       Não utilizar:
-       innerHTML para trocar iframe.
-
-       youtube-nocookie é compatível com embed
-       e reduz cookies de rastreamento.
-    */
-
-    return (
-        "https://www.youtube-nocookie.com/embed/"
-        + id
-        + "?autoplay=0"
-        + "&controls=1"
-        + "&playsinline=1"
-        + "&rel=0"
-        + "&enablejsapi=1"
-    );
-
+  if(!isValidVideoId(id)) return "";
+  return "https://www.youtube-nocookie.com/embed/"+id+"?autoplay=0&controls=1&playsinline=1&rel=0&enablejsapi=1";
 }
-
-
-/* =========================================================
-   URL NORMAL
-========================================================= */
-
 function getWatchURL(id){
-
-    if(!isValidVideoId(id)){
-        return "#";
-    }
-
-    return (
-        "https://www.youtube.com/watch?v="
-        + id
-    );
-
+  return isValidVideoId(id) ? "https://www.youtube.com/watch?v="+id : "#";
 }
 
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function esc(text){
-
-    return String(text ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+/* pega o próximo vídeo da reserva e devolve o atual para o fim da fila */
+function getNextVideoId(currentId){
+  if(queue.length === 0) return null;
+  const nextId = queue.shift();
+  if(isValidVideoId(currentId)) queue.push(currentId);
+  return nextId;
 }
-
-
-/* =========================================================
-   CRIAR CARD UMA ÚNICA VEZ
-========================================================= */
 
 function createCard(index){
-
-    const data=CARTOMANTES[index];
-
-    const videoId=VIDEOS[index];
-
-
-    const card=
-        document.createElement("article");
-
-    card.className="card";
-
-
-    /* RANK */
-
-    const rank=
-        document.createElement("div");
-
-    rank.className="rank";
-
-    rank.textContent=
-        data[4]+" CARTOMANTE";
-
-
-    /* HEADER */
-
-    const header=
-        document.createElement("div");
-
-    header.className="card-header";
-
-
-    const avatar=
-        document.createElement("div");
-
-    avatar.className="avatar";
-
-    avatar.textContent="🔮";
-
-
-    const info=
-        document.createElement("div");
-
-    info.className="info";
-
-
-    const name=
-        document.createElement("div");
-
-    name.className="name";
-
-    name.textContent=data[0];
-
-
-    const stats=
-        document.createElement("div");
-
-    stats.className="stats";
-
-
-    const stat1=
-        document.createElement("span");
-
-    stat1.className="stat";
-
-    stat1.textContent=
-        "👥 "+data[1];
-
-
-    const stat2=
-        document.createElement("span");
-
-    stat2.className="stat";
-
-    stat2.textContent=data[2];
-
-
-    const badge=
-        document.createElement("span");
-
-    badge.className="badge";
-
-    badge.textContent=data[3];
-
-
-    stats.appendChild(stat1);
-
-    stats.appendChild(stat2);
-
-    stats.appendChild(badge);
-
-
-    info.appendChild(name);
-
-    info.appendChild(stats);
-
-
-    header.appendChild(avatar);
-
-    header.appendChild(info);
-
-
-    /* PLAYER */
-
-    const player=
-        document.createElement("div");
-
-    player.className="player";
-
-
-    /* IFRAME */
-
-    const iframe=
-        document.createElement("iframe");
-
-    iframe.title=
-        data[0]+" - YouTube";
-
-
-    iframe.allow=
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-
-
-    iframe.allowFullscreen=true;
-
-
-    iframe.loading="lazy";
-
-
-    iframe.referrerPolicy=
-        "strict-origin-when-cross-origin";
-
-
-    /*
-       SRC É DEFINIDO UMA ÚNICA VEZ
-    */
-
-    if(isValidVideoId(videoId)){
-
-        iframe.src=
-            getYoutubeURL(videoId);
-
-    }
-
-
-    /* LOADING */
-
-    const loading=
-        document.createElement("div");
-
-    loading.className="loading";
-
-    loading.innerHTML=
-        '<div class="spinner"></div>' +
-        '<div>A preparar vídeo...</div>';
-
-
-    /* TÍTULO */
-
-    const footer=
-        document.createElement("div");
-
-    footer.className="video-footer";
-
-
-    const title=
-        document.createElement("div");
-
-    title.className="video-title";
-
-    title.textContent=
-        "🎬 Previsão para Áries";
-
-
-    /* BOTÃO ABRIR YOUTUBE */
-
-    const open=
-        document.createElement("a");
-
-    open.className="btn";
-
-    open.target="_blank";
-
-    open.rel="noopener noreferrer";
-
-    open.textContent="▶️ YouTube";
-
-    open.href=
-        getWatchURL(videoId);
-
-
-    /* BOTÃO ATUALIZAR */
-
-    const update=
-        document.createElement("button");
-
-    update.className="btn";
-
-    update.type="button";
-
-    update.textContent="🔄 Atualizar";
-
-
-    /* ERRO */
-
-    const error=
-        document.createElement("div");
-
-    error.className="error";
-
-
-    /* =====================================================
-       EVENTO LOAD
-    ===================================================== */
-
-    iframe.addEventListener(
-        "load",
-        function(){
-
-            loading.classList.remove("active");
-
-        }
-    );
-
-
-    /* =====================================================
-       EVENTO ERRO
-    ===================================================== */
-
-    iframe.addEventListener(
-        "error",
-        function(){
-
-            loading.classList.remove("active");
-
-            error.textContent=
-                "⚠️ O YouTube não conseguiu carregar este vídeo.";
-
-            error.classList.add("show");
-
-        }
-    );
-
-
-    /* =====================================================
-       BOTÃO ATUALIZAR
-    ===================================================== */
-
-    update.addEventListener(
-        "click",
-        function(){
-
-            refreshVideo(index);
-
-        }
-    );
-
-
-    /*
-       MONTAR DOM
-
-       Isto acontece APENAS UMA VEZ.
-    */
-
-    player.appendChild(iframe);
-
-    player.appendChild(loading);
-
-
-    footer.appendChild(title);
-
-    footer.appendChild(open);
-
-    footer.appendChild(update);
-
-
-    card.appendChild(rank);
-
-    card.appendChild(header);
-
-    card.appendChild(player);
-
-    card.appendChild(footer);
-
-    card.appendChild(error);
-
-
-    return {
-
-        card:card,
-
-        player:player,
-
-        iframe:iframe,
-
-        loading:loading,
-
-        title:title,
-
-        open:open,
-
-        update:update,
-
-        error:error,
-
-        videoId:videoId
-
-    };
-
+  const data = CARTOMANTES[index];
+  const videoId = INITIAL_VIDEOS[index];
+
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const rank = document.createElement("div");
+  rank.className = "rank";
+  rank.textContent = data[4]+" CARTOMANTE";
+
+  const header = document.createElement("div");
+  header.className = "card-header";
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = "🔮";
+
+  const info = document.createElement("div");
+  info.className = "info";
+
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = data[0];
+
+  const stats = document.createElement("div");
+  stats.className = "stats";
+
+  const stat1 = document.createElement("span");
+  stat1.className = "stat";
+  stat1.textContent = "👥 "+data[1];
+
+  const stat2 = document.createElement("span");
+  stat2.className = "stat";
+  stat2.textContent = data[2];
+
+  const badge = document.createElement("span");
+  badge.className = "badge";
+  badge.textContent = data[3];
+
+  stats.appendChild(stat1);
+  stats.appendChild(stat2);
+  stats.appendChild(badge);
+  info.appendChild(name);
+  info.appendChild(stats);
+  header.appendChild(avatar);
+  header.appendChild(info);
+
+  const player = document.createElement("div");
+  player.className = "player";
+
+  const iframe = document.createElement("iframe");
+  iframe.title = data[0]+" - YouTube";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+  iframe.loading = "lazy";
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  if(isValidVideoId(videoId)) iframe.src = getYoutubeURL(videoId);
+
+  const loading = document.createElement("div");
+  loading.className = "loading";
+  loading.innerHTML = '<div class="spinner"></div><div>A preparar vídeo...</div>';
+
+  const footer = document.createElement("div");
+  footer.className = "video-footer";
+
+  const title = document.createElement("div");
+  title.className = "video-title";
+  title.textContent = "🎬 Previsão para Áries";
+
+  const open = document.createElement("a");
+  open.className = "btn";
+  open.target = "_blank";
+  open.rel = "noopener noreferrer";
+  open.textContent = "▶️ YouTube";
+  open.href = getWatchURL(videoId);
+
+  const update = document.createElement("button");
+  update.className = "btn";
+  update.type = "button";
+  update.textContent = "🔄 Atualizar";
+
+  const error = document.createElement("div");
+  error.className = "error";
+
+  iframe.addEventListener("load", function(){ loading.classList.remove("active"); });
+  iframe.addEventListener("error", function(){
+    loading.classList.remove("active");
+    error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo.";
+    error.classList.add("show");
+  });
+
+  update.addEventListener("click", function(){ refreshVideo(index); });
+
+  player.appendChild(iframe);
+  player.appendChild(loading);
+  footer.appendChild(title);
+  footer.appendChild(open);
+  footer.appendChild(update);
+  card.appendChild(rank);
+  card.appendChild(header);
+  card.appendChild(player);
+  card.appendChild(footer);
+  card.appendChild(error);
+
+  return { card, player, iframe, loading, title, open, update, error, videoId };
 }
-
-
-/* =========================================================
-   INICIALIZAR TODOS
-========================================================= */
 
 function init(){
-
-    const grid=
-        document.getElementById("videosGrid");
-
-
-    if(!grid){
-        return;
-    }
-
-
-    /*
-       IMPORTANTE:
-
-       Os cards são criados uma única vez.
-    */
-
-    for(
-        let i=0;
-        i<CARTOMANTES.length;
-        i++
-    ){
-
-        const instance=
-            createCard(i);
-
-
-        players.push(instance);
-
-
-        grid.appendChild(
-            instance.card
-        );
-
-    }
-
+  const grid = document.getElementById("videosGrid");
+  if(!grid) return;
+  for(let i=0;i<CARTOMANTES.length;i++){
+    const instance = createCard(i);
+    players.push(instance);
+    grid.appendChild(instance.card);
+  }
 }
 
-
-/* =========================================================
-   TROCAR VÍDEO SEM DESTRUIR O PLAYER ATUAL
-========================================================= */
-
-function replaceVideo(index,newVideoId){
-
-    const item=
-        players[index];
-
-
-    if(!item){
-        return;
-    }
-
-
-    if(!isValidVideoId(newVideoId)){
-
-        item.error.textContent=
-            "⚠️ ID do vídeo YouTube inválido.";
-
-        item.error.classList.add("show");
-
-        return;
-
-    }
-
-
-    /*
-       Se for exatamente o mesmo vídeo,
-       não fazemos absolutamente nada.
-
-       Isto evita reload desnecessário.
-    */
-
-    if(
-        item.videoId === newVideoId
-    ){
-
-        item.error.classList.remove("show");
-
-        return;
-
-    }
-
-
-    item.loading.classList.add("active");
-
+/* troca o vídeo sem destruir o player enquanto o novo não carrega */
+function replaceVideo(index, newVideoId){
+  const item = players[index];
+  if(!item) return;
+  if(!isValidVideoId(newVideoId)){
+    item.error.textContent = "⚠️ ID do vídeo YouTube inválido.";
+    item.error.classList.add("show");
+    return;
+  }
+  if(item.videoId === newVideoId){
     item.error.classList.remove("show");
+    return;
+  }
 
+  item.loading.classList.add("active");
+  item.error.classList.remove("show");
 
-    /*
-       NOVO IFRAME É CRIADO FORA DO PLAYER.
+  const newIframe = document.createElement("iframe");
+  newIframe.title = CARTOMANTES[index][0]+" - YouTube";
+  newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  newIframe.allowFullscreen = true;
+  newIframe.loading = "eager";
+  newIframe.referrerPolicy = "strict-origin-when-cross-origin";
+  newIframe.src = getYoutubeURL(newVideoId);
+  newIframe.style.opacity = "0";
+  newIframe.style.position = "absolute";
+  newIframe.style.inset = "0";
+  newIframe.style.width = "100%";
+  newIframe.style.height = "100%";
+  newIframe.style.border = "0";
 
-       O vídeo antigo continua visível.
-    */
+  newIframe.addEventListener("load", function(){
+    const oldIframe = item.iframe;
+    item.player.appendChild(newIframe);
+    requestAnimationFrame(function(){
+      newIframe.style.transition = "opacity .25s ease";
+      newIframe.style.opacity = "1";
+    });
+    setTimeout(function(){
+      if(oldIframe) oldIframe.remove();
+      item.iframe = newIframe;
+      item.videoId = newVideoId;
+      item.open.href = getWatchURL(newVideoId);
+      item.loading.classList.remove("active");
+      item.title.textContent = "🎬 Previsão para Áries";
+    }, 300);
+  });
 
-    const newIframe=
-        document.createElement("iframe");
-
-
-    newIframe.title=
-        CARTOMANTES[index][0]
-        +" - YouTube";
-
-
-    newIframe.allow=
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-
-
-    newIframe.allowFullscreen=true;
-
-
-    newIframe.loading="eager";
-
-
-    newIframe.referrerPolicy=
-        "strict-origin-when-cross-origin";
-
-
-    newIframe.src=
-        getYoutubeURL(newVideoId);
-
-
-    /*
-       Fica invisível enquanto carrega.
-    */
-
-    newIframe.style.opacity="0";
-
-    newIframe.style.position="absolute";
-
-    newIframe.style.inset="0";
-
-    newIframe.style.width="100%";
-
-    newIframe.style.height="100%";
-
-    newIframe.style.border="0";
-
-
-    newIframe.addEventListener(
-        "load",
-        function(){
-
-            /*
-               O novo player carregou.
-
-               AGORA SIM substituímos o antigo.
-            */
-
-            const oldIframe=
-                item.iframe;
-
-
-            item.player.appendChild(
-                newIframe
-            );
-
-
-            /*
-               Pequena transição.
-            */
-
-            requestAnimationFrame(
-                function(){
-
-                    newIframe.style.transition=
-                        "opacity .25s ease";
-
-                    newIframe.style.opacity="1";
-
-                }
-            );
-
-
-            setTimeout(
-                function(){
-
-                    if(oldIframe){
-
-                        oldIframe.remove();
-
-                    }
-
-
-                    item.iframe=
-                        newIframe;
-
-                    item.videoId=
-                        newVideoId;
-
-
-                    item.open.href=
-                        getWatchURL(
-                            newVideoId
-                        );
-
-
-                    item.loading
-                        .classList
-                        .remove("active");
-
-
-                    item.title.textContent=
-                        "🎬 Previsão para Áries";
-
-                },
-                300
-            );
-
-        }
-    );
-
-
-    newIframe.addEventListener(
-        "error",
-        function(){
-
-            item.loading
-                .classList
-                .remove("active");
-
-
-            item.error.textContent=
-                "⚠️ Não foi possível carregar o novo vídeo. O vídeo atual foi mantido.";
-
-
-            item.error
-                .classList
-                .add("show");
-
-        }
-    );
-
+  newIframe.addEventListener("error", function(){
+    item.loading.classList.remove("active");
+    item.error.textContent = "⚠️ Não foi possível carregar o novo vídeo. O vídeo atual foi mantido.";
+    item.error.classList.add("show");
+  });
 }
 
-
-/* =========================================================
-   ATUALIZAR UM VÍDEO
-========================================================= */
-
+/* pede o próximo vídeo da reserva e troca este card para ele */
 function refreshVideo(index){
-
-    const item=
-        players[index];
-
-
-    if(!item){
-        return;
-    }
-
-
-    /*
-       IMPORTANTE:
-
-       Não fazemos:
-
-       grid.innerHTML = ...
-
-       Não fazemos:
-
-       renderAllCards()
-
-       Não destruímos os outros 12 players.
-    */
-
-
-    /*
-       Nesta versão não inventamos um novo vídeo.
-
-       Mantemos o vídeo atual.
-
-       Quando houver um novo ID fornecido pelo sistema
-       de atualização, chamaremos replaceVideo().
-    */
-
+  const item = players[index];
+  if(!item) return;
+  const nextId = getNextVideoId(item.videoId);
+  if(!nextId){
     item.loading.classList.add("active");
-
-    item.error.classList.remove("show");
-
-
-    setTimeout(
-        function(){
-
-            item.loading.classList.remove("active");
-
-        },
-        350
-    );
-
+    setTimeout(function(){ item.loading.classList.remove("active"); }, 350);
+    return;
+  }
+  replaceVideo(index, nextId);
 }
 
-
-/* =========================================================
-   ATUALIZAR TODOS
-========================================================= */
-
-const refreshAll=
-    document.getElementById(
-        "refreshAll"
-    );
-
-
+const refreshAll = document.getElementById("refreshAll");
 if(refreshAll){
-
-    refreshAll.addEventListener(
-        "click",
-        async function(){
-
-            refreshAll.disabled=true;
-
-            refreshAll.textContent=
-                "⏳ A verificar...";
-
-
-            /*
-               IMPORTANTE:
-
-               Não recarregamos os iframes.
-
-               Apenas verificamos o estado
-               sem destruir os players.
-            */
-
-            for(
-                let i=0;
-                i<players.length;
-                i++
-            ){
-
-                players[i]
-                    .error
-                    .classList
-                    .remove("show");
-
-            }
-
-
-            await new Promise(
-                resolve=>
-                    setTimeout(
-                        resolve,
-                        500
-                    )
-            );
-
-
-            refreshAll.disabled=false;
-
-            refreshAll.textContent=
-                "🔄 ATUALIZAR";
-
-        }
-    );
-
+  refreshAll.addEventListener("click", function(){
+    refreshAll.disabled = true;
+    refreshAll.textContent = "⏳ A atualizar...";
+    for(let i=0;i<players.length;i++){
+      refreshVideo(i);
+    }
+    setTimeout(function(){
+      refreshAll.disabled = false;
+      refreshAll.textContent = "🔄 ATUALIZAR TODOS";
+    }, 600);
+  });
 }
 
-
-/* =========================================================
-   INICIAR
-========================================================= */
-
-if(
-    document.readyState ===
-    "loading"
-){
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        init
-    );
-
-}
-else{
-
-    init();
-
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
 }
 
-
-/* =========================================================
-   LOG
-========================================================= */
-
-console.log(
-    "♈ Áries YouTube iniciado"
-);
-
-console.log(
-    "13 players estáveis"
-);
-
-console.log(
-    "Sem reconstrução de iframe"
-);
-
+console.log("♈ Áries YouTube — pool:", VIDEO_POOL.length, "vídeos, reserva:", queue.length);
 </script>
-
 </body>
-
 </html>
-```
