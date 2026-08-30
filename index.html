@@ -15,9 +15,7 @@ html,body{
 }
 body{
   min-height:100vh;
-  background:
-    radial-gradient(circle at 50% -10%, rgba(255,105,55,.25), transparent 40%),
-    linear-gradient(145deg,#120812,#24101f 55%,#10070f);
+  background:#1a0e18;
   color:#f8ead7;
   font-family:"Segoe UI",Poppins,system-ui,-apple-system,Roboto,Arial,sans-serif;
   padding:16px 10px 40px;
@@ -41,13 +39,12 @@ img,.card,.player,.thumb-wrap{
 .sign{
   display:inline-flex;align-items:center;justify-content:center;gap:12px;
   padding:10px 18px;border:1px solid rgba(255,145,90,.65);border-radius:100px;
-  background:rgba(255,90,50,.10);box-shadow:0 12px 35px rgba(0,0,0,.35);
+  background:rgba(255,90,50,.10);
 }
 .sign-icon{font-size:35px;}
 .sign-name{
   font-size:clamp(1.3rem,5vw,2.2rem);font-weight:900;letter-spacing:1px;
-  background:linear-gradient(135deg,#ffd166,#ff7043);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  color:#ffab5e;
 }
 .subtitle{
   display:inline-block;margin-top:13px;padding:7px 15px;border-radius:30px;
@@ -56,16 +53,16 @@ img,.card,.player,.thumb-wrap{
 .status{margin-top:10px;font-size:.72rem;opacity:.75;}
 .status-dot{
   display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:#56d364;margin-right:5px;box-shadow:0 0 8px #56d364;
+  background:#56d364;margin-right:5px;
 }
 .grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;
   touch-action:pan-y;
 }
 .card{
-  position:relative;overflow:hidden;border-radius:24px;
-  background:rgba(20,10,22,.94);border:1px solid rgba(255,130,70,.28);
-  box-shadow:0 15px 35px rgba(0,0,0,.45);
+  position:relative;overflow:hidden;border-radius:20px;
+  background:#180d1a;border:1px solid rgba(255,130,70,.28);
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
 .rank{
   position:absolute;top:10px;left:10px;z-index:10;padding:5px 10px;
@@ -73,7 +70,7 @@ img,.card,.player,.thumb-wrap{
 }
 .card-header{
   display:flex;align-items:center;gap:10px;padding:45px 13px 12px;
-  background:linear-gradient(110deg,#32182c,#1d0e1d);
+  background:#26141f;
   border-bottom:1px solid rgba(255,110,70,.45);
 }
 .avatar{
@@ -126,7 +123,6 @@ img,.card,.player,.thumb-wrap{
 .play-btn{
   position:relative;z-index:2;width:62px;height:62px;border-radius:50%;
   background:rgba(255,90,50,.92);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 25px rgba(0,0,0,.5);transition:transform .15s ease;
   pointer-events:none;
 }
 .thumb-wrap:active .play-btn{transform:scale(.92);}
@@ -170,7 +166,7 @@ img,.card,.player,.thumb-wrap{
 .footer{text-align:center;margin-top:28px;padding-top:20px;border-top:1px dashed rgba(255,140,90,.25);}
 .main-button{
   border:0;padding:11px 20px;border-radius:50px;
-  background:linear-gradient(135deg,#ff7545,#ffad5e);color:#220b10;font-weight:900;font-size:.78rem;cursor:pointer;
+  background:#ff8a4d;color:#220b10;font-weight:900;font-size:.78rem;cursor:pointer;
   touch-action:manipulation;
 }
 .main-button:disabled{opacity:.5;}
@@ -181,11 +177,10 @@ img,.card,.player,.thumb-wrap{
   .card{border-radius:20px;}
   .player{min-height:190px;}
 }
-.kodular-fix{-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden;}
 </style>
 </head>
 <body>
-<div class="app kodular-fix">
+<div class="app">
 
 <header class="header">
   <div class="sign">
@@ -214,9 +209,6 @@ img,.card,.player,.thumb-wrap{
 </div>
 
 <script>
-/* =========================================================
-   CARTOMANTES (13 cards)
-========================================================= */
 const CARTOMANTES = [
   ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
   ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
@@ -233,29 +225,11 @@ const CARTOMANTES = [
   ["🔮 Atomic Papers","420k","⭐ 4.83","🏆 INTUIÇÃO","#13"]
 ];
 
-/* =========================================================
-   POOL DE VÍDEOS (originais + novos, duplicados removidos)
-========================================================= */
 const RAW_VIDEOS = [
-  "1vQgMmKgy-4",
-  "Vu-mjJ0lWMo",
-  "uENK1wIYZRk",
-  "o6xxwU4cIdw",
-  "J7XG7A9lUOI",
-  "s6uG79FbR-U",
-  "b9G5O1Z6tQw",
-  "vcjqd-5lAu8",
-  "OzF7vf6XIbk",
-  "cGIZ3CwUk58",
-  "ehY4yJNMSMI",
-  "T-uolV9NLjY",
-  "f0VpYbuBItA",
-  "oBhI4XfRs5Y",
-  "omwrK8KbO6M",
-  "L4sk9hjx_QE",
-  "_DSbV6nUggw",
-  "6wY5i1MT-6Q",
-  "gFkUIcf7rBU"
+  "1vQgMmKgy-4","Vu-mjJ0lWMo","uENK1wIYZRk","o6xxwU4cIdw","J7XG7A9lUOI",
+  "s6uG79FbR-U","b9G5O1Z6tQw","vcjqd-5lAu8","OzF7vf6XIbk","cGIZ3CwUk58",
+  "ehY4yJNMSMI","T-uolV9NLjY","f0VpYbuBItA","oBhI4XfRs5Y","omwrK8KbO6M",
+  "L4sk9hjx_QE","_DSbV6nUggw","6wY5i1MT-6Q","gFkUIcf7rBU"
 ];
 
 const VIDEO_POOL = [...new Set(RAW_VIDEOS)];
@@ -281,10 +255,6 @@ function getThumbURL(id, qualityIndex){
   return "https://img.youtube.com/vi/"+id+"/"+q+".jpg";
 }
 
-/* Em vez de validar cada vídeo com um pedido de rede ao YouTube (que
-   dentro de um WebView/Kodular pode falhar ou ficar pendurado e dar
-   sensação de travamento), a miniatura tem um fallback simples:
-   se a imagem hqdefault não carregar, tenta mqdefault e depois default. */
 function attachThumbFallback(item){
   item.thumbQuality = 0;
   item.thumbImg.addEventListener("error", function(){
@@ -359,6 +329,8 @@ function createCard(index){
   const thumbImg = document.createElement("img");
   thumbImg.alt = data[0];
   thumbImg.draggable = false;
+  thumbImg.loading = "lazy";
+  thumbImg.decoding = "async";
   if(isValidVideoId(videoId)) thumbImg.src = getThumbURL(videoId, 0);
 
   const playBtn = document.createElement("div");
@@ -469,9 +441,6 @@ function playVideo(index){
     item.thumbWrap.style.display = "flex";
   });
 
-  /* Rede-de-segurança: alguns WebViews nunca disparam "load" para
-     iframes de origem cruzada. Ao fim de 8s escondemos o spinner de
-     qualquer forma, para nunca ficar preso a girar para sempre. */
   item.spinnerTimer = setTimeout(stopSpinner, 8000);
 
   item.thumbWrap.style.display = "none";
@@ -577,8 +546,6 @@ if(document.readyState === "loading"){
 } else {
   init();
 }
-
-console.log("♈ Áries YouTube — pool:", VIDEO_POOL.length, "vídeos, reserva:", queue.length);
 </script>
 </body>
 </html>
