@@ -66,6 +66,31 @@ body{
 .badge{padding:3px 7px;border-radius:20px;background:#d4af37;color:#1d0e0d;font-size:.59rem;font-weight:900;}
 .player{position:relative;width:100%;aspect-ratio:16/9;min-height:185px;background:#000;overflow:hidden;}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;}
+
+/* --- miniatura clicável (substitui o autoplay de 13 iframes) --- */
+.thumb-wrap{
+  position:absolute;inset:0;cursor:pointer;background:#000;
+  display:flex;align-items:center;justify-content:center;
+}
+.thumb-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;opacity:.75;
+}
+.play-btn{
+  position:relative;z-index:2;width:62px;height:62px;border-radius:50%;
+  background:rgba(255,90,50,.92);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.5);transition:transform .15s ease;
+}
+.thumb-wrap:active .play-btn{transform:scale(.92);}
+.play-btn::after{
+  content:"";width:0;height:0;margin-left:5px;
+  border-top:12px solid transparent;border-bottom:12px solid transparent;
+  border-left:19px solid #1d0e0d;
+}
+.thumb-tap{
+  position:absolute;bottom:8px;left:0;right:0;text-align:center;
+  font-size:.62rem;opacity:.75;z-index:2;
+}
+
 .loading{
   position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
   flex-direction:column;gap:10px;background:rgba(8,4,9,.88);font-size:.75rem;
@@ -119,15 +144,15 @@ body{
     <span class="sign-icon">🐏</span>
   </div>
   <div class="subtitle">🔥 Previsões de Áries · YouTube</div>
-  <div class="status"><span class="status-dot"></span>Player YouTube ativo</div>
+  <div class="status"><span class="status-dot"></span>Toca no play para carregar cada vídeo</div>
 </header>
 
 <main class="grid" id="videosGrid"></main>
 
 <footer class="footer">
-  <button class="main-button" id="refreshAll">🔄 ATUALIZAR TODOS</button>
-  <div class="note">Os players são mantidos estáveis para evitar desaparecimentos e recarregamentos no Kodular/WebView.</div>
-  <div class="note">Cada atualização troca o vídeo por outro da reserva, sem repetir o que já está visível noutro card.</div>
+  <button class="main-button" id="refreshAll">🔄 TROCAR TODOS</button>
+  <div class="note">Os vídeos só carregam quando tocas no play — isto evita que o WebView do Kodular fique sobrecarregado com 13 players ao mesmo tempo.</div>
+  <div class="note">Cada atualização troca a miniatura por outro vídeo da reserva, sem repetir o que já está visível noutro card.</div>
   <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer</div>
 </footer>
 
@@ -163,13 +188,8 @@ const RAW_VIDEOS = [
   "oBhI4XfRs5Y","omwrK8KbO6M","L4sk9hjx_QE","_DSbV6nUggw","6wY5i1MT-6Q","gFkUIcf7rBU"
 ];
 
-// remove duplicados mantendo a ordem
 const VIDEO_POOL = [...new Set(RAW_VIDEOS)];
-
-// os primeiros N (=nº de cartomantes) ficam já atribuídos a um card
 const INITIAL_VIDEOS = VIDEO_POOL.slice(0, CARTOMANTES.length);
-
-// o resto fica em reserva, para entrar quando se carrega em "Atualizar"
 let queue = VIDEO_POOL.slice(CARTOMANTES.length);
 
 const players = [];
@@ -179,13 +199,15 @@ function isValidVideoId(id){
 }
 function getYoutubeURL(id){
   if(!isValidVideoId(id)) return "";
-  return "https://www.youtube-nocookie.com/embed/"+id+"?autoplay=0&controls=1&playsinline=1&rel=0&enablejsapi=1";
+  return "https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&playsinline=1&rel=0&enablejsapi=1";
 }
 function getWatchURL(id){
   return isValidVideoId(id) ? "https://www.youtube.com/watch?v="+id : "#";
 }
+function getThumbURL(id){
+  return isValidVideoId(id) ? "https://img.youtube.com/vi/"+id+"/hqdefault.jpg" : "";
+}
 
-/* pega o próximo vídeo da reserva e devolve o atual para o fim da fila */
 function getNextVideoId(currentId){
   if(queue.length === 0) return null;
   const nextId = queue.shift();
@@ -244,13 +266,25 @@ function createCard(index){
   const player = document.createElement("div");
   player.className = "player";
 
-  const iframe = document.createElement("iframe");
-  iframe.title = data[0]+" - YouTube";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.allowFullscreen = true;
-  iframe.loading = "lazy";
-  iframe.referrerPolicy = "strict-origin-when-cross-origin";
-  if(isValidVideoId(videoId)) iframe.src = getYoutubeURL(videoId);
+  // miniatura clicável em vez de iframe automático
+  const thumbWrap = document.createElement("div");
+  thumbWrap.className = "thumb-wrap";
+
+  const thumbImg = document.createElement("img");
+  thumbImg.loading = "lazy";
+  thumbImg.alt = data[0];
+  if(isValidVideoId(videoId)) thumbImg.src = getThumbURL(videoId);
+
+  const playBtn = document.createElement("div");
+  playBtn.className = "play-btn";
+
+  const tapHint = document.createElement("div");
+  tapHint.className = "thumb-tap";
+  tapHint.textContent = "▶ Toca para ver a previsão";
+
+  thumbWrap.appendChild(thumbImg);
+  thumbWrap.appendChild(playBtn);
+  thumbWrap.appendChild(tapHint);
 
   const loading = document.createElement("div");
   loading.className = "loading";
@@ -273,21 +307,14 @@ function createCard(index){
   const update = document.createElement("button");
   update.className = "btn";
   update.type = "button";
-  update.textContent = "🔄 Atualizar";
+  update.textContent = "🔄 Trocar";
 
   const error = document.createElement("div");
   error.className = "error";
 
-  iframe.addEventListener("load", function(){ loading.classList.remove("active"); });
-  iframe.addEventListener("error", function(){
-    loading.classList.remove("active");
-    error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo.";
-    error.classList.add("show");
-  });
-
   update.addEventListener("click", function(){ refreshVideo(index); });
 
-  player.appendChild(iframe);
+  player.appendChild(thumbWrap);
   player.appendChild(loading);
   footer.appendChild(title);
   footer.appendChild(open);
@@ -298,7 +325,68 @@ function createCard(index){
   card.appendChild(footer);
   card.appendChild(error);
 
-  return { card, player, iframe, loading, title, open, update, error, videoId };
+  const item = { card, player, thumbWrap, thumbImg, loading, title, open, update, error, videoId, iframe:null, loaded:false };
+
+  thumbWrap.addEventListener("click", function(){ playVideo(index); });
+
+  return item;
+}
+
+/* cria o iframe só quando o utilizador toca na miniatura */
+function playVideo(index){
+  const item = players[index];
+  if(!item || item.loaded) return;
+  if(!isValidVideoId(item.videoId)){
+    item.error.textContent = "⚠️ ID do vídeo YouTube inválido.";
+    item.error.classList.add("show");
+    return;
+  }
+
+  item.loading.classList.add("active");
+  item.error.classList.remove("show");
+
+  const iframe = document.createElement("iframe");
+  iframe.title = CARTOMANTES[index][0]+" - YouTube";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  iframe.src = getYoutubeURL(item.videoId);
+
+  iframe.addEventListener("load", function(){
+    item.loading.classList.remove("active");
+  });
+  iframe.addEventListener("error", function(){
+    item.loading.classList.remove("active");
+    item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo.";
+    item.error.classList.add("show");
+    item.loaded = false;
+    item.thumbWrap.style.display = "flex";
+  });
+
+  item.thumbWrap.style.display = "none";
+  item.player.appendChild(iframe);
+  item.iframe = iframe;
+  item.loaded = true;
+}
+
+/* troca o card para outro vídeo da reserva, voltando ao estado de miniatura */
+function refreshVideo(index){
+  const item = players[index];
+  if(!item) return;
+  const nextId = getNextVideoId(item.videoId);
+  if(!nextId) return;
+
+  if(item.iframe){
+    item.iframe.remove();
+    item.iframe = null;
+  }
+  item.loaded = false;
+  item.loading.classList.remove("active");
+  item.error.classList.remove("show");
+  item.videoId = nextId;
+  item.thumbImg.src = getThumbURL(nextId);
+  item.open.href = getWatchURL(nextId);
+  item.thumbWrap.style.display = "flex";
 }
 
 function init(){
@@ -311,86 +399,18 @@ function init(){
   }
 }
 
-/* troca o vídeo sem destruir o player enquanto o novo não carrega */
-function replaceVideo(index, newVideoId){
-  const item = players[index];
-  if(!item) return;
-  if(!isValidVideoId(newVideoId)){
-    item.error.textContent = "⚠️ ID do vídeo YouTube inválido.";
-    item.error.classList.add("show");
-    return;
-  }
-  if(item.videoId === newVideoId){
-    item.error.classList.remove("show");
-    return;
-  }
-
-  item.loading.classList.add("active");
-  item.error.classList.remove("show");
-
-  const newIframe = document.createElement("iframe");
-  newIframe.title = CARTOMANTES[index][0]+" - YouTube";
-  newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  newIframe.allowFullscreen = true;
-  newIframe.loading = "eager";
-  newIframe.referrerPolicy = "strict-origin-when-cross-origin";
-  newIframe.src = getYoutubeURL(newVideoId);
-  newIframe.style.opacity = "0";
-  newIframe.style.position = "absolute";
-  newIframe.style.inset = "0";
-  newIframe.style.width = "100%";
-  newIframe.style.height = "100%";
-  newIframe.style.border = "0";
-
-  newIframe.addEventListener("load", function(){
-    const oldIframe = item.iframe;
-    item.player.appendChild(newIframe);
-    requestAnimationFrame(function(){
-      newIframe.style.transition = "opacity .25s ease";
-      newIframe.style.opacity = "1";
-    });
-    setTimeout(function(){
-      if(oldIframe) oldIframe.remove();
-      item.iframe = newIframe;
-      item.videoId = newVideoId;
-      item.open.href = getWatchURL(newVideoId);
-      item.loading.classList.remove("active");
-      item.title.textContent = "🎬 Previsão para Áries";
-    }, 300);
-  });
-
-  newIframe.addEventListener("error", function(){
-    item.loading.classList.remove("active");
-    item.error.textContent = "⚠️ Não foi possível carregar o novo vídeo. O vídeo atual foi mantido.";
-    item.error.classList.add("show");
-  });
-}
-
-/* pede o próximo vídeo da reserva e troca este card para ele */
-function refreshVideo(index){
-  const item = players[index];
-  if(!item) return;
-  const nextId = getNextVideoId(item.videoId);
-  if(!nextId){
-    item.loading.classList.add("active");
-    setTimeout(function(){ item.loading.classList.remove("active"); }, 350);
-    return;
-  }
-  replaceVideo(index, nextId);
-}
-
 const refreshAll = document.getElementById("refreshAll");
 if(refreshAll){
   refreshAll.addEventListener("click", function(){
     refreshAll.disabled = true;
-    refreshAll.textContent = "⏳ A atualizar...";
+    refreshAll.textContent = "⏳ A trocar...";
     for(let i=0;i<players.length;i++){
       refreshVideo(i);
     }
     setTimeout(function(){
       refreshAll.disabled = false;
-      refreshAll.textContent = "🔄 ATUALIZAR TODOS";
-    }, 600);
+      refreshAll.textContent = "🔄 TROCAR TODOS";
+    }, 400);
   });
 }
 
