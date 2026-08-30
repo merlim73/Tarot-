@@ -108,6 +108,20 @@ img,.card,.player,.thumb-wrap{
   width:100%;height:100%;
 }
 
+/* ecrã inteiro "falso" via CSS — não aciona o aviso do browser com o domínio */
+.fs-overlay{
+  position:fixed;inset:0;z-index:9999;background:#000;
+  display:none;flex-direction:column;
+}
+.fs-overlay.active{display:flex;}
+.fs-close{
+  align-self:flex-end;margin:10px;padding:9px 16px;border-radius:30px;
+  background:rgba(255,90,50,.92);color:#1d0e0d;font-weight:900;border:0;
+  font-size:.78rem;touch-action:manipulation;cursor:pointer;
+}
+.fs-player-host{position:relative;flex:1;background:#000;}
+.fs-player-host iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
 .thumb-wrap{
   position:absolute;inset:0;cursor:pointer;background:#000;
   display:flex;align-items:center;justify-content:center;
@@ -201,6 +215,11 @@ img,.card,.player,.thumb-wrap{
   <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer</div>
 </footer>
 
+</div>
+
+<div class="fs-overlay" id="fsOverlay">
+  <button class="fs-close" id="fsClose" type="button">✕ Fechar</button>
+  <div class="fs-player-host" id="fsPlayerHost"></div>
 </div>
 
 <script>
@@ -419,7 +438,7 @@ function createCard(index){
 
   fullscreenBtn.addEventListener("click", function(e){
     e.stopPropagation();
-    toggleFullscreen(index);
+    openFullscreenOverlay(index);
   });
 
   player.appendChild(thumbWrap);
@@ -477,41 +496,47 @@ function playVideo(index){
   item.loaded = true;
 }
 
-/* pede ecrã inteiro ao WebView/browser para este player específico */
-function requestPlayerFullscreen(index){
+/* Ecrã inteiro "falso": em vez de pedir o fullscreen real do sistema
+   (que mostra o aviso com o domínio youtube-nocookie.com), o vídeo é
+   clonado para um painel que cobre o ecrã todo só com CSS. */
+function openFullscreenOverlay(index){
   const item = players[index];
   if(!item) return;
-  const el = item.player;
-  const req = el.requestFullscreen || el.webkitRequestFullscreen ||
-              el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
-  if(req){
-    Promise.resolve(req.call(el)).catch(function(){
-      item.error.textContent = "⚠️ Ecrã inteiro não suportado neste WebView.";
-      item.error.classList.add("show");
-    });
-  }else{
-    item.error.textContent = "⚠️ Ecrã inteiro não suportado neste WebView.";
-    item.error.classList.add("show");
-  }
-}
 
-/* se o vídeo ainda não estiver a tocar, carrega-o primeiro e só depois
-   pede o ecrã inteiro, assim que o iframe estiver pronto */
-function toggleFullscreen(index){
-  const item = players[index];
-  if(!item) return;
+  function showInOverlay(){
+    const host = document.getElementById("fsPlayerHost");
+    const overlay = document.getElementById("fsOverlay");
+    if(!host || !overlay || !item.iframe) return;
+    host.innerHTML = "";
+    const clone = item.iframe.cloneNode();
+    host.appendChild(clone);
+    overlay.classList.add("active");
+  }
+
   if(!item.loaded){
     playVideo(index);
     const check = setInterval(function(){
       if(item.loaded && !item.loading.classList.contains("active")){
         clearInterval(check);
-        requestPlayerFullscreen(index);
+        showInOverlay();
       }
     }, 200);
     setTimeout(function(){ clearInterval(check); }, 6000);
   }else{
-    requestPlayerFullscreen(index);
+    showInOverlay();
   }
+}
+
+function closeFullscreenOverlay(){
+  const host = document.getElementById("fsPlayerHost");
+  const overlay = document.getElementById("fsOverlay");
+  if(host) host.innerHTML = "";
+  if(overlay) overlay.classList.remove("active");
+}
+
+const fsCloseBtn = document.getElementById("fsClose");
+if(fsCloseBtn){
+  fsCloseBtn.addEventListener("click", closeFullscreenOverlay);
 }
 
 function refreshVideo(index){
@@ -572,4 +597,3 @@ console.log("♈ Áries YouTube — pool:", VIDEO_POOL.length, "vídeos, reserva
 </script>
 </body>
 </html>
-
