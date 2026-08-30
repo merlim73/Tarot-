@@ -23,7 +23,6 @@ body{
   padding:16px 10px 40px;
   overflow-x:hidden;
 }
-/* impede o WebView Android de "arrastar" imagens/texto — causa principal do tremor e do scroll preso */
 img,.card,.player,.thumb-wrap{
   -webkit-user-drag:none;
   -khtml-user-drag:none;
@@ -86,15 +85,11 @@ img,.card,.player,.thumb-wrap{
 .stats{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
 .stat{padding:3px 7px;border-radius:20px;background:rgba(0,0,0,.35);font-size:.62rem;}
 .badge{padding:3px 7px;border-radius:20px;background:#d4af37;color:#1d0e0d;font-size:.59rem;font-weight:900;}
-
-/* player com padding-top em vez de aspect-ratio — compatível com WebViews Android antigos */
 .player{
   position:relative;width:100%;height:0;padding-top:56.25%;
   min-height:185px;background:#000;overflow:hidden;touch-action:pan-y;
 }
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;}
-
-/* quando o player entra em ecrã inteiro, ocupa o ecrã todo do telemóvel */
 .player:fullscreen,
 .player:-webkit-full-screen,
 .player:-moz-full-screen,
@@ -107,8 +102,6 @@ img,.card,.player,.thumb-wrap{
 .player:-ms-fullscreen iframe{
   width:100%;height:100%;
 }
-
-/* ecrã inteiro "falso" via CSS — não aciona o aviso do browser com o domínio */
 .fs-overlay{
   position:fixed;inset:0;z-index:9999;background:#000;
   display:none;flex-direction:column;
@@ -121,7 +114,6 @@ img,.card,.player,.thumb-wrap{
 }
 .fs-player-host{position:relative;flex:1;background:#000;}
 .fs-player-host iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-
 .thumb-wrap{
   position:absolute;inset:0;cursor:pointer;background:#000;
   display:flex;align-items:center;justify-content:center;
@@ -129,7 +121,7 @@ img,.card,.player,.thumb-wrap{
 }
 .thumb-wrap img{
   width:100%;height:100%;object-fit:cover;display:block;opacity:.75;
-  pointer-events:none; /* o clique é sempre tratado pelo wrapper, nunca pela imagem */
+  pointer-events:none;
 }
 .play-btn{
   position:relative;z-index:2;width:62px;height:62px;border-radius:50%;
@@ -147,7 +139,6 @@ img,.card,.player,.thumb-wrap{
   position:absolute;bottom:8px;left:0;right:0;text-align:center;
   font-size:.62rem;opacity:.75;z-index:2;pointer-events:none;
 }
-
 .loading{
   position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
   flex-direction:column;gap:10px;background:rgba(8,4,9,.88);font-size:.75rem;
@@ -245,28 +236,26 @@ const CARTOMANTES = [
 /* =========================================================
    POOL DE VÍDEOS (originais + novos, duplicados removidos)
 ========================================================= */
-/* Cada ID abaixo corresponde a: https://www.youtube.com/watch?v=<ID>
-   (linha de ligação direta ao vídeo oficial — útil para conferir/atualizar manualmente) */
 const RAW_VIDEOS = [
-  "1vQgMmKgy-4", // https://www.youtube.com/watch?v=1vQgMmKgy-4
-  "Vu-mjJ0lWMo", // https://www.youtube.com/watch?v=Vu-mjJ0lWMo
-  "uENK1wIYZRk", // https://www.youtube.com/watch?v=uENK1wIYZRk
-  "o6xxwU4cIdw", // https://www.youtube.com/watch?v=o6xxwU4cIdw
-  "J7XG7A9lUOI", // https://www.youtube.com/watch?v=J7XG7A9lUOI
-  "s6uG79FbR-U", // https://www.youtube.com/watch?v=s6uG79FbR-U
-  "b9G5O1Z6tQw", // https://www.youtube.com/watch?v=b9G5O1Z6tQw
-  "vcjqd-5lAu8", // https://www.youtube.com/watch?v=vcjqd-5lAu8
-  "OzF7vf6XIbk", // https://www.youtube.com/watch?v=OzF7vf6XIbk
-  "cGIZ3CwUk58", // https://www.youtube.com/watch?v=cGIZ3CwUk58
-  "ehY4yJNMSMI", // https://www.youtube.com/watch?v=ehY4yJNMSMI
-  "T-uolV9NLjY", // https://www.youtube.com/watch?v=T-uolV9NLjY
-  "f0VpYbuBItA", // https://www.youtube.com/watch?v=f0VpYbuBItA
-  "oBhI4XfRs5Y", // https://www.youtube.com/watch?v=oBhI4XfRs5Y
-  "omwrK8KbO6M", // https://www.youtube.com/watch?v=omwrK8KbO6M
-  "L4sk9hjx_QE", // https://www.youtube.com/watch?v=L4sk9hjx_QE
-  "_DSbV6nUggw", // https://www.youtube.com/watch?v=_DSbV6nUggw
-  "6wY5i1MT-6Q", // https://www.youtube.com/watch?v=6wY5i1MT-6Q
-  "gFkUIcf7rBU"  // https://www.youtube.com/watch?v=gFkUIcf7rBU
+  "1vQgMmKgy-4",
+  "Vu-mjJ0lWMo",
+  "uENK1wIYZRk",
+  "o6xxwU4cIdw",
+  "J7XG7A9lUOI",
+  "s6uG79FbR-U",
+  "b9G5O1Z6tQw",
+  "vcjqd-5lAu8",
+  "OzF7vf6XIbk",
+  "cGIZ3CwUk58",
+  "ehY4yJNMSMI",
+  "T-uolV9NLjY",
+  "f0VpYbuBItA",
+  "oBhI4XfRs5Y",
+  "omwrK8KbO6M",
+  "L4sk9hjx_QE",
+  "_DSbV6nUggw",
+  "6wY5i1MT-6Q",
+  "gFkUIcf7rBU"
 ];
 
 const VIDEO_POOL = [...new Set(RAW_VIDEOS)];
@@ -274,53 +263,36 @@ const INITIAL_VIDEOS = VIDEO_POOL.slice(0, CARTOMANTES.length);
 let queue = VIDEO_POOL.slice(CARTOMANTES.length);
 
 const players = [];
+const THUMB_QUALITIES = ["hqdefault", "mqdefault", "default"];
 
 function isValidVideoId(id){
   return typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id);
 }
 function getYoutubeURL(id){
   if(!isValidVideoId(id)) return "";
-  /* cc_load_policy=1 força a apresentação de legendas;
-     cc_lang_pref=pt e hl=pt pedem ao YouTube a faixa em português
-     (nativa ou traduzida automaticamente, quando o vídeo tiver essa opção disponível) */
   return "https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&playsinline=1&rel=0&enablejsapi=1&cc_load_policy=1&cc_lang_pref=pt&hl=pt";
 }
 function getWatchURL(id){
   return isValidVideoId(id) ? "https://www.youtube.com/watch?v="+id : "#";
 }
-function getThumbURL(id){
-  return isValidVideoId(id) ? "https://img.youtube.com/vi/"+id+"/hqdefault.jpg" : "";
+function getThumbURL(id, qualityIndex){
+  if(!isValidVideoId(id)) return "";
+  const q = THUMB_QUALITIES[qualityIndex || 0] || THUMB_QUALITIES[THUMB_QUALITIES.length-1];
+  return "https://img.youtube.com/vi/"+id+"/"+q+".jpg";
 }
 
-/* Confirma, junto do endpoint OFICIAL do YouTube (oEmbed), se o vídeo
-   ainda existe e pode ser incorporado. Corre sempre que a página abre.
-   Se o vídeo tiver sido removido/tornado privado, troca automaticamente
-   para o seguinte da reserva — sem precisar de atualizar o código à mão. */
-async function validateVideo(index, attempt){
-  attempt = attempt || 0;
-  const item = players[index];
-  if(!item || !isValidVideoId(item.videoId)) return;
-  if(attempt > VIDEO_POOL.length) return; // evita loop infinito se a reserva esgotar
-
-  try{
-    const watchURL = "https://www.youtube.com/watch?v="+item.videoId;
-    const res = await fetch("https://www.youtube.com/oembed?url="+encodeURIComponent(watchURL)+"&format=json");
-    if(!res.ok) throw new Error("indisponível");
-    const data = await res.json();
-    item.thumbImg.src = data.thumbnail_url || getThumbURL(item.videoId);
-    item.title.textContent = "🎬 " + (data.title || "Previsão para Áries");
-    item.error.classList.remove("show");
-  }catch(e){
-    const nextId = getNextVideoId(item.videoId);
-    if(nextId){
-      item.videoId = nextId;
-      item.open.href = getWatchURL(nextId);
-      validateVideo(index, attempt + 1);
-    }else{
-      item.error.textContent = "⚠️ Vídeo indisponível no momento.";
-      item.error.classList.add("show");
+/* Em vez de validar cada vídeo com um pedido de rede ao YouTube (que
+   dentro de um WebView/Kodular pode falhar ou ficar pendurado e dar
+   sensação de travamento), a miniatura tem um fallback simples:
+   se a imagem hqdefault não carregar, tenta mqdefault e depois default. */
+function attachThumbFallback(item){
+  item.thumbQuality = 0;
+  item.thumbImg.addEventListener("error", function(){
+    item.thumbQuality++;
+    if(item.thumbQuality < THUMB_QUALITIES.length){
+      item.thumbImg.src = getThumbURL(item.videoId, item.thumbQuality);
     }
-  }
+  });
 }
 
 function getNextVideoId(currentId){
@@ -387,7 +359,7 @@ function createCard(index){
   const thumbImg = document.createElement("img");
   thumbImg.alt = data[0];
   thumbImg.draggable = false;
-  if(isValidVideoId(videoId)) thumbImg.src = getThumbURL(videoId);
+  if(isValidVideoId(videoId)) thumbImg.src = getThumbURL(videoId, 0);
 
   const playBtn = document.createElement("div");
   playBtn.className = "play-btn";
@@ -453,8 +425,9 @@ function createCard(index){
   card.appendChild(footer);
   card.appendChild(error);
 
-  const item = { card, player, thumbWrap, thumbImg, loading, title, open, update, fullscreenBtn, error, videoId, iframe:null, loaded:false };
+  const item = { card, player, thumbWrap, thumbImg, loading, title, open, update, fullscreenBtn, error, videoId, iframe:null, loaded:false, spinnerTimer:null };
 
+  attachThumbFallback(item);
   thumbWrap.addEventListener("click", function(){ playVideo(index); });
 
   return item;
@@ -479,16 +452,27 @@ function playVideo(index){
   iframe.referrerPolicy = "strict-origin-when-cross-origin";
   iframe.src = getYoutubeURL(item.videoId);
 
-  iframe.addEventListener("load", function(){
+  function stopSpinner(){
     item.loading.classList.remove("active");
-  });
+    if(item.spinnerTimer){
+      clearTimeout(item.spinnerTimer);
+      item.spinnerTimer = null;
+    }
+  }
+
+  iframe.addEventListener("load", stopSpinner);
   iframe.addEventListener("error", function(){
-    item.loading.classList.remove("active");
+    stopSpinner();
     item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo.";
     item.error.classList.add("show");
     item.loaded = false;
     item.thumbWrap.style.display = "flex";
   });
+
+  /* Rede-de-segurança: alguns WebViews nunca disparam "load" para
+     iframes de origem cruzada. Ao fim de 8s escondemos o spinner de
+     qualquer forma, para nunca ficar preso a girar para sempre. */
+  item.spinnerTimer = setTimeout(stopSpinner, 8000);
 
   item.thumbWrap.style.display = "none";
   item.player.appendChild(iframe);
@@ -496,9 +480,6 @@ function playVideo(index){
   item.loaded = true;
 }
 
-/* Ecrã inteiro "falso": em vez de pedir o fullscreen real do sistema
-   (que mostra o aviso com o domínio youtube-nocookie.com), o vídeo é
-   clonado para um painel que cobre o ecrã todo só com CSS. */
 function openFullscreenOverlay(index){
   const item = players[index];
   if(!item) return;
@@ -515,13 +496,16 @@ function openFullscreenOverlay(index){
 
   if(!item.loaded){
     playVideo(index);
+    let attempts = 0;
     const check = setInterval(function(){
+      attempts++;
       if(item.loaded && !item.loading.classList.contains("active")){
         clearInterval(check);
         showInOverlay();
+      } else if(attempts > 40){
+        clearInterval(check);
       }
     }, 200);
-    setTimeout(function(){ clearInterval(check); }, 6000);
   }else{
     showInOverlay();
   }
@@ -545,6 +529,10 @@ function refreshVideo(index){
   const nextId = getNextVideoId(item.videoId);
   if(!nextId) return;
 
+  if(item.spinnerTimer){
+    clearTimeout(item.spinnerTimer);
+    item.spinnerTimer = null;
+  }
   if(item.iframe){
     item.iframe.remove();
     item.iframe = null;
@@ -553,7 +541,8 @@ function refreshVideo(index){
   item.loading.classList.remove("active");
   item.error.classList.remove("show");
   item.videoId = nextId;
-  item.thumbImg.src = getThumbURL(nextId);
+  item.thumbQuality = 0;
+  item.thumbImg.src = getThumbURL(nextId, 0);
   item.open.href = getWatchURL(nextId);
   item.thumbWrap.style.display = "flex";
 }
@@ -565,10 +554,6 @@ function init(){
     const instance = createCard(i);
     players.push(instance);
     grid.appendChild(instance.card);
-  }
-  // confirma cada vídeo junto da fonte oficial do YouTube assim que a página carrega
-  for(let i=0;i<players.length;i++){
-    validateVideo(i);
   }
 }
 
