@@ -176,16 +176,16 @@ img,.card,.player,.thumb-wrap{
   </div>
   <div class="subtitle">🔥 Previsões de Áries · YouTube</div>
   <div class="status"><span class="status-dot"></span>Toca no play para carregar cada vídeo</div>
-  <div class="mode-badge" id="modeBadge">A detetar modo de reprodução…</div>
+  <div class="mode-badge" id="modeBadge">🌐 Leitor incorporado</div>
 </header>
 
 <main class="grid" id="videosGrid"></main>
 
 <footer class="footer">
   <button class="main-button" id="refreshAll">🔄 TROCAR TODOS</button>
-  <div class="note">Dentro da app: o vídeo abre no leitor nativo do YouTube (mais estável). No navegador: reproduz aqui mesmo.</div>
+  <div class="note">O vídeo reproduz diretamente aqui dentro, tanto no navegador como dentro da app.</div>
   <div class="note">Cada atualização troca a miniatura por outro vídeo da reserva, sem repetir o que já está visível noutro card.</div>
-  <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer (híbrido)</div>
+  <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer</div>
 </footer>
 
 </div>
@@ -196,29 +196,6 @@ img,.card,.player,.thumb-wrap{
 </div>
 
 <script>
-/* =========================================================
-   DETEÇÃO DE AMBIENTE: dentro do Kodular (WebViewer) vs navegador normal
-   O Kodular injeta o objeto window.AppInventor no WebViewer.
-   Se existir, usamos WebViewString para avisar os blocos Kodular
-   e deixamos o YoutubePlayer NATIVO tratar da reprodução.
-   Se não existir (spck, GitHub Pages, Chrome normal), usamos o
-   iframe do YouTube como antes.
-========================================================= */
-const IS_KODULAR = typeof window.AppInventor !== "undefined" && typeof window.AppInventor.setWebViewString === "function";
-
-function notifyKodular(videoId){
-  if(!IS_KODULAR) return false;
-  try{
-    /* Formato simples "PLAY:<id>" para os blocos conseguirem distinguir
-       facilmente outros comandos que queiras adicionar no futuro
-       (ex: "OPEN:<id>", "FULLSCREEN:<id>") sem ambiguidade. */
-    window.AppInventor.setWebViewString("PLAY:" + videoId);
-    return true;
-  }catch(e){
-    return false;
-  }
-}
-
 /* =========================================================
    CARTOMANTES (13 cards)
 ========================================================= */
@@ -398,12 +375,7 @@ function createCard(index){
 
   fullscreenBtn.addEventListener("click", function(e){
     e.stopPropagation();
-    const item = players[index];
-    if(IS_KODULAR){
-      notifyKodular(item.videoId);
-    }else{
-      openFullscreenOverlay(index);
-    }
+    openFullscreenOverlay(index);
   });
 
   player.appendChild(thumbWrap);
@@ -436,18 +408,6 @@ function playVideo(index){
     return;
   }
 
-  /* ---- MODO KODULAR (app instalada): pede ao leitor nativo para tocar ---- */
-  if(IS_KODULAR){
-    item.error.classList.remove("show");
-    const sent = notifyKodular(item.videoId);
-    if(!sent){
-      item.error.textContent = "⚠️ Não foi possível comunicar com a app.";
-      item.error.classList.add("show");
-    }
-    return;
-  }
-
-  /* ---- MODO NAVEGADOR (spck / GitHub Pages / Chrome): iframe normal ---- */
   if(item.loaded) return;
 
   item.loading.classList.add("active");
@@ -559,13 +519,6 @@ function init(){
     const instance = createCard(i);
     players.push(instance);
     grid.appendChild(instance.card);
-  }
-
-  const badge = document.getElementById("modeBadge");
-  if(badge){
-    badge.textContent = IS_KODULAR
-      ? "📱 Modo app · leitor nativo do YouTube"
-      : "🌐 Modo navegador · leitor incorporado";
   }
 }
 
