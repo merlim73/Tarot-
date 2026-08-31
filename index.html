@@ -8,197 +8,96 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{background:#120812;min-height:100%;}
-html,body{
-  touch-action:pan-y;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior-y:contain;
-}
-body{
-  min-height:100vh;
-  background:#1a0e18;
-  color:#f8ead7;
-  font-family:"Segoe UI",Poppins,system-ui,-apple-system,Roboto,Arial,sans-serif;
-  padding:16px 10px 40px;
-  overflow-x:hidden;
-}
-img,.card,.player,.thumb-wrap{
-  -webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;
-}
-*{
-  -webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;
-}
+html,body{touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;}
+body{min-height:100vh;background:#1a0e18;color:#f8ead7;font-family:"Segoe UI",Poppins,system-ui,-apple-system,Roboto,Arial,sans-serif;padding:16px 10px 40px;overflow-x:hidden;}
+img,.card,.player,.thumb-wrap{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;}
+*{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;}
 .app{width:100%;max-width:1500px;margin:auto;}
 .header{text-align:center;padding:10px 5px 25px;}
-.sign{
-  display:inline-flex;align-items:center;justify-content:center;gap:12px;
-  padding:10px 18px;border:1px solid rgba(255,145,90,.65);border-radius:100px;
-  background:rgba(255,90,50,.10);
-}
+.sign{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:10px 18px;border:1px solid rgba(255,145,90,.65);border-radius:100px;background:rgba(255,90,50,.10);}
 .sign-icon{font-size:35px;}
-.sign-name{
-  font-size:clamp(1.3rem,5vw,2.2rem);font-weight:900;letter-spacing:1px;
-  color:#ffab5e;
-}
-.subtitle{
-  display:inline-block;margin-top:13px;padding:7px 15px;border-radius:30px;
-  border:1px solid rgba(255,140,80,.4);background:rgba(0,0,0,.25);font-size:.82rem;
-}
+.sign-name{font-size:clamp(1.3rem,5vw,2.2rem);font-weight:900;letter-spacing:1px;color:#ffab5e;}
+.subtitle{display:inline-block;margin-top:13px;padding:7px 15px;border-radius:30px;border:1px solid rgba(255,140,80,.4);background:rgba(0,0,0,.25);font-size:.82rem;}
 .status{margin-top:10px;font-size:.72rem;opacity:.75;}
-.status-dot{
-  display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:#56d364;margin-right:5px;
-}
-.mode-badge{
-  display:inline-block;margin-top:8px;padding:4px 12px;border-radius:20px;
-  background:rgba(255,255,255,.06);font-size:.62rem;opacity:.7;
-}
-.grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;
-  touch-action:pan-y;
-}
-.card{
-  position:relative;overflow:hidden;border-radius:20px;
-  background:#180d1a;border:1px solid rgba(255,130,70,.28);
-  box-shadow:0 4px 10px rgba(0,0,0,.3);
-}
-.rank{
-  position:absolute;top:10px;left:10px;z-index:10;padding:5px 10px;
-  border-radius:30px;background:#ff6338;color:#210a0d;font-size:.63rem;font-weight:900;
-}
-.card-header{
-  display:flex;align-items:center;gap:10px;padding:45px 13px 12px;
-  background:#26141f;border-bottom:1px solid rgba(255,110,70,.45);
-}
-.avatar{
-  width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:rgba(255,110,70,.12);font-size:25px;
-}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#56d364;margin-right:5px;}
+.mode-badge{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.06);font-size:.62rem;opacity:.7;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;touch-action:pan-y;}
+.card{position:relative;overflow:hidden;border-radius:20px;background:#180d1a;border:1px solid rgba(255,130,70,.28);box-shadow:0 4px 10px rgba(0,0,0,.3);}
+.rank{position:absolute;top:10px;left:10px;z-index:10;padding:5px 10px;border-radius:30px;background:#ff6338;color:#210a0d;font-size:.63rem;font-weight:900;}
+.card-header{display:flex;align-items:center;gap:10px;padding:45px 13px 12px;background:#26141f;border-bottom:1px solid rgba(255,110,70,.45);}
+.avatar{width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,110,70,.12);font-size:25px;}
 .info{min-width:0;flex:1;}
 .name{font-size:1.08rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .stats{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
 .stat{padding:3px 7px;border-radius:20px;background:rgba(0,0,0,.35);font-size:.62rem;}
 .badge{padding:3px 7px;border-radius:20px;background:#d4af37;color:#1d0e0d;font-size:.59rem;font-weight:900;}
-.player{
-  position:relative;width:100%;height:0;padding-top:56.25%;
-  min-height:185px;background:#000;overflow:hidden;touch-action:pan-y;
-}
+.player{position:relative;width:100%;height:0;padding-top:56.25%;min-height:185px;background:#000;overflow:hidden;touch-action:pan-y;}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000;}
-.player:fullscreen,.player:-webkit-full-screen,.player:-moz-full-screen,.player:-ms-fullscreen{
-  width:100vw;height:100vh;padding-top:0;background:#000;
-}
-.player:fullscreen iframe,.player:-webkit-full-screen iframe,.player:-moz-full-screen iframe,.player:-ms-fullscreen iframe{
-  width:100%;height:100%;
-}
-.fs-overlay{
-  position:fixed;inset:0;z-index:9999;background:#000;display:none;flex-direction:column;
-}
+.player:fullscreen,.player:-webkit-full-screen,.player:-moz-full-screen,.player:-ms-fullscreen{width:100vw;height:100vh;padding-top:0;background:#000;}
+.player:fullscreen iframe,.player:-webkit-full-screen iframe,.player:-moz-full-screen iframe,.player:-ms-fullscreen iframe{width:100%;height:100%;}
+.fs-overlay{position:fixed;inset:0;z-index:9999;background:#000;display:none;flex-direction:column;}
 .fs-overlay.active{display:flex;}
-.fs-close{
-  align-self:flex-end;margin:10px;padding:9px 16px;border-radius:30px;
-  background:rgba(255,90,50,.92);color:#1d0e0d;font-weight:900;border:0;
-  font-size:.78rem;touch-action:manipulation;cursor:pointer;
-}
+.fs-close{align-self:flex-end;margin:10px;padding:9px 16px;border-radius:30px;background:rgba(255,90,50,.92);color:#1d0e0d;font-weight:900;border:0;font-size:.78rem;touch-action:manipulation;cursor:pointer;}
 .fs-player-host{position:relative;flex:1;background:#000;}
 .fs-player-host iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-.thumb-wrap{
-  position:absolute;inset:0;cursor:pointer;background:#000;
-  display:flex;align-items:center;justify-content:center;touch-action:manipulation;
-}
-.thumb-wrap img{
-  width:100%;height:100%;object-fit:cover;display:block;opacity:.75;pointer-events:none;
-}
-.play-btn{
-  position:relative;z-index:2;width:62px;height:62px;border-radius:50%;
-  background:rgba(255,90,50,.92);display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
-}
+.thumb-wrap{position:absolute;inset:0;cursor:pointer;background:#000;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+.thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block;opacity:.75;pointer-events:none;}
+.play-btn{position:relative;z-index:2;width:62px;height:62px;border-radius:50%;background:rgba(255,90,50,.92);display:flex;align-items:center;justify-content:center;pointer-events:none;}
 .thumb-wrap:active .play-btn{transform:scale(.92);}
-.play-btn::after{
-  content:"";width:0;height:0;margin-left:5px;
-  border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #1d0e0d;
-}
-.thumb-tap{
-  position:absolute;bottom:8px;left:0;right:0;text-align:center;
-  font-size:.62rem;opacity:.75;z-index:2;pointer-events:none;
-}
-.loading{
-  position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
-  flex-direction:column;gap:10px;background:rgba(8,4,9,.88);font-size:.75rem;
-}
+.play-btn::after{content:"";width:0;height:0;margin-left:5px;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #1d0e0d;}
+.thumb-tap{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:.62rem;opacity:.75;z-index:2;pointer-events:none;}
+.loading{position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:rgba(8,4,9,.88);font-size:.75rem;}
 .loading.active{display:flex;}
-.spinner{
-  width:28px;height:28px;border:3px solid rgba(255,160,100,.25);
-  border-top-color:#ff8555;border-radius:50%;animation:spin .8s linear infinite;
-}
+.spinner{width:28px;height:28px;border:3px solid rgba(255,160,100,.25);border-top-color:#ff8555;border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .video-footer{display:flex;align-items:center;gap:6px;padding:10px;flex-wrap:wrap;}
-.video-title{
-  flex:1;min-width:150px;padding:7px 9px;border-radius:13px;background:rgba(0,0,0,.32);
-  font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 10px;
-  border:1px solid rgba(255,145,95,.45);border-radius:20px;background:rgba(255,110,70,.08);
-  color:#ffd5c0;font-size:.64rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;
-  touch-action:manipulation;
-}
+.video-title{flex:1;min-width:150px;padding:7px 9px;border-radius:13px;background:rgba(0,0,0,.32);font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 10px;border:1px solid rgba(255,145,95,.45);border-radius:20px;background:rgba(255,110,70,.08);color:#ffd5c0;font-size:.64rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;touch-action:manipulation;}
 .btn:hover{background:rgba(255,110,70,.22);color:#fff;}
 .btn:disabled{opacity:.4;cursor:not-allowed;}
-.error{
-  display:none;margin:0 10px 10px;padding:7px 9px;border-radius:10px;
-  background:rgba(255,60,60,.08);color:#ffaaa0;font-size:.65rem;
-}
+.error{display:none;margin:0 10px 10px;padding:7px 9px;border-radius:10px;background:rgba(255,60,60,.08);color:#ffaaa0;font-size:.65rem;}
 .error.show{display:block;}
 .footer{text-align:center;margin-top:28px;padding-top:20px;border-top:1px dashed rgba(255,140,90,.25);}
-.main-button{
-  border:0;padding:11px 20px;border-radius:50px;
-  background:#ff8a4d;color:#220b10;font-weight:900;font-size:.78rem;cursor:pointer;
-  touch-action:manipulation;
-}
+.main-button{border:0;padding:11px 20px;border-radius:50px;background:#ff8a4d;color:#220b10;font-weight:900;font-size:.78rem;cursor:pointer;touch-action:manipulation;}
 .main-button:disabled{opacity:.5;}
 .note{margin-top:10px;font-size:.65rem;opacity:.6;line-height:1.5;}
-@media(max-width:700px){
-  body{padding:10px 7px 30px;}
-  .grid{grid-template-columns:1fr;}
-  .card{border-radius:20px;}
-  .player{min-height:190px;}
-}
+@media(max-width:700px){body{padding:10px 7px 30px;}.grid{grid-template-columns:1fr;}.card{border-radius:20px;}.player{min-height:190px;}}
 </style>
 </head>
 <body>
 <div class="app">
-
 <header class="header">
-  <div class="sign">
-    <span class="sign-icon">♈</span>
-    <span class="sign-name">ÁRIES · CARNEIRO</span>
-    <span class="sign-icon">🐏</span>
-  </div>
+  <div class="sign"><span class="sign-icon">♈</span><span class="sign-name">ÁRIES · CARNEIRO</span><span class="sign-icon">🐏</span></div>
   <div class="subtitle">🔥 Previsões de Áries · YouTube</div>
   <div class="status"><span class="status-dot"></span>Toca no play para carregar cada vídeo</div>
   <div class="mode-badge" id="modeBadge">🌐 Leitor incorporado</div>
 </header>
-
 <main class="grid" id="videosGrid"></main>
-
 <footer class="footer">
   <button class="main-button" id="refreshAll">🔄 TROCAR TODOS</button>
   <div class="note">O vídeo reproduz diretamente aqui dentro, tanto no navegador como dentro da app.</div>
   <div class="note">Cada atualização troca a miniatura por outro vídeo da reserva, sem repetir o que já está visível noutro card.</div>
   <div class="note">📱 GitHub Pages · spck editor · Kodular WebViewer</div>
 </footer>
-
 </div>
-
 <div class="fs-overlay" id="fsOverlay">
   <button class="fs-close" id="fsClose" type="button">✕ Fechar</button>
   <div class="fs-player-host" id="fsPlayerHost"></div>
 </div>
-
 <script>
-/* =========================================================
-   CARTOMANTES (13 cards)
-========================================================= */
+function bindTap(el, handler){
+  let firedByTouch = false;
+  el.addEventListener("touchend", function(e){
+    firedByTouch = true;
+    e.preventDefault();
+    handler();
+    setTimeout(function(){ firedByTouch = false; }, 500);
+  }, {passive:false});
+  el.addEventListener("click", function(){
+    if(firedByTouch) return;
+    handler();
+  });
+}
 const CARTOMANTES = [
   ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
   ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
@@ -214,334 +113,130 @@ const CARTOMANTES = [
   ["🌟 She-Geek Tarot","430k","⭐ 4.84","🏆 ENERGIA","#12"],
   ["🔮 Atomic Papers","420k","⭐ 4.83","🏆 INTUIÇÃO","#13"]
 ];
-
-/* =========================================================
-   POOL DE VÍDEOS
-========================================================= */
-const RAW_VIDEOS = [
-  "1vQgMmKgy-4","Vu-mjJ0lWMo","uENK1wIYZRk","o6xxwU4cIdw","J7XG7A9lUOI",
-  "s6uG79FbR-U","b9G5O1Z6tQw","vcjqd-5lAu8","OzF7vf6XIbk","cGIZ3CwUk58",
-  "ehY4yJNMSMI","T-uolV9NLjY","f0VpYbuBItA","oBhI4XfRs5Y","omwrK8KbO6M",
-  "L4sk9hjx_QE","_DSbV6nUggw","6wY5i1MT-6Q","gFkUIcf7rBU"
-];
-
+const RAW_VIDEOS = ["1vQgMmKgy-4","Vu-mjJ0lWMo","uENK1wIYZRk","o6xxwU4cIdw","J7XG7A9lUOI","s6uG79FbR-U","b9G5O1Z6tQw","vcjqd-5lAu8","OzF7vf6XIbk","cGIZ3CwUk58","ehY4yJNMSMI","T-uolV9NLjY","f0VpYbuBItA","oBhI4XfRs5Y","omwrK8KbO6M","L4sk9hjx_QE","_DSbV6nUggw","6wY5i1MT-6Q","gFkUIcf7rBU"];
 const VIDEO_POOL = [...new Set(RAW_VIDEOS)];
 const INITIAL_VIDEOS = VIDEO_POOL.slice(0, CARTOMANTES.length);
 let queue = VIDEO_POOL.slice(CARTOMANTES.length);
-
 const players = [];
 const THUMB_QUALITIES = ["hqdefault", "mqdefault", "default"];
-
-function isValidVideoId(id){
-  return typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id);
-}
-function getYoutubeURL(id){
-  if(!isValidVideoId(id)) return "";
-  return "https://www.youtube.com/embed/"+id+"?autoplay=1&playsinline=1&rel=0&enablejsapi=1&cc_load_policy=1&cc_lang_pref=pt&hl=pt";
-}
-function getWatchURL(id){
-  return isValidVideoId(id) ? "https://www.youtube.com/watch?v="+id : "#";
-}
-function getThumbURL(id, qualityIndex){
-  if(!isValidVideoId(id)) return "";
-  const q = THUMB_QUALITIES[qualityIndex || 0] || THUMB_QUALITIES[THUMB_QUALITIES.length-1];
-  return "https://img.youtube.com/vi/"+id+"/"+q+".jpg";
-}
-
+function isValidVideoId(id){return typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id);}
+function getYoutubeURL(id){if(!isValidVideoId(id)) return "";return "https://www.youtube.com/embed/"+id+"?autoplay=1&playsinline=1&rel=0&enablejsapi=1&cc_load_policy=1&cc_lang_pref=pt&hl=pt";}
+function getWatchURL(id){return isValidVideoId(id) ? "https://www.youtube.com/watch?v="+id : "#";}
+function getThumbURL(id, qualityIndex){if(!isValidVideoId(id)) return "";const q = THUMB_QUALITIES[qualityIndex || 0] || THUMB_QUALITIES[THUMB_QUALITIES.length-1];return "https://img.youtube.com/vi/"+id+"/"+q+".jpg";}
 function attachThumbFallback(item){
   item.thumbQuality = 0;
   item.thumbImg.addEventListener("error", function(){
     item.thumbQuality++;
-    if(item.thumbQuality < THUMB_QUALITIES.length){
-      item.thumbImg.src = getThumbURL(item.videoId, item.thumbQuality);
-    }
+    if(item.thumbQuality < THUMB_QUALITIES.length){ item.thumbImg.src = getThumbURL(item.videoId, item.thumbQuality); }
   });
 }
-
 function getNextVideoId(currentId){
   if(queue.length === 0) return null;
   const nextId = queue.shift();
   if(isValidVideoId(currentId)) queue.push(currentId);
   return nextId;
 }
-
 function createCard(index){
   const data = CARTOMANTES[index];
   const videoId = INITIAL_VIDEOS[index];
-
-  const card = document.createElement("article");
-  card.className = "card";
-
-  const rank = document.createElement("div");
-  rank.className = "rank";
-  rank.textContent = data[4]+" CARTOMANTE";
-
-  const header = document.createElement("div");
-  header.className = "card-header";
-
-  const avatar = document.createElement("div");
-  avatar.className = "avatar";
-  avatar.textContent = "🔮";
-
-  const info = document.createElement("div");
-  info.className = "info";
-
-  const name = document.createElement("div");
-  name.className = "name";
-  name.textContent = data[0];
-
-  const stats = document.createElement("div");
-  stats.className = "stats";
-
-  const stat1 = document.createElement("span");
-  stat1.className = "stat";
-  stat1.textContent = "👥 "+data[1];
-
-  const stat2 = document.createElement("span");
-  stat2.className = "stat";
-  stat2.textContent = data[2];
-
-  const badge = document.createElement("span");
-  badge.className = "badge";
-  badge.textContent = data[3];
-
-  stats.appendChild(stat1);
-  stats.appendChild(stat2);
-  stats.appendChild(badge);
-  info.appendChild(name);
-  info.appendChild(stats);
-  header.appendChild(avatar);
-  header.appendChild(info);
-
-  const player = document.createElement("div");
-  player.className = "player";
-
-  const thumbWrap = document.createElement("div");
-  thumbWrap.className = "thumb-wrap";
-
+  const card = document.createElement("article"); card.className = "card";
+  const rank = document.createElement("div"); rank.className = "rank"; rank.textContent = data[4]+" CARTOMANTE";
+  const header = document.createElement("div"); header.className = "card-header";
+  const avatar = document.createElement("div"); avatar.className = "avatar"; avatar.textContent = "🔮";
+  const info = document.createElement("div"); info.className = "info";
+  const name = document.createElement("div"); name.className = "name"; name.textContent = data[0];
+  const stats = document.createElement("div"); stats.className = "stats";
+  const stat1 = document.createElement("span"); stat1.className = "stat"; stat1.textContent = "👥 "+data[1];
+  const stat2 = document.createElement("span"); stat2.className = "stat"; stat2.textContent = data[2];
+  const badge = document.createElement("span"); badge.className = "badge"; badge.textContent = data[3];
+  stats.appendChild(stat1); stats.appendChild(stat2); stats.appendChild(badge);
+  info.appendChild(name); info.appendChild(stats);
+  header.appendChild(avatar); header.appendChild(info);
+  const player = document.createElement("div"); player.className = "player";
+  const thumbWrap = document.createElement("div"); thumbWrap.className = "thumb-wrap";
   const thumbImg = document.createElement("img");
-  thumbImg.alt = data[0];
-  thumbImg.draggable = false;
-  thumbImg.loading = "lazy";
-  thumbImg.decoding = "async";
+  thumbImg.alt = data[0]; thumbImg.draggable = false; thumbImg.loading = "lazy"; thumbImg.decoding = "async";
   if(isValidVideoId(videoId)) thumbImg.src = getThumbURL(videoId, 0);
-
-  const playBtn = document.createElement("div");
-  playBtn.className = "play-btn";
-
-  const tapHint = document.createElement("div");
-  tapHint.className = "thumb-tap";
-  tapHint.textContent = "▶ Toca para ver a previsão";
-
-  thumbWrap.appendChild(thumbImg);
-  thumbWrap.appendChild(playBtn);
-  thumbWrap.appendChild(tapHint);
-
-  const loading = document.createElement("div");
-  loading.className = "loading";
-  loading.innerHTML = '<div class="spinner"></div><div>A preparar vídeo...</div>';
-
-  const footer = document.createElement("div");
-  footer.className = "video-footer";
-
-  const title = document.createElement("div");
-  title.className = "video-title";
-  title.textContent = "🎬 Previsão para Áries";
-
-  const open = document.createElement("a");
-  open.className = "btn";
-  open.target = "_blank";
-  open.rel = "noopener noreferrer";
-  open.textContent = "▶️ YouTube";
-  open.href = getWatchURL(videoId);
-
-  const update = document.createElement("button");
-  update.className = "btn";
-  update.type = "button";
-  update.textContent = "🔄 Trocar";
-
-  const fullscreenBtn = document.createElement("button");
-  fullscreenBtn.className = "btn";
-  fullscreenBtn.type = "button";
-  fullscreenBtn.textContent = "⛶ Ecrã inteiro";
-
-  const error = document.createElement("div");
-  error.className = "error";
-
-  update.addEventListener("click", function(e){
-    e.stopPropagation();
-    refreshVideo(index);
-  });
-
-  fullscreenBtn.addEventListener("click", function(e){
-    e.stopPropagation();
-    openFullscreenOverlay(index);
-  });
-
-  player.appendChild(thumbWrap);
-  player.appendChild(loading);
-  footer.appendChild(title);
-  footer.appendChild(open);
-  footer.appendChild(update);
-  footer.appendChild(fullscreenBtn);
-  card.appendChild(rank);
-  card.appendChild(header);
-  card.appendChild(player);
-  card.appendChild(footer);
-  card.appendChild(error);
-
+  const playBtn = document.createElement("div"); playBtn.className = "play-btn";
+  const tapHint = document.createElement("div"); tapHint.className = "thumb-tap"; tapHint.textContent = "▶ Toca para ver a previsão";
+  thumbWrap.appendChild(thumbImg); thumbWrap.appendChild(playBtn); thumbWrap.appendChild(tapHint);
+  const loading = document.createElement("div"); loading.className = "loading"; loading.innerHTML = '<div class="spinner"></div><div>A preparar vídeo...</div>';
+  const footer = document.createElement("div"); footer.className = "video-footer";
+  const title = document.createElement("div"); title.className = "video-title"; title.textContent = "🎬 Previsão para Áries";
+  const open = document.createElement("a"); open.className = "btn"; open.target = "_blank"; open.rel = "noopener noreferrer"; open.textContent = "▶️ YouTube"; open.href = getWatchURL(videoId);
+  const update = document.createElement("button"); update.className = "btn"; update.type = "button"; update.textContent = "🔄 Trocar";
+  const fullscreenBtn = document.createElement("button"); fullscreenBtn.className = "btn"; fullscreenBtn.type = "button"; fullscreenBtn.textContent = "⛶ Ecrã inteiro";
+  const error = document.createElement("div"); error.className = "error";
+  bindTap(update, function(){ refreshVideo(index); });
+  bindTap(fullscreenBtn, function(){ openFullscreenOverlay(index); });
+  player.appendChild(thumbWrap); player.appendChild(loading);
+  footer.appendChild(title); footer.appendChild(open); footer.appendChild(update); footer.appendChild(fullscreenBtn);
+  card.appendChild(rank); card.appendChild(header); card.appendChild(player); card.appendChild(footer); card.appendChild(error);
   const item = { card, player, thumbWrap, thumbImg, loading, title, open, update, fullscreenBtn, error, videoId, iframe:null, loaded:false, spinnerTimer:null };
-
   attachThumbFallback(item);
-  thumbWrap.addEventListener("click", function(){ playVideo(index); });
-
+  bindTap(thumbWrap, function(){ playVideo(index); });
   return item;
 }
-
 function playVideo(index){
   const item = players[index];
   if(!item) return;
-
-  if(!isValidVideoId(item.videoId)){
-    item.error.textContent = "⚠️ ID do vídeo YouTube inválido.";
-    item.error.classList.add("show");
-    return;
-  }
-
+  if(!isValidVideoId(item.videoId)){ item.error.textContent = "⚠️ ID do vídeo YouTube inválido."; item.error.classList.add("show"); return; }
   if(item.loaded) return;
-
-  item.loading.classList.add("active");
-  item.error.classList.remove("show");
-
+  item.loading.classList.add("active"); item.error.classList.remove("show");
   const iframe = document.createElement("iframe");
   iframe.title = CARTOMANTES[index][0]+" - YouTube";
   iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.allowFullscreen = true;
-  iframe.referrerPolicy = "strict-origin-when-cross-origin";
-  iframe.src = getYoutubeURL(item.videoId);
-
-  function stopSpinner(){
-    item.loading.classList.remove("active");
-    if(item.spinnerTimer){
-      clearTimeout(item.spinnerTimer);
-      item.spinnerTimer = null;
-    }
-  }
-
+  iframe.allowFullscreen = true; iframe.referrerPolicy = "strict-origin-when-cross-origin"; iframe.src = getYoutubeURL(item.videoId);
+  function stopSpinner(){ item.loading.classList.remove("active"); if(item.spinnerTimer){ clearTimeout(item.spinnerTimer); item.spinnerTimer = null; } }
   iframe.addEventListener("load", stopSpinner);
-  iframe.addEventListener("error", function(){
-    stopSpinner();
-    item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo.";
-    item.error.classList.add("show");
-    item.loaded = false;
-    item.thumbWrap.style.display = "flex";
-  });
-
+  iframe.addEventListener("error", function(){ stopSpinner(); item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo."; item.error.classList.add("show"); item.loaded = false; item.thumbWrap.style.display = "flex"; });
   item.spinnerTimer = setTimeout(stopSpinner, 8000);
-
-  item.thumbWrap.style.display = "none";
-  item.player.appendChild(iframe);
-  item.iframe = iframe;
-  item.loaded = true;
+  item.thumbWrap.style.display = "none"; item.player.appendChild(iframe); item.iframe = iframe; item.loaded = true;
 }
-
 function openFullscreenOverlay(index){
   const item = players[index];
   if(!item) return;
-
   function showInOverlay(){
-    const host = document.getElementById("fsPlayerHost");
-    const overlay = document.getElementById("fsOverlay");
+    const host = document.getElementById("fsPlayerHost"); const overlay = document.getElementById("fsOverlay");
     if(!host || !overlay || !item.iframe) return;
-    host.innerHTML = "";
-    const clone = item.iframe.cloneNode();
-    host.appendChild(clone);
-    overlay.classList.add("active");
+    host.innerHTML = ""; const clone = item.iframe.cloneNode(); host.appendChild(clone); overlay.classList.add("active");
   }
-
   if(!item.loaded){
-    playVideo(index);
-    let attempts = 0;
+    playVideo(index); let attempts = 0;
     const check = setInterval(function(){
       attempts++;
-      if(item.loaded && !item.loading.classList.contains("active")){
-        clearInterval(check);
-        showInOverlay();
-      } else if(attempts > 40){
-        clearInterval(check);
-      }
+      if(item.loaded && !item.loading.classList.contains("active")){ clearInterval(check); showInOverlay(); }
+      else if(attempts > 40){ clearInterval(check); }
     }, 200);
-  }else{
-    showInOverlay();
-  }
+  } else { showInOverlay(); }
 }
-
 function closeFullscreenOverlay(){
-  const host = document.getElementById("fsPlayerHost");
-  const overlay = document.getElementById("fsOverlay");
-  if(host) host.innerHTML = "";
-  if(overlay) overlay.classList.remove("active");
+  const host = document.getElementById("fsPlayerHost"); const overlay = document.getElementById("fsOverlay");
+  if(host) host.innerHTML = ""; if(overlay) overlay.classList.remove("active");
 }
-
 const fsCloseBtn = document.getElementById("fsClose");
-if(fsCloseBtn){
-  fsCloseBtn.addEventListener("click", closeFullscreenOverlay);
-}
-
+if(fsCloseBtn){ bindTap(fsCloseBtn, closeFullscreenOverlay); }
 function refreshVideo(index){
-  const item = players[index];
-  if(!item) return;
-  const nextId = getNextVideoId(item.videoId);
-  if(!nextId) return;
-
-  if(item.spinnerTimer){
-    clearTimeout(item.spinnerTimer);
-    item.spinnerTimer = null;
-  }
-  if(item.iframe){
-    item.iframe.remove();
-    item.iframe = null;
-  }
-  item.loaded = false;
-  item.loading.classList.remove("active");
-  item.error.classList.remove("show");
-  item.videoId = nextId;
-  item.thumbQuality = 0;
-  item.thumbImg.src = getThumbURL(nextId, 0);
-  item.open.href = getWatchURL(nextId);
-  item.thumbWrap.style.display = "flex";
+  const item = players[index]; if(!item) return;
+  const nextId = getNextVideoId(item.videoId); if(!nextId) return;
+  if(item.spinnerTimer){ clearTimeout(item.spinnerTimer); item.spinnerTimer = null; }
+  if(item.iframe){ item.iframe.remove(); item.iframe = null; }
+  item.loaded = false; item.loading.classList.remove("active"); item.error.classList.remove("show");
+  item.videoId = nextId; item.thumbQuality = 0; item.thumbImg.src = getThumbURL(nextId, 0); item.open.href = getWatchURL(nextId); item.thumbWrap.style.display = "flex";
 }
-
 function init(){
-  const grid = document.getElementById("videosGrid");
-  if(!grid) return;
-  for(let i=0;i<CARTOMANTES.length;i++){
-    const instance = createCard(i);
-    players.push(instance);
-    grid.appendChild(instance.card);
-  }
+  const grid = document.getElementById("videosGrid"); if(!grid) return;
+  for(let i=0;i<CARTOMANTES.length;i++){ const instance = createCard(i); players.push(instance); grid.appendChild(instance.card); }
 }
-
 const refreshAll = document.getElementById("refreshAll");
 if(refreshAll){
-  refreshAll.addEventListener("click", function(){
-    refreshAll.disabled = true;
-    refreshAll.textContent = "⏳ A trocar...";
-    for(let i=0;i<players.length;i++){
-      refreshVideo(i);
-    }
-    setTimeout(function(){
-      refreshAll.disabled = false;
-      refreshAll.textContent = "🔄 TROCAR TODOS";
-    }, 400);
+  bindTap(refreshAll, function(){
+    refreshAll.disabled = true; refreshAll.textContent = "⏳ A trocar...";
+    for(let i=0;i<players.length;i++){ refreshVideo(i); }
+    setTimeout(function(){ refreshAll.disabled = false; refreshAll.textContent = "🔄 TROCAR TODOS"; }, 400);
   });
 }
-
-if(document.readyState === "loading"){
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
+if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
 </script>
 </body>
 </html>
