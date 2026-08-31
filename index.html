@@ -98,6 +98,17 @@ function bindTap(el, handler){
     handler();
   });
 }
+
+const IS_KODULAR = typeof window.AppInventor !== "undefined" && typeof window.AppInventor.setWebViewString === "function";
+function openInKodular(watchUrl){
+  try{
+    window.AppInventor.setWebViewString(watchUrl);
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
 const CARTOMANTES = [
   ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
   ["🔮 Tarot Aries","558k","⭐ 4.93","🏆 TOP BRASIL","#2"],
@@ -168,7 +179,14 @@ function createCard(index){
   const fullscreenBtn = document.createElement("button"); fullscreenBtn.className = "btn"; fullscreenBtn.type = "button"; fullscreenBtn.textContent = "⛶ Ecrã inteiro";
   const error = document.createElement("div"); error.className = "error";
   bindTap(update, function(){ refreshVideo(index); });
-  bindTap(fullscreenBtn, function(){ openFullscreenOverlay(index); });
+  bindTap(fullscreenBtn, function(){
+    if(IS_KODULAR){
+      const item = players[index];
+      if(item) openInKodular(getWatchURL(item.videoId));
+      return;
+    }
+    openFullscreenOverlay(index);
+  });
   player.appendChild(thumbWrap); player.appendChild(loading);
   footer.appendChild(title); footer.appendChild(open); footer.appendChild(update); footer.appendChild(fullscreenBtn);
   card.appendChild(rank); card.appendChild(header); card.appendChild(player); card.appendChild(footer); card.appendChild(error);
@@ -181,6 +199,17 @@ function playVideo(index){
   const item = players[index];
   if(!item) return;
   if(!isValidVideoId(item.videoId)){ item.error.textContent = "⚠️ ID do vídeo YouTube inválido."; item.error.classList.add("show"); return; }
+
+  if(IS_KODULAR){
+    item.error.classList.remove("show");
+    const sent = openInKodular(getWatchURL(item.videoId));
+    if(!sent){
+      item.error.textContent = "⚠️ Não foi possível abrir o vídeo.";
+      item.error.classList.add("show");
+    }
+    return;
+  }
+
   if(item.loaded) return;
   item.loading.classList.add("active"); item.error.classList.remove("show");
   const iframe = document.createElement("iframe");
