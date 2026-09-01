@@ -102,7 +102,8 @@ function bindTap(el, handler){
 const IS_KODULAR = typeof window.AppInventor !== "undefined" && typeof window.AppInventor.setWebViewString === "function";
 function openInKodular(watchUrl){
   try{
-    window.AppInventor.setWebViewString(watchUrl);
+    const id = watchUrl.split("v=")[1];
+    window.location.href = "https://m.youtube.com/watch?v=" + id;
     return true;
   }catch(e){
     return false;
@@ -199,7 +200,6 @@ function playVideo(index){
   const item = players[index];
   if(!item) return;
   if(!isValidVideoId(item.videoId)){ item.error.textContent = "⚠️ ID do vídeo YouTube inválido."; item.error.classList.add("show"); return; }
-
   if(IS_KODULAR){
     item.error.classList.remove("show");
     const sent = openInKodular(getWatchURL(item.videoId));
@@ -209,7 +209,6 @@ function playVideo(index){
     }
     return;
   }
-
   if(item.loaded) return;
   item.loading.classList.add("active"); item.error.classList.remove("show");
   const iframe = document.createElement("iframe");
@@ -256,6 +255,12 @@ function refreshVideo(index){
 function init(){
   const grid = document.getElementById("videosGrid"); if(!grid) return;
   for(let i=0;i<CARTOMANTES.length;i++){ const instance = createCard(i); players.push(instance); grid.appendChild(instance.card); }
+  const badge = document.getElementById("modeBadge");
+  if(badge){
+    if(typeof window.AppInventor === "undefined"){ badge.textContent = "🔴 JS OK · AppInventor NÃO encontrado"; }
+    else if(typeof window.AppInventor.setWebViewString !== "function"){ badge.textContent = "🟡 JS OK · AppInventor sem setWebViewString"; }
+    else { badge.textContent = "🟢 JS OK · Kodular detetado"; }
+  }
 }
 const refreshAll = document.getElementById("refreshAll");
 if(refreshAll){
