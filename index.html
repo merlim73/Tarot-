@@ -21,6 +21,9 @@ img,.card,.player,.thumb-wrap{-webkit-user-drag:none;-khtml-user-drag:none;-moz-
 .status{margin-top:10px;font-size:.72rem;opacity:.75;}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#56d364;margin-right:5px;}
 .mode-badge{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.06);font-size:.62rem;opacity:.7;}
+.toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.toolbar .main-button{padding:9px 18px;font-size:.72rem;}
+.toolbar .main-button.exit{background:#ff4d4d;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;touch-action:pan-y;}
 .card{position:relative;overflow:hidden;border-radius:20px;background:#180d1a;border:1px solid rgba(255,130,70,.28);box-shadow:0 4px 10px rgba(0,0,0,.3);}
 .rank{position:absolute;top:10px;left:10px;z-index:10;padding:5px 10px;border-radius:30px;background:#ff6338;color:#210a0d;font-size:.63rem;font-weight:900;}
@@ -55,6 +58,7 @@ img,.card,.player,.thumb-wrap{-webkit-user-drag:none;-khtml-user-drag:none;-moz-
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 10px;border:1px solid rgba(255,145,95,.45);border-radius:20px;background:rgba(255,110,70,.08);color:#ffd5c0;font-size:.64rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;touch-action:manipulation;}
 .btn:hover{background:rgba(255,110,70,.22);color:#fff;}
 .btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn.close-btn{display:none;}
 .error{display:none;margin:0 10px 10px;padding:7px 9px;border-radius:10px;background:rgba(255,60,60,.08);color:#ffaaa0;font-size:.65rem;}
 .error.show{display:block;}
 .footer{text-align:center;margin-top:28px;padding-top:20px;border-top:1px dashed rgba(255,140,90,.25);}
@@ -71,6 +75,10 @@ img,.card,.player,.thumb-wrap{-webkit-user-drag:none;-khtml-user-drag:none;-moz-
   <div class="subtitle">🔥 Previsões de Áries · YouTube</div>
   <div class="status"><span class="status-dot"></span>Toca no play para carregar cada vídeo</div>
   <div class="mode-badge" id="modeBadge">🌐 Leitor incorporado</div>
+  <div class="toolbar">
+    <button class="main-button" id="goHomeBtn" type="button">🏠 Início</button>
+    <button class="main-button exit" id="exitAppBtn" type="button">🚪 Sair</button>
+  </div>
 </header>
 <main class="grid" id="videosGrid"></main>
 <footer class="footer">
@@ -100,15 +108,54 @@ function bindTap(el, handler){
 }
 
 const IS_KODULAR = typeof window.AppInventor !== "undefined" && typeof window.AppInventor.setWebViewString === "function";
-function openInKodular(watchUrl){
-  try{
-    const id = watchUrl.split("v=")[1];
-    window.location.href = "https://m.youtube.com/watch?v=" + id;
-    return true;
-  }catch(e){
-    return false;
+
+// Ponte de comunicação com o Kodular via WebViewString.
+// "EXIT_APP"      -> o Kodular deve fechar a app
+// "OPEN:<id>"     -> o Kodular deve abrir o vídeo <id> noutra activity/browser
+function sendToKodular(message){
+  if(IS_KODULAR){
+    try{ window.AppInventor.setWebViewString(message); }catch(e){}
   }
 }
+
+function openExternal(id){
+  if(!isValidVideoId(id)) return;
+  const url = getWatchURL(id);
+  if(IS_KODULAR){
+    sendToKodular("OPEN:" + id);
+  } else {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+}
+
+function exitApp(){
+  if(IS_KODULAR){
+    sendToKodular("EXIT_APP");
+  } else {
+    window.close();
+    setTimeout(function(){
+      alert("Podes fechar esta janela/separador do navegador.");
+    }, 300);
+  }
+}
+
+// Chamada pelo Kodular (WebViewer1.RunJavaScript("appHandleBack();")) quando
+// o botão físico de Voltar é premido. Fecha o ecrã inteiro, depois volta ao
+// início da app, e só sai da app se já estiver no início.
+function appHandleBack(){
+  const overlay = document.getElementById("fsOverlay");
+  if(overlay && overlay.classList.contains("active")){
+    closeFullscreenOverlay();
+    return;
+  }
+  const anyOpen = players.some(function(p){ return p.loaded; });
+  if(anyOpen){
+    goHome();
+    return;
+  }
+  exitApp();
+}
+window.appHandleBack = appHandleBack;
 
 const CARTOMANTES = [
   ["🌙 LUNARR Tarô","612k","⭐ 4.96","🏆 MAIS ACERTOS","#1"],
@@ -175,23 +222,19 @@ function createCard(index){
   const loading = document.createElement("div"); loading.className = "loading"; loading.innerHTML = '<div class="spinner"></div><div>A preparar vídeo...</div>';
   const footer = document.createElement("div"); footer.className = "video-footer";
   const title = document.createElement("div"); title.className = "video-title"; title.textContent = "🎬 Previsão para Áries";
-  const open = document.createElement("a"); open.className = "btn"; open.target = "_blank"; open.rel = "noopener noreferrer"; open.textContent = "▶️ YouTube"; open.href = getWatchURL(videoId);
+  const open = document.createElement("button"); open.className = "btn"; open.type = "button"; open.textContent = "▶️ YouTube";
+  const closeBtn = document.createElement("button"); closeBtn.className = "btn close-btn"; closeBtn.type = "button"; closeBtn.textContent = "⬅ Fechar";
   const update = document.createElement("button"); update.className = "btn"; update.type = "button"; update.textContent = "🔄 Trocar";
   const fullscreenBtn = document.createElement("button"); fullscreenBtn.className = "btn"; fullscreenBtn.type = "button"; fullscreenBtn.textContent = "⛶ Ecrã inteiro";
   const error = document.createElement("div"); error.className = "error";
+  bindTap(open, function(){ const item = players[index]; if(item) openExternal(item.videoId); });
+  bindTap(closeBtn, function(){ closeVideoCard(index); });
   bindTap(update, function(){ refreshVideo(index); });
-  bindTap(fullscreenBtn, function(){
-    if(IS_KODULAR){
-      const item = players[index];
-      if(item) openInKodular(getWatchURL(item.videoId));
-      return;
-    }
-    openFullscreenOverlay(index);
-  });
+  bindTap(fullscreenBtn, function(){ openFullscreenOverlay(index); });
   player.appendChild(thumbWrap); player.appendChild(loading);
-  footer.appendChild(title); footer.appendChild(open); footer.appendChild(update); footer.appendChild(fullscreenBtn);
+  footer.appendChild(title); footer.appendChild(open); footer.appendChild(closeBtn); footer.appendChild(update); footer.appendChild(fullscreenBtn);
   card.appendChild(rank); card.appendChild(header); card.appendChild(player); card.appendChild(footer); card.appendChild(error);
-  const item = { card, player, thumbWrap, thumbImg, loading, title, open, update, fullscreenBtn, error, videoId, iframe:null, loaded:false, spinnerTimer:null };
+  const item = { card, player, thumbWrap, thumbImg, loading, title, open, closeBtn, update, fullscreenBtn, error, videoId, iframe:null, loaded:false, spinnerTimer:null };
   attachThumbFallback(item);
   bindTap(thumbWrap, function(){ playVideo(index); });
   return item;
@@ -200,15 +243,6 @@ function playVideo(index){
   const item = players[index];
   if(!item) return;
   if(!isValidVideoId(item.videoId)){ item.error.textContent = "⚠️ ID do vídeo YouTube inválido."; item.error.classList.add("show"); return; }
-  if(IS_KODULAR){
-    item.error.classList.remove("show");
-    const sent = openInKodular(getWatchURL(item.videoId));
-    if(!sent){
-      item.error.textContent = "⚠️ Não foi possível abrir o vídeo.";
-      item.error.classList.add("show");
-    }
-    return;
-  }
   if(item.loaded) return;
   item.loading.classList.add("active"); item.error.classList.remove("show");
   const iframe = document.createElement("iframe");
@@ -217,9 +251,22 @@ function playVideo(index){
   iframe.allowFullscreen = true; iframe.referrerPolicy = "strict-origin-when-cross-origin"; iframe.src = getYoutubeURL(item.videoId);
   function stopSpinner(){ item.loading.classList.remove("active"); if(item.spinnerTimer){ clearTimeout(item.spinnerTimer); item.spinnerTimer = null; } }
   iframe.addEventListener("load", stopSpinner);
-  iframe.addEventListener("error", function(){ stopSpinner(); item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo."; item.error.classList.add("show"); item.loaded = false; item.thumbWrap.style.display = "flex"; });
+  iframe.addEventListener("error", function(){ stopSpinner(); item.error.textContent = "⚠️ O YouTube não conseguiu carregar este vídeo."; item.error.classList.add("show"); item.loaded = false; item.thumbWrap.style.display = "flex"; item.closeBtn.style.display = "none"; });
   item.spinnerTimer = setTimeout(stopSpinner, 8000);
   item.thumbWrap.style.display = "none"; item.player.appendChild(iframe); item.iframe = iframe; item.loaded = true;
+  item.closeBtn.style.display = "inline-flex";
+}
+function closeVideoCard(index){
+  const item = players[index]; if(!item || !item.loaded) return;
+  if(item.spinnerTimer){ clearTimeout(item.spinnerTimer); item.spinnerTimer = null; }
+  if(item.iframe){ item.iframe.remove(); item.iframe = null; }
+  item.loaded = false; item.loading.classList.remove("active"); item.error.classList.remove("show");
+  item.thumbWrap.style.display = "flex"; item.closeBtn.style.display = "none";
+}
+function goHome(){
+  for(let i=0;i<players.length;i++){ closeVideoCard(i); }
+  closeFullscreenOverlay();
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 function openFullscreenOverlay(index){
   const item = players[index];
@@ -250,7 +297,7 @@ function refreshVideo(index){
   if(item.spinnerTimer){ clearTimeout(item.spinnerTimer); item.spinnerTimer = null; }
   if(item.iframe){ item.iframe.remove(); item.iframe = null; }
   item.loaded = false; item.loading.classList.remove("active"); item.error.classList.remove("show");
-  item.videoId = nextId; item.thumbQuality = 0; item.thumbImg.src = getThumbURL(nextId, 0); item.open.href = getWatchURL(nextId); item.thumbWrap.style.display = "flex";
+  item.videoId = nextId; item.thumbQuality = 0; item.thumbImg.src = getThumbURL(nextId, 0); item.thumbWrap.style.display = "flex"; item.closeBtn.style.display = "none";
 }
 function init(){
   const grid = document.getElementById("videosGrid"); if(!grid) return;
@@ -270,6 +317,10 @@ if(refreshAll){
     setTimeout(function(){ refreshAll.disabled = false; refreshAll.textContent = "🔄 TROCAR TODOS"; }, 400);
   });
 }
+const goHomeBtn = document.getElementById("goHomeBtn");
+if(goHomeBtn){ bindTap(goHomeBtn, goHome); }
+const exitAppBtn = document.getElementById("exitAppBtn");
+if(exitAppBtn){ bindTap(exitAppBtn, exitApp); }
 if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
 </script>
 </body>
